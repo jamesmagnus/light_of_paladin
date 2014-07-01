@@ -1,0 +1,11 @@
+# Blender MTL File: 'test J-L.blend'
+# Material Count: 1
+
+newmtl Material
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.448425 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.025000
+illum 2
