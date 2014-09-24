@@ -1,0 +1,47 @@
+#pragma once
+
+#include <OGRE/Ogre.h>
+#include <OIS/OIS.h>
+
+class InputListener: public Ogre::FrameListener, Ogre::WindowEventListener
+{
+public:
+
+    /* Constructeur */
+    /* pWindow, pointeur sur la fenêtre de rendue de Ogre */
+    /* pCam, pointeur sur la caméra */
+    InputListener(Ogre::RenderWindow *pWindow, Ogre::Camera *pCam);
+
+    /* Destructeur */
+    virtual ~InputListener();
+
+    /* S'exécute pendant le rendu */
+    /* Renvoie false si le programme doit s'arrêter */
+    bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
+    /* Initialise OIS, appelée par le constructeur */
+    void startOIS();
+
+    /* Appelée lors du redimensionnement de la fenêtre */
+    virtual void windowResized(Ogre::RenderWindow* rw);
+
+    /* Appelée lors de la fermeture de la fenêtre */
+    virtual void windowClosed(Ogre::RenderWindow* rw);
+
+protected:
+    Ogre::RenderWindow *mpWindow;
+    Ogre::Camera *mpCamera;
+
+    OIS::InputManager *mpInputManager;
+    OIS::Mouse *mpMouse;
+    OIS::Keyboard *mpKeyBoard;
+
+    bool mToucheAppuyee;
+
+    Ogre::Real mMouvement;
+    Ogre::Real mVitesse;
+    Ogre::Real mVitesseRotation;
+
+    Ogre::Radian mRotationX;
+    Ogre::Radian mRotationY;
+};
