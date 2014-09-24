@@ -1,0 +1,28 @@
+
+material railDroit/Material
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.0980392 0.0470588 0 1
+			diffuse 0.0980392 0.0470588 0 1
+		}
+
+	}
+
+}
+
+material railDroit/Material.002
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.8 0.8 0.8 1
+			diffuse 0.8 0.8 0.8 1
+		}
+
+	}
+
+}

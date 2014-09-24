@@ -1,0 +1,28 @@
+
+material rylai/Material.001
+{
+	technique
+	{
+		pass
+		{
+			ambient 0 0 0.8 1
+			diffuse 0 0 0.8 1
+		}
+
+	}
+
+}
+
+material rylai/Material.002
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.8 0.8 0 1
+			diffuse 0.8 0.8 0 1
+		}
+
+	}
+
+}

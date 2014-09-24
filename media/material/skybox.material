@@ -1,0 +1,17 @@
+material skybox/space_invaders
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture darkskies_rt.tga darkskies_lf.tga darkskies_bk.tga darkskies_ft.tga darkskies_up.tga darkskies_dn.tga separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
