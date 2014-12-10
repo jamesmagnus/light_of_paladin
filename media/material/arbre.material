@@ -1,0 +1,38 @@
+
+material arbre/_Treebranche
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+			cull_hardware none
+			cull_software none
+			texture_unit
+			{
+				texture_alias 0
+				texture DB2X2_01.PNG
+			}
+		}
+
+	}
+
+}
+
+material arbre/_TreeTrank_b
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture_alias 0
+				texture BARK_005.JPG
+			}
+		}
+
+	}
+
+}

@@ -1,0 +1,42 @@
+
+material pommier/Material.001
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.8 0.8 0.8 1
+			diffuse 0.8 0.8 0.8 1
+
+			texture_unit
+			{
+				texture_alias 0
+				texture iTrees-02_Bark-AppleOld-01.jpg
+			}
+		}
+
+	}
+
+}
+
+material pommier/wire_0061340
+{
+	technique
+	{
+		pass
+		{
+			cull_hardware none
+			cull_software none
+			ambient 0.0196078 0.52549 0.0196078 1
+			diffuse 0.0196078 0.52549 0.0196078 1
+
+			texture_unit
+			{
+				texture_alias 0
+				texture itrees-02-leaf_002.jpg
+			}
+		}
+
+	}
+
+}
