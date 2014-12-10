@@ -9,6 +9,8 @@
 
 class Personnage;
 
+/* Classe abstraite qui sert de base à tous les objets du jeu */
+/* Sémantique d'entité */
 class Item: public Affichable
 {
 protected:
@@ -19,15 +21,22 @@ protected:
     std::string mNom;
     bool mIsUnique;
 
+private:
+
+	/* Constructeur par copie interdit */
+	Item(Item const& rOriginal);
+
+	/* Opérateur d'assignement interdit */
+	Item& operator=(Item const& rOriginal);
+
 public:
 
     /* Constructeur */
-    /* id, un identifiant unique */
     /* pNode, l'adresse du noeud de Ogre */
     /* prix, poid, nom, caractéristiques de l'item */
     /* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
     /* IsVisible, true si l'item doit être rendu par Ogre */
-    Item(unsigned long id, Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string nom="defaultItem", bool IsUnique=false, bool IsVisible=true);    
+    Item(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string nom="defaultItem", bool IsUnique=false, bool IsVisible=true);
 
     /* Destructeur */
     virtual ~Item();
@@ -48,7 +57,7 @@ public:
     /* Change le poid de l'item */
     void setPoid(float poid);
 
-    /* Renvoie l'ID de l'item */
+    /* Renvoie l'ID unique de l'item */
     unsigned long getID() const;
 
     /* Renvoie le nom de l'item */
@@ -62,4 +71,25 @@ public:
 
     /* Défini si un item peut être plusieurs fois dans un même inventaire */
     void setIsUnique(bool IsUnique);
+
+	/* Clonage, méthode virtuelle pure */
+	virtual Item* clone() const =0;
+
+	/* Méthode virtuelle pure de comparaison entre deux objets */
+	virtual bool compare(Item const& secondItem) const =0;
+
+#ifdef _DEBUG
+	/* Affiche des informations sur l'objet dans la console, DEBUG */
+	virtual void afficheDebug(std::ostream& rOst) const override;
+#endif
 };
+
+/* Surcharge des opérateurs externes */
+
+/* == */
+bool operator==(Item const& inv1, Item const& inv2);
+
+#ifdef _DEBUG
+/* << */
+std::ostream& operator<<(std::ostream& rOst, Item const& obj);
+#endif

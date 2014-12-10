@@ -2,6 +2,11 @@
 
 #include <OGRE/Ogre.h>
 #include <Ogre/Terrain/OgreTerrain.h>
+
+#include <SkyX.h>
+#include <Hydrax.h>
+#include <PagedGeometry.h>
+
 #include <map>
 
 #include "Structures.h"
@@ -18,8 +23,12 @@ protected:
     Ogre::RenderWindow *mpWindow;
     Ogre::SceneManager *mpSceneMgr;
     Ogre::Camera *mpCam;
+
     GestionnaireTerrain *mpTerrain;
-    Ogre::TerrainGlobalOptions *mpGlobals;
+
+	SkyX::SkyX *mpSky;
+	Hydrax::Hydrax *mpWater;
+	Forests::PagedGeometry *mpTrees;
 
     std::map<std::string, Personnage*> mmapPersonnages;
     std::map<std::string, Item*> mmapItem;

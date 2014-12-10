@@ -17,7 +17,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
     mpTerrainGroup = nullptr;
     mpIDGestion = nullptr;
 
-    mpIDGestion = new GestionnaireID(12000);
+    mpIDGestion = GestionnaireID::getInstance();
 
     mpOptions = OGRE_NEW TerrainGlobalOptions();
     mpOptions->setMaxPixelError(4);
@@ -31,7 +31,8 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
     mpTerrainGroup->setFilenameConvention("data","ter");
 
     Terrain::ImportData& imp = mpTerrainGroup->getDefaultImportSettings();
-    imp.inputScale = 1000;
+	imp.inputBias=0.0;
+    imp.inputScale = 1000.0;
     imp.minBatchSize = 33;
     imp.maxBatchSize = 65;
 
@@ -58,7 +59,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
             {
 
                 Image img;
-                img.load("heighmap1.jpg", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+                img.load("heightmap1.jpg", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
                 if(x % 2 != 0)
                     img.flipAroundY();
@@ -67,7 +68,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 
                 mpTerrainGroup->defineTerrain(x, y, &img);
                 mpTerrainGroup->loadTerrain(x, y, true);
-                mpTerrainGroup->getTerrain(x, y)->save("media/" + mpTerrainGroup->generateFilename(x, y));
+                //mpTerrainGroup->getTerrain(x, y)->save("media/terrain/" + mpTerrainGroup->generateFilename(x, y));
             }
         }
     }
@@ -91,7 +92,6 @@ GestionnaireTerrain::~GestionnaireTerrain()
 
     if (mpIDGestion != nullptr)
     {
-        delete mpIDGestion;
         mpIDGestion = nullptr;
     }
 }

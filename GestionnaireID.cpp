@@ -2,27 +2,47 @@
 #include "ExceptionPerso.h"
 
 #include <ctime>
+#include <climits>
 #include <set>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 
 using namespace boost;
 
-GestionnaireID::GestionnaireID(const unsigned int maxID): mIDMax(maxID)
+GestionnaireID::GestionnaireID()
 {
-    mEngine.seed(static_cast<uint32_t>(time(nullptr)));
+    mEngine.seed(static_cast<uint32_t>(time(nullptr)));	//Init
 
-    mpLongDistrib = new boost::random::uniform_int_distribution<unsigned long>(1, mIDMax+1);
+    mpLongDistrib = new boost::random::uniform_int_distribution<unsigned long>(1, ULONG_MAX);	//Distribution uniforme entre 1 et max
 }
-
 
 GestionnaireID::~GestionnaireID()
 {
-    if (mpLongDistrib != nullptr)
-    {
-        delete mpLongDistrib;
-        mpLongDistrib = nullptr;
-    }
+}
+
+GestionnaireID* GestionnaireID::getInstance()
+{
+	if (mpInstanceUnique == nullptr)
+	{
+		mpInstanceUnique = new GestionnaireID();
+	} 
+	
+	return mpInstanceUnique;
+}
+
+void GestionnaireID::destroy()
+{
+	if(mpInstanceUnique != nullptr)
+	{
+		if(mpInstanceUnique->mpLongDistrib != nullptr)
+		{
+			delete mpInstanceUnique->mpLongDistrib;
+			mpInstanceUnique->mpLongDistrib = nullptr;
+		}
+
+		delete mpInstanceUnique;
+		mpInstanceUnique = nullptr;
+	}
 }
 
 unsigned long GestionnaireID::newID()
@@ -33,22 +53,22 @@ unsigned long GestionnaireID::newID()
 
     if (!isMoreIDFree())
     {
-        throw ExceptionPerso("Plus d'IDs disponibles", ERREUR);
+        throw ExceptionPerso("Plus d'IDs disponibles", ERREUR);	//S'il n'y a plus d'id on lève une exception
     }
 
     do 
     {
-        id = mpLongDistrib->operator()(mEngine);
-        retPair = mIDExistants.insert(id);
+        id = mpLongDistrib->operator()(mEngine);	//On choisit un id au hasard
+        retPair = mIDExistants.insert(id);	//On tente de le mettre dans le set
 
-    } while (!retPair.second);
+    } while (!retPair.second);	//Si on a pu le mettre c'est qu'il n'était pas utilisé
 
     return id;
 }
 
 bool GestionnaireID::isMoreIDFree() const
 {
-    if (mIDExistants.size() < mIDMax)
+    if (mIDExistants.size() >= ULONG_MAX)
     {
         return false;
     }
@@ -62,9 +82,10 @@ bool GestionnaireID::memoriseID(std::vector<unsigned long> liste)
 {
     std::vector<unsigned long>::iterator it;
 
-    for (it=liste.begin(); it != liste.end(); it++)
+    for (it=liste.begin(); it != liste.end(); ++it)
     {
-        mIDExistants.insert(*it);
+        auto retval = mIDExistants.insert(*it);
+		assert(retval.second);
     }
 
     return isMoreIDFree();

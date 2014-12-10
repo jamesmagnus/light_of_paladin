@@ -11,3 +11,15 @@ EntiteVivante::EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, st
 EntiteVivante::~EntiteVivante()
 {
 }
+
+/* Surcharge des opérateurs externes */
+
+#ifdef _DEBUG
+/* << */
+std::ostream& operator<<(std::ostream& rOst, EntiteVivante const& obj)
+{
+	obj.afficheDebug(rOst);
+
+	return rOst;
+}
+#endif

@@ -10,16 +10,26 @@ class Item;
 /* Classe pour gérer un inventaire, sémantique de valeur */
 class Inventaire
 {
+	friend bool operator==(Inventaire const& inv1, Inventaire const& inv2);
+	friend bool operator<(Inventaire const& inv1, Inventaire const& inv2);
+
 protected:
 
-    std::multimap<unsigned long, Item*> mStuff;
+    std::multimap<unsigned long, Item*> mStuff; //Pointeurs sur des Items, repérés par l'id
     int mNb, mMax;
     float mPoidTotal;
 
 public:
 
     /* Constructeur */
+	/* max, le nombre d'emplacements de l'inventaire */
     Inventaire(int max=10);
+
+	/* Constructeur par copie, clone les items */
+	Inventaire(Inventaire const& rOriginal);
+
+	/* Opérateur d'assignement, clone les items */
+	Inventaire& operator=(Inventaire const& rOriginal);
 
     /* Destructeur */
     virtual ~Inventaire();
@@ -66,12 +76,33 @@ public:
     bool existe(unsigned long ID) const;
     bool existe(Item* pItem) const;
 
-    /* Surcharge des opérateurs unaires */
-    void operator+=(Inventaire const& inv);
+#ifdef _DEBUG
+	/* Affiche des informations sur l'inventaire dans la console, DEBUG */
+	void afficheDebugInv(std::ostream& rOst) const;
+#endif
+
+
+    /* Surcharge des opérateurs internes */
+
+	/* += */
+    Inventaire& operator+=(Inventaire const& inv);
 };
 
 
-/* Surcharge des opérateurs binaires */
+/* Surcharge des opérateurs externes*/
 
 /* + */
 Inventaire operator+(Inventaire const& inv1, Inventaire const& inv2);
+
+/* == */
+/* Deux inventaires sont égaux s'ils ont le même nombre d'objets et que ces objets sont les mêmes */
+bool operator==(Inventaire const& inv1, Inventaire const& inv2);
+
+/* < */
+/* Un inventaire est inférieur à un autre s'il contient moins d'objet */
+bool operator<(Inventaire const& inv1, Inventaire const& inv2);
+
+#ifdef _DEBUG
+/* << */
+std::ostream& operator<<(std::ostream& rOst, Inventaire const& inv);
+#endif

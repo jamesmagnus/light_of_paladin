@@ -41,3 +41,22 @@ SceneNode* Affichable::getNode() const
 {
     return mpNoeud;
 }
+
+#ifdef _DEBUG
+void Affichable::afficheDebug(std::ostream& rOst) const
+{
+	rOst << "Visible:" << std::boolalpha << mIsVisible << std::endl;
+}
+#endif
+
+/* Surcharge des opérateurs externes */
+
+#ifdef _DEBUG
+/* << */
+std::ostream& operator<<(std::ostream& rOst, Affichable const& obj)
+{
+	obj.afficheDebug(rOst);
+
+	return rOst;
+}
+#endif

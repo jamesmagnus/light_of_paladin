@@ -13,13 +13,12 @@ class Arme;
 class Inventaire;
 class Item;
 
-/* Cette classe est utilisée pour gérer les personnages du jeu */
+/* Cette classe est utilisée pour gérer les personnages du jeu, sémantique d'entité */
 class Personnage: public Humanoide
 {
 protected:
 
     int m_mana, m_niveau, m_XP;
-    Inventaire *mp_inventaire;
     int m_stat[EStat::ESTATMAX];
     Arme *mp_arme;
 
@@ -89,4 +88,19 @@ public:
     /* Vide l'inventaire mais il conserve sa taille max, appeler SetMax() pour la changer */
     /* Retourne true s'il y avait un inventaire à vider */
     bool viderInventaire();
+
+	/* Clonage, méthode virtuelle pure */
+	virtual Personnage* clone() const override=0;
+
+#ifdef _DEBUG
+	/* Affiche des informations sur l'objet dans la console, DEBUG */
+	virtual void afficheDebug(std::ostream& rOst) const override=0;
+#endif
 };
+
+/* Surcharge des opérateurs externes */
+
+#ifdef _DEBUG
+/* << */
+std::ostream& operator<<(std::ostream& rOst, Personnage const& obj);
+#endif

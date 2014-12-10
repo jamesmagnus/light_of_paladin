@@ -8,13 +8,13 @@
 #include "ClassPersonnage.h"
 #include "ClassInventaire.h"
 #include "ClassArme.h"
-
+#include "Structures.h"
 
 using namespace std;
 
-Personnage::Personnage(Ogre::SceneNode *pNode, int stat[EStat::ESTATMAX], bool IsVisible, std::string nom, int niveau, int XP):Humanoide(pNode, IsVisible, stat[VIE_MAX], nom)
+Personnage::Personnage(Ogre::SceneNode *pNode, int stat[EStat::ESTATMAX], bool IsVisible, std::string nom, int niveau, int XP):Humanoide(pNode, IsVisible, stat[EStat::VIE_MAX], nom)
 {
-    for (int i=0; i<ESTATMAX; i++)
+    for (int i=0; i<EStat::ESTATMAX; i++)
     {
         m_stat[i] = stat[i];
     }
@@ -23,7 +23,7 @@ Personnage::Personnage(Ogre::SceneNode *pNode, int stat[EStat::ESTATMAX], bool I
     m_XP = XP;
     m_mana = m_stat[MANA_MAX];
     mp_arme = nullptr;
-    mp_inventaire = nullptr;
+    mpInventaire = nullptr;
 }
 
 Personnage::~Personnage()
@@ -34,10 +34,10 @@ Personnage::~Personnage()
         mp_arme = nullptr;
     }
 
-    if (mp_inventaire != nullptr)
+    if (mpInventaire != nullptr)
     {
-        delete mp_inventaire;
-        mp_inventaire = nullptr;
+        delete mpInventaire;
+        mpInventaire = nullptr;
     }
 }
 
@@ -65,16 +65,16 @@ bool Personnage::boitPopoVie(EPopo type)
 
         switch (type)
         {
-        case FAIBLE:
+		case EPopo::FAIBLE:
             vieRendue = 30 + 180*m_stat[GUERISON];
             break;
-        case MOYENNE:
+        case EPopo::MOYENNE:
             vieRendue = 55 + 180*m_stat[GUERISON];
             break;
-        case FORTE:
+        case EPopo::FORTE:
             vieRendue = 90 + 180*m_stat[GUERISON];
             break;
-        case LEGENDAIRE:
+        case EPopo::LEGENDAIRE:
             vieRendue = 135 + 180*m_stat[GUERISON];
             break;
         default:
@@ -104,16 +104,16 @@ bool Personnage::boitPopoMana(EPopo type)
 
         switch (type)
         {
-        case FAIBLE:
+        case EPopo::FAIBLE:
             manaRendu = 50 + 200*m_stat[GUERISON];
             break;
-        case MOYENNE:
+        case EPopo::MOYENNE:
             manaRendu = 80 + 200*m_stat[GUERISON];
             break;
-        case FORTE:
+        case EPopo::FORTE:
             manaRendu = 110 + 200*m_stat[GUERISON];
             break;
-        case LEGENDAIRE:
+        case EPopo::LEGENDAIRE:
             manaRendu = 160 + 200*m_stat[GUERISON];
             break;
         default:
@@ -137,13 +137,13 @@ void Personnage::prendDegat(int degatBrut, EDegat type)
 
     switch (type)
     {
-    case PHYSIQUE:
+	case EDegat::PHYSIQUE:
         degat = degatBrut * (1 - m_stat[ARMURE]);
         break;
-    case MAGIQUE:
+    case EDegat::MAGIQUE:
         degat = degatBrut * (1 - m_stat[REMPART]);
         break;
-    case BRUT:
+    case EDegat::BRUT:
         degat = degatBrut;
         break;
     default:
@@ -162,12 +162,12 @@ void Personnage::attaque(Personnage &rCible) const
 {
     if (mp_arme != nullptr && mp_arme->getResistance() > 0.0)
     {
-        rCible.prendDegat(valeurAttaqueBase(), PHYSIQUE);
+        rCible.prendDegat(valeurAttaqueBase(), EDegat::PHYSIQUE);
         mp_arme->decreaseResistance();
     }
     else
     {
-        rCible.prendDegat(1, PHYSIQUE);
+        rCible.prendDegat(1, EDegat::PHYSIQUE);
     }
 }
 
@@ -197,13 +197,13 @@ int Personnage::valeurAttaqueBase() const
 
 bool Personnage::setInventaire(Inventaire *pInventaire)
 {
-    if (mp_inventaire != nullptr)
+    if (mpInventaire != nullptr)
     {
         return false;
     }
     else if (pInventaire != nullptr)
     {
-        mp_inventaire = pInventaire;
+        mpInventaire = pInventaire;
 
         return true;
     }
@@ -215,9 +215,9 @@ bool Personnage::setInventaire(Inventaire *pInventaire)
 
 bool Personnage::supprInventaire()
 {
-    if (mp_inventaire != nullptr)
+    if (mpInventaire != nullptr)
     {
-        mp_inventaire = nullptr;
+        mpInventaire = nullptr;
 
         return true;
     }
@@ -229,9 +229,9 @@ bool Personnage::supprInventaire()
 
 bool Personnage::viderInventaire()
 {
-    if (mp_inventaire != nullptr)
+    if (mpInventaire != nullptr)
     {
-        mp_inventaire->~Inventaire();
+        delete mpInventaire;
 
         return true;
     } 
@@ -243,11 +243,19 @@ bool Personnage::viderInventaire()
 
 int Personnage::placerItem(Item& rItem)
 {
-    return mp_inventaire->ajout(rItem);
+    return mpInventaire->ajout(rItem);
 }
 
 int Personnage::placerItem(Item* const pItem)
 {
-    return mp_inventaire->ajout(pItem);
+    return mpInventaire->ajout(pItem);
 }
 
+#ifdef _DEBUG
+std::ostream& operator<<(std::ostream& rOst, Personnage const& obj)
+{
+	obj.afficheDebug(rOst);
+
+	return rOst;
+}
+#endif

@@ -4,12 +4,13 @@
 #include <vector>
 
 #include "ClassItem.h"
+#include "GestionnaireID.h"
 
 using namespace std;
 
-Item::Item(unsigned long id, Ogre::SceneNode *pNode, int prix, float poid, string nom, bool IsUnique, bool IsVisible): Affichable(pNode, IsVisible)
+Item::Item(Ogre::SceneNode *pNode, int prix, float poid, string nom, bool IsUnique, bool IsVisible): Affichable(pNode, IsVisible)
 {
-    mID = id;
+    mID = GestionnaireID::getInstance()->newID();
 
     if (prix >= 0)
     {
@@ -88,3 +89,38 @@ void Item::setIsUnique(bool IsUnique)
 {
     mIsUnique = IsUnique;
 }
+
+#ifdef _DEBUG
+void Item::afficheDebug(std::ostream& rOst) const 
+{
+	rOst << "Nom:" << mNom << endl;
+	Affichable::afficheDebug(rOst);
+	rOst << "ID:" << mID << endl << "Prix:" << mPrix << endl << "Poid:" << mPoid << endl;
+}
+#endif
+
+
+/* Surcharge opérateurs externes */
+
+/* == */
+bool operator==(Item const& item1, Item const& item2)
+{
+	if (typeid(item1) == typeid(item2))
+	{
+		return item1.compare(item2);	//Comportement polymorphique
+	} 
+	else
+	{
+		return false;
+	}
+}
+
+#ifdef _DEBUG
+/* << */
+std::ostream& operator<<(std::ostream& rOst, Item const& obj)
+{
+	obj.afficheDebug(rOst);
+
+	return rOst;
+}
+#endif

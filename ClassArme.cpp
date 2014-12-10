@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Arme::Arme(unsigned long id, Ogre::SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string nom, bool IsUnique, bool IsVisible): Item(id, pNode, prix, poid, nom, IsUnique, IsVisible)
+Arme::Arme(Ogre::SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string nom, bool IsUnique, bool IsVisible): Item(pNode, prix, poid, nom, IsUnique, IsVisible)
 {
     if (degat >= 0)
     {
@@ -29,29 +29,6 @@ Arme::Arme(unsigned long id, Ogre::SceneNode *pNode, int degat, float vitesse, f
     
     resistance = Ogre::Math::Clamp(resistance, 0.0f, 1.0f);
     mResistance = resistance;
-}
-
-Arme::Arme(Arme const& original):Item(original)
-{
-    mDegat = original.mDegat;
-    mVitesse = original.mVitesse;
-    mResistance = original.mResistance;
-}
-
-Arme& Arme::operator=(Arme const& original)
-{
-    if (this != &original)
-    {
-        mID = original.mID;
-        mDegat = original.mDegat;
-        mNom = original.mNom;
-        mPoid = original.mPoid;
-        mPrix = original.mPrix;
-        mResistance = original.mResistance;
-        mVitesse = original.mVitesse;
-    }
-
-    return *this;
 }
 
 Arme::~Arme()
@@ -84,12 +61,6 @@ void Arme::decreaseResistance()
     }
 }
 
-bool Arme::canUse(Personnage *pJoueur) const
-{
-    // Truc a faire
-    return true;
-}
-
 void Arme::setDegat(int degat)
 {
     if (degat >= 0)
@@ -112,3 +83,36 @@ void Arme::setResistance(float resistance)
 
     mResistance = resistance;
 }
+
+#ifdef _DEBUG
+void Arme::afficheDebug(std::ostream& rOst) const 
+{
+	Item::afficheDebug(rOst);
+	rOst << "Degats:" << mDegat << endl << "Vitesse:" << mVitesse << endl << "Resistance:" << mResistance*100 << "%" << endl << "-----------------------------------------------" << endl;
+}
+#endif
+
+/* Surcharge opérateurs externes */
+
+/* == */
+bool operator==(Arme const& item1, Arme const& item2)
+{
+	if (typeid(item1) == typeid(item2))
+	{
+		return item1.compare(item2);	//Comportement polymorphique
+	} 
+	else
+	{
+		return false;
+	}
+}
+
+#ifdef _DEBUG
+/* << */
+std::ostream& operator<<(std::ostream& rOst, Arme const& obj)
+{
+	obj.afficheDebug(rOst);
+
+	return rOst;
+}
+#endif
