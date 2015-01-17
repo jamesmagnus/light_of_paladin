@@ -5,21 +5,21 @@ HydraxVersion=0.5.1
 
 #Main options field
 <vector3>Position=-5000x100x-5000
-<float>PlanesError=10.5
+<float>PlanesError=8.5
 #Shader mode: 0=HLSL, 1=CG, 2=GLSL
-<int>ShaderMode=0
-<float>FullReflectionDistance=1e+011
+<int>ShaderMode=1
+<float>FullReflectionDistance=9e+05
 <float>GlobalTransparency=0
 <float>NormalDistortion=0.075
 <vector3>WaterColor=0.139765x0.359464x0.425373
 
 #Components field
-Components=Sun|Foam|Depth|Smooth|Caustics|Underwater|UnderwaterReflections|UnderwaterGodRays
+Components=Sun|Foam|Depth|Smooth|Underwater|UnderwaterReflections|UnderwaterGodRays
 
 #Sun parameters
 <vector3>SunPosition=0x10000x0
-<float>SunStrength=1.75
-<float>SunArea=150
+<float>SunStrength=0.08
+<float>SunArea=120
 <vector3>SunColor=1x0.9x0.6
 
 #Foam parameters
@@ -32,18 +32,18 @@ Components=Sun|Foam|Depth|Smooth|Caustics|Underwater|UnderwaterReflections|Under
 <float>DepthLimit=90
 
 #Smooth transitions parameters
-<float>SmoothPower=5
+<float>SmoothPower=8
 
 #Caustics parameters
-<float>CausticsScale=135
-<float>CausticsPower=10.5
-<float>CausticsEnd=0.8
+<float>CausticsScale=100
+<float>CausticsPower=2.0
+<float>CausticsEnd=0.6
 
 #God rays parameters
-<vector3>GodRaysExposure=0.76x2.46x2.29
-<float>GodRaysIntensity=0.015
-<float>GodRaysSpeed=5
-<int>GodRaysNumberOfRays=100
+<vector3>GodRaysExposure=1.2x2.3x1.6
+<float>GodRaysIntensity=0.035
+<float>GodRaysSpeed=15
+<int>GodRaysNumberOfRays=50
 <float>GodRaysRaysSize=0.03
 <bool>GodRaysIntersections=false
 

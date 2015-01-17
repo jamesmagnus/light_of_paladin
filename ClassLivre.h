@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Classdocument.h"
+#include "ClassDocument.h"
 
 class Livre :public Document
 {

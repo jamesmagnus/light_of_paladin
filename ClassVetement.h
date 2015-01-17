@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Classitem.h"
+#include "ClassItem.h"
 
 class Vetement :public Item
 {

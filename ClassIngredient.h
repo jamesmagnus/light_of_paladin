@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Classconsommable.h"
+#include "ClassConsommable.h"
 
 class Ingredient :public Consommable
 {

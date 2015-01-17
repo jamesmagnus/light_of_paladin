@@ -23,11 +23,11 @@ private:
 
 public:
 
-    /* Constructeur */
-    /* pNode, adresse du noeud de scène lié à l'objet */
-    /* IsVisible, true si l'objet doit être rendu, true par défaut */
-    /* max, la taille de l'inventaire du contenaire */
-    Contenaire(Ogre::SceneNode *pNode, bool IsVisible=true, int max=10);
+	/* Constructeur */
+	/* pNode, adresse du noeud de scène lié à l'objet */
+	/* IsVisible, true si l'objet doit être rendu, true par défaut */
+	/* max, la taille de l'inventaire du contenaire */
+	Contenaire(Ogre::SceneNode *pNode, bool IsVisible=true, int max=10);
 
 	/* Constructeur */
 	/* pNode, adresse du noeud de scène lié à l'objet */
@@ -35,8 +35,8 @@ public:
 	/* inv, l'inventaire à partir duquel construire le contenaire, vide cet inventaire */
 	Contenaire(Ogre::SceneNode *pNode, Inventaire& inv, bool IsVisible=true);
 
-    /* Destructeur */
-    virtual ~Contenaire();
+	/* Destructeur */
+	virtual ~Contenaire();
 
 	/* clone un contenaire, devant être libéré */
 	/* Renvoie un pointeur */

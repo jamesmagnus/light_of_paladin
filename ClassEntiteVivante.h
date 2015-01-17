@@ -11,8 +11,8 @@
 class EntiteVivante: public Affichable
 {
 protected:
-    int mVie;
-    std::string mNom;
+	int mVie;
+	std::string mNom;
 	Inventaire *mpInventaire;
 
 private:
@@ -25,15 +25,15 @@ private:
 
 public:
 
-    /* Constructeur */
-    /* pNode, adresse du noeud de scène lié à l'objet */
-    /* IsVisible, true si l'objet doit être rendu */
-    /* vie, la vie de l'entité */
-    /* nom, le nom de l'entité */
-    EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string nom="DefaultName");
+	/* Constructeur */
+	/* pNode, adresse du noeud de scène lié à l'objet */
+	/* IsVisible, true si l'objet doit être rendu */
+	/* vie, la vie de l'entité */
+	/* nom, le nom de l'entité */
+	EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string nom="DefaultName");
 
-    /* Destructeur */
-    virtual ~EntiteVivante();
+	/* Destructeur */
+	virtual ~EntiteVivante();
 
 	/* Clonage, méthode virtuelle pure */
 	virtual EntiteVivante* clone() const override=0;

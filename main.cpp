@@ -10,7 +10,7 @@
 #include <io.h>
 #include <tchar.h>
 
-#include "AppDemarrage.h"
+#include "AppMain.h"
 #include "GestionnaireID.h"
 
 /* Singletons */
@@ -33,37 +33,45 @@ int main(int argc, char **argv) //Main standard
 #ifdef _DEBUG
 	AllocConsole();
 	*stdout = *_tfdopen(_open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), _O_APPEND), _T("a"));
+
+	_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF|_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF));	//Fuite mémoire
 #endif
 
-    AppDemarrage app;   //Le jeu
+#if defined(HK_COMPILER_HAS_INTRINSICS_IA32) && HK_CONFIG_SIMD == HK_CONFIG_SIMD_ENABLED
+	// Flush all denormal/subnormal numbers (2^-1074 to 2^-1022) to zero.
+	// Typically operations on denormals are very slow, up to 100 times slower than normal numbers.
+	_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+#endif
 
-    /* On lance le jeu et on récupère les éventuelles exceptions levées pour les afficher */
-    try
-    {
-        app.start();
-    }
-    catch(Ogre::Exception& e)
-    {
+	AppMain app;   //Le jeu
+
+	/* On lance le jeu et on récupère les éventuelles exceptions levées pour les afficher */
+	try
+	{
+		app.start();
+	}
+	catch(Ogre::Exception& e)
+	{
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 
-        MessageBoxA(NULL, e.getFullDescription().c_str(), "An exception has occurred!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+		MessageBoxA(NULL, e.getFullDescription().c_str(), "An exception has occurred!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 
 #else
 
-        fprintf(stderr, "An exception has occurred: %s\n", e.getFullDescription().c_str());
+		fprintf(stderr, "An exception has occurred: %s\n", e.getFullDescription().c_str());
 
 #endif
 
-    }
-    catch(std::exception& e)	//Exception perso
-    {
-        e.what();
-    }
+	}
+	catch(std::exception& e)	//Exception perso
+	{
+		e.what();
+	}
 
 #ifdef _DEBUG
 	FreeConsole();
 #endif
 
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

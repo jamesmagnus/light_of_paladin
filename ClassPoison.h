@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Classpotion.h"
+#include "ClassPotion.h"
 
 class Poison :public Potion
 {

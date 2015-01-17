@@ -18,15 +18,15 @@ private:
 
 public:
 
-    /* Constructeur */
-    /* pNode, adresse du noeud de scène lié à l'objet */
-    /* IsVisible, true si l'objet doit être rendu */
-    /* vie, la vie de l'entité */
-    /* nom, le nom de l'entité */
-    Humanoide(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string nom="DefaultHuma");
+	/* Constructeur */
+	/* pNode, adresse du noeud de scène lié à l'objet */
+	/* IsVisible, true si l'objet doit être rendu */
+	/* vie, la vie de l'entité */
+	/* nom, le nom de l'entité */
+	Humanoide(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string nom="DefaultHuma");
 
-    /* Destructeur */
-    virtual ~Humanoide();
+	/* Destructeur */
+	virtual ~Humanoide();
 
 	/* Clonage, méthode virtuelle pure */
 	virtual Humanoide* clone() const override=0;

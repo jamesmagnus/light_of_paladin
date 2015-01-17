@@ -2,6 +2,8 @@
 #include <OgreTerrainGroup.h>
 #include <OgreFileSystemLayer.h>
 
+#include <cstringt.h>
+
 #include "GestionnaireID.h"
 #include "GestionnaireTerrain.h"
 #include "ExceptionPerso.h"
@@ -44,11 +46,11 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
     imp.layerList[1].textureNames.push_back("terrainsnow01.dds");
     imp.layerList[1].textureNames.push_back("terrainsnow01_N.dds");
 
-        int largeur = 1, longueur = 1;
+    int largeur = 1, longueur = 8;
 
-    for(int x = 0; x < largeur; x++)
+    for(int x=0; x < largeur; x++)
     {
-        for(int y = 0; y < longueur; y++)
+        for(int y=1; y <= longueur; y++)
         {
             if (ResourceGroupManager::getSingleton().resourceExists(ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, mpTerrainGroup->generateFilename(x, y)))
             {
@@ -57,18 +59,26 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
             } 
             else
             {
+				int num = x*8 + y;
+				std::string name;
 
-                Image img;
-                img.load("heightmap1.jpg", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+				if (num < 10)
+				{
+					name = "island_00" + std::to_string(num) + ".bmp";
+				} 
+				else
+				{
+					name = "island_0" + std::to_string(num) + ".bmp";
+				}
 
-                if(x % 2 != 0)
-                    img.flipAroundY();
-                if(y % 2 != 0)
-                    img.flipAroundX();
+				std::cout << name << std::endl;
+
+				Image img;
+                img.load(name, ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
                 mpTerrainGroup->defineTerrain(x, y, &img);
                 mpTerrainGroup->loadTerrain(x, y, true);
-                //mpTerrainGroup->getTerrain(x, y)->save("media/terrain/" + mpTerrainGroup->generateFilename(x, y));
+                mpTerrainGroup->getTerrain(x, y)->save("media/terrain/" + mpTerrainGroup->generateFilename(x, y));
             }
         }
     }
