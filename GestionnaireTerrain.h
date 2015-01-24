@@ -37,7 +37,7 @@ public:
     /* Lève une exception si l'id ne correspond pas à un terrain */
     std::pair<int, int> getXYFromID(unsigned long id) const;
 
-protected:
+private:
 
     unsigned int mTailleTerrain, mTailleHeightMap;
 

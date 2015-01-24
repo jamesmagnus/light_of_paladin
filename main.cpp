@@ -1,4 +1,4 @@
-#include <OGRE/Ogre.h>
+#include <Ogre.h>
 
 #include <conio.h>
 #include <cstdio>
@@ -16,7 +16,7 @@
 /* Singletons */
 GestionnaireID* GestionnaireID::mpInstanceUnique = nullptr;
 
-#if OGRE_PLATFORM == PLATFORM_WIN32 || OGRE_PLATFORM == OGRE_PLATFORM_WIN32 //Windows x86
+#if OGRE_PLATFORM == OGRE_PLATFORM_WINRT || OGRE_PLATFORM == OGRE_PLATFORM_WIN32 //Windows x86
 
 #define WIN32_LEAN_AND_MEAN //Désactive les fonctionnalités inutiles
 #include "windows.h"
@@ -53,7 +53,7 @@ int main(int argc, char **argv) //Main standard
 	catch(Ogre::Exception& e)
 	{
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32 || OGRE_PLATFORM == OGRE_PLATFORM_WINRT
 
 		MessageBoxA(NULL, e.getFullDescription().c_str(), "An exception has occurred!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 

@@ -3,7 +3,7 @@
 
 HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *mTerrains): hkpSampledHeightFieldShape(rInfo)
 {
-	mpHeightData = mTerrains->getTerrains()->getTerrain(0, 1)->getHeightData();
+	mpHeightData = mTerrains->getTerrains()->getTerrain(0, 0)->getHeightData();
 }
 
 HeightFieldShape::~HeightFieldShape()
@@ -22,5 +22,5 @@ void HeightFieldShape::collideSpheres(CollideSpheresInput const& input, SphereCo
 
 HK_FORCE_INLINE hkReal HeightFieldShape::getHeightAtImpl(int x, int z) const 
 {
-	return mpHeightData[x*257+z]/(5000.0f/257.0f);
+	return mpHeightData[x*2049+z]/(80000.0f/2049.0f);
 }

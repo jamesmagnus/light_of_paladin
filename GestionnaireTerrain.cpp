@@ -1,6 +1,7 @@
 #include <Ogre.h>
 #include <OgreTerrainGroup.h>
 #include <OgreFileSystemLayer.h>
+#include <OgreImage.h>
 
 #include <cstringt.h>
 
@@ -33,24 +34,24 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
     mpTerrainGroup->setFilenameConvention("data","ter");
 
     Terrain::ImportData& imp = mpTerrainGroup->getDefaultImportSettings();
-	imp.inputBias=0.0;
-    imp.inputScale = 1000.0;
-    imp.minBatchSize = 33;
-    imp.maxBatchSize = 65;
+	imp.inputBias=0.0f;
+    imp.inputScale = 2000.0f;
+    imp.minBatchSize = 65;
+    imp.maxBatchSize = 129;
 
     imp.layerList.resize(2);
-    imp.layerList[0].worldSize = 200;
+    imp.layerList[0].worldSize = 140;
     imp.layerList[0].textureNames.push_back("grass_green-01_diffusespecular.dds");
     imp.layerList[0].textureNames.push_back("grass_green-01_normalheight.dds");
-    imp.layerList[1].worldSize = 60;
+    imp.layerList[1].worldSize = 120;
     imp.layerList[1].textureNames.push_back("terrainsnow01.dds");
     imp.layerList[1].textureNames.push_back("terrainsnow01_N.dds");
 
-    int largeur = 1, longueur = 8;
+    int largeur = 1, longueur = 1;
 
     for(int x=0; x < largeur; x++)
     {
-        for(int y=1; y <= longueur; y++)
+        for(int y=0; y < longueur; y++)
         {
             if (ResourceGroupManager::getSingleton().resourceExists(ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, mpTerrainGroup->generateFilename(x, y)))
             {
@@ -59,7 +60,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
             } 
             else
             {
-				int num = x*8 + y;
+				int num = x*largeur + y+1;
 				std::string name;
 
 				if (num < 10)
@@ -71,10 +72,13 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 					name = "island_0" + std::to_string(num) + ".bmp";
 				}
 
-				std::cout << name << std::endl;
+				if(!ResourceGroupManager::getSingleton().resourceExists(ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, name))
+				{
+					throw ExceptionPerso(("HeightMap:" + name + " introuvable.").c_str(), FATAL);
+				}
 
 				Image img;
-                img.load(name, ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+                img.load("island.bmp", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
                 mpTerrainGroup->defineTerrain(x, y, &img);
                 mpTerrainGroup->loadTerrain(x, y, true);
@@ -82,6 +86,37 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
             }
         }
     }
+
+	TerrainLayerBlendMap *pBlendMap = mpTerrainGroup->getTerrain(0, 0)->getLayerBlendMap(1);
+
+	float *pBlend = pBlendMap->getBlendPointer();
+	for (uint16 y=0; y < mpTerrainGroup->getTerrain(0, 0)->getLayerBlendMapSize(); y++)
+	{
+		for (uint16 x=0; x < mpTerrainGroup->getTerrain(0, 0)->getLayerBlendMapSize(); x++)
+		{
+			Real terrainX, terrainY;
+
+			pBlendMap->convertImageToTerrainSpace(x, y, &terrainX, &terrainY);
+
+			Real height = mpTerrainGroup->getTerrain(0, 0)->getHeightAtTerrainPosition(terrainX, terrainY);
+
+			if (height >= 1800.0f)
+			{
+				*pBlend++ = 1; //Neige au dessus de 1500
+			}
+			else if (height <= 1350.0f)
+			{
+				*pBlend++ = 255;    //Roche en dessous de 1200
+			}
+			else
+			{
+				*pBlend++ = 255 + (height-1350)*(-255/450);   //Progressivement entre les deux
+			}
+		}
+	}
+
+	pBlendMap->dirty();
+	pBlendMap->update();
 
     mpTerrainGroup->freeTemporaryResources();
 }

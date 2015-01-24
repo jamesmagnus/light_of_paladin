@@ -35,7 +35,7 @@ void AppMain::initHavok()
 	hkpWorldCinfo HkWorldInfo;
 
 	HkWorldInfo.m_gravity.set(0, -9.81f, 0);
-	HkWorldInfo.setBroadPhaseWorldSize(5000.0f);	//Taille de la simulation (ici du monde)
+	HkWorldInfo.setBroadPhaseWorldSize(1500.0f);	//Taille de la simulation (ici 3 chunks de 500 métres sur 3 chunks de 500)
 	HkWorldInfo.setupSolverInfo(hkpWorldCinfo::SOLVER_TYPE_8ITERS_MEDIUM);
 	HkWorldInfo.m_simulationType = hkpWorldCinfo::SIMULATION_TYPE_CONTINUOUS;
 

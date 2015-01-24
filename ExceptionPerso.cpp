@@ -1,6 +1,9 @@
 #include <string>
+#include <iostream>
 
-#if OGRE_PLATFORM == PLATFORM_WIN32 || OGRE_PLATFORM == OGRE_PLATFORM_WIN32 //Windows x86
+#include <Ogre.h>
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WINRT || OGRE_PLATFORM == OGRE_PLATFORM_WIN32 //Windows x86
 
 #include "windows.h"
 
@@ -49,7 +52,7 @@ const char* ExceptionPerso::what() const throw()
         break;
     }
 
-#if OGRE_PLATFORM == PLATFORM_WIN32 || OGRE_PLATFORM == OGRE_PLATFORM_WIN3
+#if OGRE_PLATFORM == OGRE_PLATFORM_WINRT || OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 
     /* On utilise la fenêtre message d'erreur classique sous Windows */
     MessageBoxA(NULL, std::exception::what(), lvl.c_str(), MB_OK | MB_ICONERROR | MB_TASKMODAL);
