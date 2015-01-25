@@ -45,4 +45,3 @@ public:
 	/* Lève une exception si les chunks ne sont pas 'ready' */
 	virtual bool frameRenderingQueued(Ogre::FrameEvent const& rEv) override; 
 };
-

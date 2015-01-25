@@ -24,7 +24,7 @@ static void HK_CALL errorReportHavok(const char* msg, void* obj)
 	std::cout << msg;
 }
 
-void AppMain::initHavok()
+bool AppMain::initHavok()
 {
 	Ogre::LogManager::getSingletonPtr()->logMessage("**** Init Havok ****");
 
@@ -35,13 +35,15 @@ void AppMain::initHavok()
 	hkpWorldCinfo HkWorldInfo;
 
 	HkWorldInfo.m_gravity.set(0, -9.81f, 0);
-	HkWorldInfo.setBroadPhaseWorldSize(1500.0f);	//Taille de la simulation (ici 3 chunks de 500 métres sur 3 chunks de 500)
+	HkWorldInfo.setBroadPhaseWorldSize(3*TAILLE_CHUNK);	//Taille de la simulation 3 chunks sur 3 chunks
 	HkWorldInfo.setupSolverInfo(hkpWorldCinfo::SOLVER_TYPE_8ITERS_MEDIUM);
 	HkWorldInfo.m_simulationType = hkpWorldCinfo::SIMULATION_TYPE_CONTINUOUS;
 
 	mpHkWorld = new hkpWorld(HkWorldInfo);
 
-	Ogre::LogManager::getSingletonPtr()->logMessage("**** Havok successfully initialized ****");	
+	Ogre::LogManager::getSingletonPtr()->logMessage("**** Havok successfully initialized ****");
+
+	return true;
 }
 
 

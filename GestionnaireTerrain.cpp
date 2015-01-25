@@ -5,13 +5,14 @@
 
 #include <cstringt.h>
 
+#include "Chunk.h"
 #include "GestionnaireID.h"
 #include "GestionnaireTerrain.h"
 #include "ExceptionPerso.h"
 
 using namespace Ogre;
 
-GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort)
+GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort): mChunksMgn(tailleTerrain, 500, this, pCam)
 {
     mpSceneMgr = pSceneMgr;
     mTailleTerrain = tailleTerrain;
@@ -60,23 +61,6 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
             } 
             else
             {
-				int num = x*largeur + y+1;
-				std::string name;
-
-				if (num < 10)
-				{
-					name = "island_00" + std::to_string(num) + ".bmp";
-				} 
-				else
-				{
-					name = "island_0" + std::to_string(num) + ".bmp";
-				}
-
-				if(!ResourceGroupManager::getSingleton().resourceExists(ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, name))
-				{
-					throw ExceptionPerso(("HeightMap:" + name + " introuvable.").c_str(), FATAL);
-				}
-
 				Image img;
                 img.load("island.bmp", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
@@ -197,4 +181,9 @@ std::pair<int, int> GestionnaireTerrain::getXYFromID(unsigned long id) const
     }
 
     return it->second;
+}
+
+Chunk* GestionnaireTerrain::getPChunk()
+{
+	return &mChunksMgn;
 }

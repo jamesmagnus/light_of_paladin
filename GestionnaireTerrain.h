@@ -2,6 +2,8 @@
 
 #include <OgreTerrainGroup.h>
 
+#include "Chunk.h"
+
 class GestionnaireID;
 
 class GestionnaireTerrain
@@ -37,6 +39,9 @@ public:
     /* Lève une exception si l'id ne correspond pas à un terrain */
     std::pair<int, int> getXYFromID(unsigned long id) const;
 
+	/* Renvoie l'adresse du gestionnaire de chunks (frameListener) */
+	Chunk* getPChunk();
+
 private:
 
     unsigned int mTailleTerrain, mTailleHeightMap;
@@ -45,6 +50,8 @@ private:
     Ogre::TerrainGroup *mpTerrainGroup;
     Ogre::TerrainGlobalOptions *mpOptions;
     Ogre::Light *mpSoleil;
+
+	Chunk mChunksMgn;
 
     GestionnaireID *mpIDGestion;
 

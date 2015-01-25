@@ -22,5 +22,5 @@ void HeightFieldShape::collideSpheres(CollideSpheresInput const& input, SphereCo
 
 HK_FORCE_INLINE hkReal HeightFieldShape::getHeightAtImpl(int x, int z) const 
 {
-	return mpHeightData[x*2049+z]/(80000.0f/2049.0f);
+	return mpHeightData[x*TAILLE_IMG_HEIGHTMAP+z] / ((float)TAILLE_MONDE/(float)TAILLE_IMG_HEIGHTMAP);
 }
