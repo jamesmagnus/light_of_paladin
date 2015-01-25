@@ -96,6 +96,11 @@ void AppMain::start()
 		throw ExceptionPerso("Erreur dans AppMain::initOGRE(), mais Ogre ne parait pas avoir levé une exception.", FATAL);
 	}
 
+	if (!initHavok()) //Physique et collision
+	{
+		throw ExceptionPerso("Erreur lors de l'initialisation du moteur Havok.", FATAL);
+	}
+
 	mpCeguiMain = &CEGUI::OgreRenderer::bootstrapSystem();
 
 	/* Création du singleton gestionnaire ID */
@@ -109,8 +114,6 @@ void AppMain::start()
 	InputListener *listener = new InputListener(mpWindow, mpCam);   //Ecouteur d'évènement pour les entrées utilisateurs
 
 	mpRoot->addFrameListener(listener);
-
-	initHavok();	//Moteur physique et collision
 
 	infiniteLoop(); //Boucle de rendu
 }
@@ -219,6 +222,8 @@ bool AppMain::createSky()
 
 	mpSky->getMoonManager()->setMoonSize(0.3f);
 
+	mpSky->setTimeMultiplier(0.02f);
+
 	return true;
 }
 
@@ -230,7 +235,31 @@ bool AppMain::createTerrain()
 	pSoleil->setDiffuseColour(ColourValue(0.8f, 0.68f, 0.73f));
 	pSoleil->setSpecularColour(ColourValue(0.8f, 0.68f, 0.73f));
 
-	mpTerrain = new GestionnaireTerrain(257, 5000, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport());
+	mpTerrain = new GestionnaireTerrain(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport());
+
+	hkpSampledHeightFieldBaseCinfo info;
+
+	info.m_maxHeight = -1;
+	info.m_minHeight = 0;
+	info.m_xRes = TAILLE_CHUNK;
+	info.m_zRes = TAILLE_CHUNK;
+
+	HeightFieldShape *mTerrainShape = new HeightFieldShape(info, mpTerrain);;
+	hkpRigidBodyCinfo rci;
+	rci.m_motionType = hkpMotion::MOTION_FIXED;
+	rci.m_position.setMul4(-0.5f, mTerrainShape->m_extents); // center the heightfield
+	rci.m_shape = mTerrainShape;
+	rci.m_friction = 0.2f;
+
+	hkpRigidBody* body = new hkpRigidBody( rci );
+
+	mpHkWorld->addEntity(body);
+
+	body->removeReference();
+	mTerrainShape->removeReference();
+
+
+//	mpRoot->addFrameListener(mpTerrain->getPChunk());
 
 	mpWater = new Eau(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
 	mpRoot->addFrameListener(mpWater);
@@ -264,7 +293,7 @@ bool AppMain::createTerrain()
 		z = Math::RangeRandom(-5000.0f, 5000.0f);
 		scale = Math::RangeRandom(0.2f, 0.9f);
 		t = static_cast<int>(Math::RangeRandom(0, 3));
-		y = mpTerrain->getTerrains()->getTerrain(0, 1)->getHeightAtWorldPosition(x, 2000, z);
+		y = mpTerrain->getTerrains()->getTerrain(0, 0)->getHeightAtWorldPosition(x, 2000, z);
 
 		if(y > 65.0f)
 		{
@@ -273,40 +302,6 @@ bool AppMain::createTerrain()
 	}
 
 	mpTrees->setPageLoader(treeLoader);
-
-	/* TerrainLayerBlendMap *pBlendMap = mpTerrain->getLayerBlendMap(1);
-
-	float *pBlend = pBlendMap->getBlendPointer();
-	for (uint16 y=0; y < mpTerrain->getLayerBlendMapSize(); y++)
-	{
-	for (uint16 x=0; x < mpTerrain->getLayerBlendMapSize(); x++)
-	{
-	Real terrainX, terrainY;
-
-	pBlendMap->convertImageToTerrainSpace(x, y, &terrainX, &terrainY);
-
-	Real height = mpTerrain->getHeightAtTerrainPosition(terrainX, terrainY);
-
-	if (height >= 800)
-	{
-	*pBlend++ = 1; //Neige au dessus de 800
-	}
-	else if (height <= 600)
-	{
-	*pBlend++ = 255;    //Roche en dessous de 400
-	}
-	else
-	{
-	*pBlend++ = height * (-1.27f) + 1017;   //Progressivement entre les deux
-	}
-	}
-	}
-
-	pBlendMap->dirty();
-	pBlendMap->update();
-
-	mpTerrain->freeTemporaryResources();*/
-
 
 	return true;
 }
@@ -379,36 +374,12 @@ void AppMain::infiniteLoop()
 	vdb->serve(25001);
 #endif
 
-	hkpSampledHeightFieldBaseCinfo info;
-
-	info.m_maxHeight = -1;
-	info.m_minHeight = 0;
-	info.m_xRes = 257;
-	info.m_zRes = 257;
-
-	HeightFieldShape *mTerrainShape = new HeightFieldShape(info, mpTerrain);;
-	hkpRigidBodyCinfo rci;
-	rci.m_motionType = hkpMotion::MOTION_FIXED;
-	rci.m_position.setMul4(-0.5f, mTerrainShape->m_extents); // center the heightfield
-	rci.m_shape = mTerrainShape;
-	rci.m_friction = 0.2f;
-
-	hkpRigidBody* body = new hkpRigidBody( rci );
-
-	mpHkWorld->addEntity(body);
-
-	body->removeReference();
-	mTerrainShape->removeReference();
-
-
 	while (true)
 	{
 		mpHkWorld->stepDeltaTime(0.001);
 
 #ifdef _DEBUG
 		vdb->step(0);
-#else
-		error
 #endif
 	
 		WindowEventUtilities::messagePump();

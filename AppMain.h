@@ -108,5 +108,5 @@ public:
 	Personnage* getPersonnage(std::string nom) const;
 
 	/* Initialise Havok */
-	void initHavok();
+	bool initHavok();
 };
