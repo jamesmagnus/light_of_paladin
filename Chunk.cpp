@@ -1,9 +1,9 @@
 #include "Chunk.h"
 #include "ExceptionPerso.h"
-#include "HeightFieldShape.h"
+
+#include <OgreCamera.h>
 
 using namespace Ogre;
-
 
 Chunk::Chunk(unsigned int sizeMap, unsigned int chunkSize, GestionnaireTerrain *pGestTer, Ogre::Camera *pCam)
 {
@@ -15,7 +15,12 @@ Chunk::Chunk(unsigned int sizeMap, unsigned int chunkSize, GestionnaireTerrain *
 
 	mReady = false;
 
-	mppChunks = new HeightFieldShape* [mMaxChunkCoo*mMaxChunkCoo];
+	mppChunks = new hkpRigidBody* [mMaxChunkCoo*mMaxChunkCoo];
+
+	for (unsigned int i=0; i<mMaxChunkCoo*mMaxChunkCoo; ++i)
+	{
+		mppChunks[i] = nullptr;
+	}
 
 	mpGestTerrain = pGestTer;
 	mpCam = pCam;
@@ -28,7 +33,7 @@ Chunk::~Chunk()
 	mppChunks = nullptr;
 }
 
-bool Chunk::addChunkPtr(HeightFieldShape* pShape, unsigned int x, unsigned int y)
+bool Chunk::addChunkPtr(hkpRigidBody* pShape, unsigned int x, unsigned int y)
 {
 	if (x >= mMaxChunkCoo || y >= mMaxChunkCoo)
 	{
@@ -61,7 +66,6 @@ bool Chunk::removeChunkPtr(unsigned int x, unsigned int y)
 
 	if (mppChunks[mMaxChunkCoo*x + y] != nullptr)
 	{
-		delete mppChunks[mMaxChunkCoo*x + y];
 		mppChunks[mMaxChunkCoo*x + y] = nullptr;
 		mReady = false;
 
@@ -106,16 +110,24 @@ bool Chunk::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 	tmp.positionJoueur = pos;
 
 	/* Coordonnées du chunk sur lequel est le joueur */
-	pos.x = int(pos.x/mChunkSize);
-	pos.y = int(pos.y/mChunkSize);
+	pos.x = Real(int(pos.x)/mChunkSize);
+	pos.y = Real(int(pos.y)/mChunkSize);
 
 	unsigned int k=0;
 
-	for (unsigned int i=pos.x-1; i<= pos.x+1; ++i)
+	for (unsigned int i= unsigned int (pos.x)-1; i <= unsigned int (pos.x)+1; ++i)
 	{
-		for (unsigned int j=pos.y-1; j<= pos.y+1; ++j)
+		for (unsigned int j= unsigned int (pos.y)-1; j <= unsigned int(pos.y)+1; ++j)
 		{
-			tmp.ppChunk[k] = mppChunks[i*mMaxChunkCoo + j];
+			if (i>=0 && i<mMaxChunkCoo && j>=0 && j<mMaxChunkCoo)
+			{
+				tmp.ppChunk[k] = mppChunks[i*mMaxChunkCoo + j];
+			} 
+			else
+			{
+				tmp.ppChunk[k] = nullptr;
+			}
+			
 			k++;
 		}
 	}

@@ -1,9 +1,12 @@
 #include "HeightFieldShape.h"
-#include "GestionnaireTerrain.h"
 
-HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *mTerrains): hkpSampledHeightFieldShape(rInfo)
+#include "GestionnaireTerrain.h"
+#include <OgreTerrainGroup.h>
+
+HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, Ogre::Vector2 cooHeightField): hkpSampledHeightFieldShape(rInfo)
 {
-	mpHeightData = mTerrains->getTerrains()->getTerrain(0, 0)->getHeightData();
+	mCooHeightField = cooHeightField;
+	mpHeightData = pTerrains->getTerrains()->getTerrain(0, 0)->getHeightData();	//TODO ne récupérer qu'un chunk de 500 sur 500
 }
 
 HeightFieldShape::~HeightFieldShape()
@@ -22,5 +25,5 @@ void HeightFieldShape::collideSpheres(CollideSpheresInput const& input, SphereCo
 
 HK_FORCE_INLINE hkReal HeightFieldShape::getHeightAtImpl(int x, int z) const 
 {
-	return mpHeightData[x*TAILLE_IMG_HEIGHTMAP+z] / ((float)TAILLE_MONDE/(float)TAILLE_IMG_HEIGHTMAP);
+	return mpHeightData[x*TAILLE_CHUNK+z] / ((float)TAILLE_MONDE/(float)TAILLE_CHUNK);
 }

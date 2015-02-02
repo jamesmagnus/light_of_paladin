@@ -1,18 +1,23 @@
 #pragma once
 
-#include <Ogre.h>
+#include <OgreFrameListener.h>
 
 #include "Structures.h"
 
+namespace Ogre
+{
+	class Camera;
+}
+
+class hkpRigidBody;
 class GestionnaireTerrain;
-class HeightFieldShape;
 
 class Chunk: public Ogre::FrameListener
 {
 private:
 	TableauChunks mActualChunk;
 	unsigned int mSizeMap, mChunkSize, mMaxChunkCoo;
-	HeightFieldShape **mppChunks;
+	hkpRigidBody **mppChunks;
 	bool mReady;
 	GestionnaireTerrain *mpGestTerrain;
 	Ogre::Camera* mpCam;
@@ -30,15 +35,19 @@ public:
 	/* pShape, un élément du terrain de la taille passée en paramètre au constructeur */
 	/* x, la position en x du chunk dans la grille */
 	/* y, la position en y du chunk dans la grille */
-	bool addChunkPtr(HeightFieldShape* pShape, unsigned int x, unsigned int y);
+	/* Note: Acquiert une référence sur l'objet */
+	bool addChunkPtr(hkpRigidBody* pBody, unsigned int x, unsigned int y);
 
 	/* Valide la construction de la grille de chunks, tous les chunks doivent avoir été ajoutés, sinon lève une exception */
 	void ready();
 
 	/* Supprime le chunk enregistré en x et y dans la grille */
+	/* Libère la référence */
+	/* L'objet peut s'auto-détruire */
 	bool removeChunkPtr(unsigned int x, unsigned int y);
 
-	/* Renvoie un tableau de 9 chunks (ou moins) avec celui où se trouve le joueur au centre */
+	/* Renvoie un tableau de 9 chunks  avec celui où se trouve le joueur au centre */
+	/* Si le joueur est au bord de la map certains pointeurs seront nullptr */
 	TableauChunks const& getCurrentChunks() const;
 
 	/* Mise à jour des chunks */

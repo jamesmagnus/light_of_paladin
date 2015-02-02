@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cstdio>
-#include <cstdlib>
-#include <string>
 #include <map>
 
 class Item;

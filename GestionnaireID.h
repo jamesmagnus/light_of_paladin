@@ -6,6 +6,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 
+
 /* Classe utilisée pour générer les identifiants unique de chaque item du jeu */
 /* Classe finale, non dérivable */
 /* Singleton */

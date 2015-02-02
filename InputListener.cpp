@@ -1,5 +1,12 @@
 #include "InputListener.h"
 
+#include <OgreCamera.h>
+#include <OgreLogManager.h>
+#include <OgreRenderWindow.h>
+#include <OIS/OISMouse.h>
+#include <OIS/OISKeyboard.h>
+#include <OIS//OISInputManager.h>
+
 using namespace Ogre;
 
 InputListener::InputListener(RenderWindow *pWindow, Camera *pCam)

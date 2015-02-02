@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Classentitevivante.h"
+#include "ClassEntiteVivante.h"
 
 class Creature :public EntiteVivante
 {

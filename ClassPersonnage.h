@@ -1,13 +1,12 @@
 #pragma once
 
-#include <cstdio>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <Ogre.h>
-
-#include "Structures.h"
 #include "ClassHumanoide.h"
+#include "enumerations.h"
+
+namespace Ogre
+{
+	class SceneNode;
+}
 
 class Arme;
 class Inventaire;

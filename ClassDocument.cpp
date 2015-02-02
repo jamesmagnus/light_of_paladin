@@ -1,5 +1,7 @@
 #include "ClassDocument.h"
 
+#include <string>
+
 Document::Document(Ogre::SceneNode *pNode, int prix, float poid, std::string nom, bool IsUnique, bool IsVisible):Item(pNode, prix, poid, nom, IsUnique, IsVisible)
 {
 	mTitre="Default Title";

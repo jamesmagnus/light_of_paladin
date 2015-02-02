@@ -1,14 +1,9 @@
-#include <Ogre.h>
+#include <OgreException.h>
+#include <OgrePlatform.h>
 
-#include <conio.h>
-#include <cstdio>
-#include <stdio.h>
-#include <stdlib.h>
-#include <cstdlib>
 #include <fcntl.h>
-#include <signal.h>
-#include <io.h>
 #include <tchar.h>
+#include <io.h>
 
 #include "AppMain.h"
 #include "GestionnaireID.h"
@@ -37,11 +32,9 @@ int main(int argc, char **argv) //Main standard
 	_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF|_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF));	//Fuite mémoire
 #endif
 
-#if defined(HK_COMPILER_HAS_INTRINSICS_IA32) && HK_CONFIG_SIMD == HK_CONFIG_SIMD_ENABLED
 	// Flush all denormal/subnormal numbers (2^-1074 to 2^-1022) to zero.
 	// Typically operations on denormals are very slow, up to 100 times slower than normal numbers.
 	_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
-#endif
 
 	AppMain app;   //Le jeu
 

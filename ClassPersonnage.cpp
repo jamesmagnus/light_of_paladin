@@ -1,14 +1,6 @@
-#include <cstdio>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <Ogre.h>
-
-#include "ClassItem.h"
 #include "ClassPersonnage.h"
 #include "ClassInventaire.h"
 #include "ClassArme.h"
-#include "Structures.h"
 
 using namespace std;
 

@@ -1,10 +1,18 @@
 #pragma once
 
-#include <OgreTerrainGroup.h>
-
 #include "Chunk.h"
 
 class GestionnaireID;
+
+namespace Ogre
+{
+	class TerrainGroup;
+	class TerrainGlobalOptions;
+	class Camera;
+	class Viewport;
+	class SceneManager;
+	class TerrainLayerBlendMap;
+}
 
 class GestionnaireTerrain
 {

@@ -1,8 +1,6 @@
-#include <cstdio>
-#include <cstdlib>
-
-#include "ClassItem.h"
 #include "ClassArme.h"
+
+#include <OgreMath.h>
 
 
 using namespace std;

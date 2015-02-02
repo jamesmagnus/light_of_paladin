@@ -1,18 +1,12 @@
-#include <Ogre.h>
-#include <OgreTerrainGroup.h>
-#include <OgreFileSystemLayer.h>
-#include <OgreImage.h>
-
-#include <cstringt.h>
-
-#include "Chunk.h"
-#include "GestionnaireID.h"
 #include "GestionnaireTerrain.h"
+#include "GestionnaireID.h"
 #include "ExceptionPerso.h"
+
+#include <OgreTerrainGroup.h>
 
 using namespace Ogre;
 
-GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort): mChunksMgn(tailleTerrain, 500, this, pCam)
+GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort): mChunksMgn(tailleTerrain, TAILLE_CHUNK, this, pCam)
 {
     mpSceneMgr = pSceneMgr;
     mTailleTerrain = tailleTerrain;

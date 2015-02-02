@@ -1,8 +1,5 @@
-#include <Ogre.h>
-#include <SkyX.h>
-
-#include "Eau.h"
 #include "Lumiere.h"
+#include <SkyX.h>
 
 
 GestionnaireLight::GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, Eau* pEau, Ogre::ColourValue lumAmbiente)

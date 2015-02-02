@@ -1,5 +1,7 @@
 #include "ClassArmure.h"
 
+#include <OgreMath.h>
+
 using namespace std;
 
 Armure::Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix, float poid, string nom, bool IsUnique, bool IsVisible, int pointProtection, float etat): Item(pNode, prix, poid, nom, IsUnique, IsVisible)

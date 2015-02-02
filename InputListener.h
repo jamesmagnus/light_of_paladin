@@ -1,7 +1,22 @@
 #pragma once
 
-#include <OGRE/Ogre.h>
-#include <OIS/OIS.h>
+#include <OgrePrerequisites.h>
+#include <OgreMath.h>
+#include <OgreFrameListener.h>
+#include <OgreWindowEventUtilities.h>
+
+namespace Ogre
+{
+	class RenderWindow;
+	class Camera;
+}
+
+namespace OIS
+{
+	class InputManager;
+	class Mouse;
+	class Keyboard;
+}
 
 class InputListener: public Ogre::FrameListener, Ogre::WindowEventListener
 {

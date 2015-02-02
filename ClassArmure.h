@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ClassItem.h"
-#include "Structures.h"
+
+enum class ETypeArmure{CASQUE, PLASTRON, GANT_G, GANT_D, BOTTE_G, BOTTE_D, JAMBIERE_G, JAMBIERE_D};
 
 /* Classe finale qui sert à manipuler les différentes parties d'armure */
 /* Sémantique d'entité */

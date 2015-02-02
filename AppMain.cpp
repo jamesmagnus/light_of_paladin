@@ -1,40 +1,32 @@
-#include <OgreTerrain.h>
-#include <OgreTextAreaOverlayElement.h>
+#include "AppMain.h"
+#include "Eau.h"
+#include "Lumiere.h"
+#include "HeightFieldShape.h"
+#include "GestionnaireID.h"
+#include "ExceptionPerso.h"
+#include "InputListener.h"
+#include "GestionnaireTerrain.h"
+
+#include <SkyX.h>
+
+#include <OgreTerrainGroup.h>
 #include <PagedGeometry.h>
 #include <BatchPage.h>
 #include <ImpostorPage.h>
 #include <TreeLoader3D.h>
-#include <SkyX.h>
-#include <Hydrax.h>
-#include <CEGUI/CEGUI.h>
+
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 
-#include <Common/Base/hkBase.h>
 #include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
-#include <Common/Base/System/hkBaseSystem.h>
-#include <Common/Base/Memory/Allocator/hkMemoryAllocator.h>
-#include <Common/Base/Memory/System/FreeList/hkFreeListMemorySystem.h>
-#include <Physics2012/Collide/hkpCollide.h>
-#include <Physics2012/Dynamics/Entity/hkpEntity.h>
-#include <Physics2012/Dynamics/Entity/hkpRigidBodyCinfo.h>
-#include <Physics2012/Dynamics/Entity/hkpRigidBody.h>
-#include <Physics2012/Collide/Shape/hkpShape.h>
-#include <Physics2012/Collide/Shape/HeightField/SampledHeightField/hkpSampledHeightFieldShape.h>
-#include <Physics2012/Collide/Shape/HeightField/SampledHeightField/hkpSampledHeightFieldBaseCinfo.h>
+
+#include <Physics2012/Utilities/Serialize/hkpPhysicsData.h>
+
+#ifdef _DEBUG
 
 #include <Common/Visualize/hkVisualDebugger.h>
 #include <Physics2012/Utilities/VisualDebugger/hkpPhysicsContext.h>
 
-#include "AppMain.h"
-#include "InputListener.h"
-#include "ClassPersonnage.h"
-#include "GestionnaireID.h"
-#include "GestionnaireTerrain.h"
-#include "ExceptionPerso.h"
-#include "ClassArme.h"
-#include "ClassEpee.h"
-#include "ClassArmure.h"
-#include "ClassInventaire.h"
+#endif
 
 using namespace Ogre;
 
@@ -244,27 +236,40 @@ bool AppMain::createTerrain()
 	info.m_xRes = TAILLE_CHUNK;
 	info.m_zRes = TAILLE_CHUNK;
 
-	HeightFieldShape *mTerrainShape = new HeightFieldShape(info, mpTerrain);;
-	hkpRigidBodyCinfo rci;
-	rci.m_motionType = hkpMotion::MOTION_FIXED;
-	rci.m_position.setMul4(-0.5f, mTerrainShape->m_extents); // center the heightfield
-	rci.m_shape = mTerrainShape;
-	rci.m_friction = 0.2f;
+	for (int i=0; i< 120; ++i)
+	{
+		for (int j=0; j < 120; ++j)
+		{
+			HeightFieldShape *pTerrainShape = new HeightFieldShape(info, mpTerrain, Vector2(i, j));
 
-	hkpRigidBody* body = new hkpRigidBody( rci );
+			hkpRigidBodyCinfo rci;
+			rci.m_motionType = hkpMotion::MOTION_FIXED;
+			rci.m_position.setMul4(-0.5f, pTerrainShape->m_extents); // center the heightfield
+			rci.m_shape = pTerrainShape;
+			rci.m_friction = 0.2f;
 
-	mpHkWorld->addEntity(body);
+			hkpRigidBody* pBody = new hkpRigidBody( rci );
 
-	body->removeReference();
-	mTerrainShape->removeReference();
+			//mpHkWorld->addEntity(body);
 
+			mpTerrain->getPChunk()->addChunkPtr(pBody, i, j);
 
-//	mpRoot->addFrameListener(mpTerrain->getPChunk());
+			//hkSerializeMultiMap
+
+			pBody->removeReference();
+
+			pTerrainShape->removeReference();
+		}
+	}
+
+	mpTerrain->getPChunk()->ready();
+
+	mpRoot->addFrameListener(mpTerrain->getPChunk());
 
 	mpWater = new Eau(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
 	mpRoot->addFrameListener(mpWater);
 
-	mpWater->setHauteur(-20.0f);
+	mpWater->setHauteur(350.0f);
 
 	// Create water
 	mpWater->create();
@@ -381,7 +386,7 @@ void AppMain::infiniteLoop()
 #ifdef _DEBUG
 		vdb->step(0);
 #endif
-	
+
 		WindowEventUtilities::messagePump();
 
 		if (!mpRoot->renderOneFrame())

@@ -2,7 +2,7 @@
 
 #include <exception>
 
-enum ENiveau {INFO, ERREUR, FATAL};
+#include "enumerations.h"
 
 class ExceptionPerso : public std::exception
 {

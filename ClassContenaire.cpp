@@ -1,6 +1,9 @@
 #include "ClassContenaire.h"
 #include "ClassItem.h"
 
+#include <string>
+#include <assert.h>
+
 using namespace std;
 
 Contenaire::Contenaire(Ogre::SceneNode *pNode, bool IsVisible, int max):Affichable(pNode, IsVisible), Inventaire(max)

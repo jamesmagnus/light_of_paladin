@@ -1,22 +1,15 @@
 /* Méthodes de AppMain relatives à Havok */
 
-#include <Ogre.h>
+#include "AppMain.h"
+#include "Structures.h"
+
+#include <OgreLogManager.h>
 
 #include <Common/Base/hkBase.h>
-#include <Common/Base/System/hkBaseSystem.h>
 #include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
-#include <Common/Base/Memory/Allocator/Malloc/hkMallocAllocator.h>
-#include <Common/Base/Memory/Allocator/LargeBlock/hkLargeBlockAllocator.h>
-#include <Common/Base/Memory/System/FreeList/hkFreeListMemorySystem.h>
-#include <Common/Base/Fwd/hkcstdio.h>
-#include <Common/Base/Monitor/hkMonitorStream.h>
-#include <Common/Base/Monitor/MonitorStreamAnalyzer/hkMonitorStreamAnalyzer.h>
-#include <Common/Base/System/Stopwatch/hkStopwatch.h>
-#include <Common/Base/Math/hkMath.h>
+#include <Physics2012/Dynamics/World/hkpWorldCinfo.h>
+#include <Physics2012/Dynamics/World/hkpWorld.h>
 
-
-#include "AppMain.h"
-#include "HeightFieldShape.h"
 
 /* Fonction de gestion des erreurs pour Havok */
 static void HK_CALL errorReportHavok(const char* msg, void* obj)

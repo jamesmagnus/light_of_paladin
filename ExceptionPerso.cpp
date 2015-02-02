@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-#include <Ogre.h>
+#include <OgrePlatform.h>
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WINRT || OGRE_PLATFORM == OGRE_PLATFORM_WIN32 //Windows x86
 

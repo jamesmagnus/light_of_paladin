@@ -1,26 +1,40 @@
 #pragma once
 
-#include <OGRE/Ogre.h>
-#include <Ogre/Terrain/OgreTerrain.h>
+#include <OgreVector3.h>
 
-#include <SkyX.h>
-#include <PagedGeometry.h>
-#include <CEGUI/RendererModules/Ogre/Renderer.h>
-
-#include <Physics2012/Dynamics/hkpDynamics.h>
-#include <Physics2012/Dynamics/World/hkpWorld.h>
-
-#include <map>
-
-#include "Eau.h"
-#include "Lumiere.h"
-#include "HeightFieldShape.h"
-#include "Structures.h"
+#include "enumerations.h"
 
 class GestionnaireTerrain;
 class Personnage;
 class Item;
 class Inventaire;
+class Eau;
+class GestionnaireLight;
+class hkpWorld;
+
+namespace Ogre
+{
+	class Root;
+	class RenderWindow;
+	class SceneManager;
+	class Camera;
+	class SceneNode;
+}
+
+namespace CEGUI
+{
+	class OgreRenderer;
+}
+
+namespace SkyX
+{
+	class SkyX;
+}
+
+namespace Forests
+{
+	class PagedGeometry;
+}
 
 class AppMain
 {

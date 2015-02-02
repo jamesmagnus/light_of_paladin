@@ -1,9 +1,20 @@
 #pragma once
 
-#include <Ogre.h>
-#include <SkyX.h>
+#include <OgreFrameListener.h>
+#include <OgreColourValue.h>
 
-#include "Eau.h"
+namespace Ogre
+{
+	class Light;
+	class SceneManager;
+}
+
+class Eau;
+
+namespace SkyX
+{
+	class SkyX;
+}
 
 /* Classe non dérivable pour gérer les différentes lumières de la scènes et les mettre à jour, hérite FrameListener */
 /* Sémantique d'entité */
@@ -14,7 +25,7 @@ private:
 	/* Constructeur par copie interdit */
 	GestionnaireLight(GestionnaireLight const& rOriginal);
 
-	/* Opérateur d'assignement */
+	/* Opérateur d'assignement interdit */
 	GestionnaireLight& operator=(GestionnaireLight const& rOriginal);
 
 	Ogre::Light* mpSoleil;

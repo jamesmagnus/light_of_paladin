@@ -1,10 +1,7 @@
-#include <cstdio>
-#include <cstdlib>
-#include <string>
-#include <vector>
+#include <assert.h>
 
-#include "ClassItem.h"
 #include "ClassInventaire.h"
+#include "ClassItem.h"
 
 using namespace std;
 

@@ -1,10 +1,11 @@
+#include "Eau.h"
+
 #include <Hydrax.h>
 #include <Noise/Perlin/Perlin.h>
 #include <Modules/ProjectedGrid/ProjectedGrid.h>
-#include <Ogre.h>
 #include <SkyX.h>
 
-#include "Eau.h"
+#include <OgrePrerequisites.h>
 
 
 Eau::Eau(Ogre::SceneManager* pMgn, Ogre::Camera* pCam, Ogre::Viewport* pView, SkyX::SkyX* pSky): Ogre::FrameListener()

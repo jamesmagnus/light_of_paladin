@@ -1,8 +1,16 @@
 #pragma once
 
-#include <Hydrax.h>
-#include <Ogre.h>
-#include <SkyX.h>
+#include <OgreFrameListener.h>
+
+namespace Hydrax
+{
+	class Hydrax;
+}
+
+namespace SkyX
+{
+	class SkyX;
+}
 
 /* Classe non dérivable pour gérer l'eau, dérive de Ogre::FrameListener */
 /* Sémantique d'entité */

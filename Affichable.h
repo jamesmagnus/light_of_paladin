@@ -1,6 +1,11 @@
 #pragma once
 
-#include <Ogre.h>
+#include <iostream>
+
+namespace Ogre
+{
+	class SceneNode;
+}
 
 /* Classe abstraite servant de base à tous les éléments affichables du jeu, sémantique d'entité */
 class Affichable

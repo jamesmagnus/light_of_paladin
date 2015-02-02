@@ -1,10 +1,13 @@
 #pragma once
 
-#include <string>
-#include <Ogre.h>
-
 #include "Affichable.h"
-#include "ClassInventaire.h"
+
+namespace Ogre
+{
+	class SceneNode;
+}
+
+class Inventaire;
 
 /* Classe de base abstraite pour les entités vivantes du jeu */
 /* Sémantique d'entité */

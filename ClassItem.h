@@ -1,10 +1,5 @@
 #pragma once
 
-#include <cstdio>
-#include <cstdlib>
-#include <string>
-#include <vector>
-
 #include "Affichable.h"
 
 class Personnage;

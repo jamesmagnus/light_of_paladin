@@ -1,14 +1,8 @@
 #pragma once
 
-#include <cstdio>
-#include <cstdlib>
-#include <string>
-#include <vector>
+#include "ClassItem.h"
 
 class Personnage;
-class Item;
-
-#include "ClassItem.h"
 
 /* Classe pour gérer les armes, sémantique d'entité */
 /* Classe abstraite */

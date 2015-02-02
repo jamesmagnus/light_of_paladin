@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Classentitevivante.h"
+#include "ClassEntiteVivante.h"
 
 /* Classe abstraite pour gérer les humanoïdes, sémantique d'entité */
 class Humanoide :public EntiteVivante
