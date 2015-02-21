@@ -1,56 +1,37 @@
 #pragma once
 
-#include <OgreFrameListener.h>
+#include <utility>
+#include <boost/noncopyable.hpp>
 
-#include "Structures.h"
-
-namespace Ogre
-{
-	class Camera;
-}
-
-class hkpRigidBody;
 class GestionnaireTerrain;
+class hkpRigidBody;
 
-class Chunk: public Ogre::FrameListener
-{
-private:
-	TableauChunks mActualChunk;
-	unsigned int mSizeMap, mChunkSize, mMaxChunkCoo;
-	hkpRigidBody **mppChunks;
-	bool mReady;
-	GestionnaireTerrain *mpGestTerrain;
-	Ogre::Camera* mpCam;
+class Chunk: private boost::noncopyable
+ {
+ public:
 
-public:
+ 	/* Constructeur */
+ 	/* pTerrainMgr, adresse du gestionnaire de terrain */
+ 	/* pos, position en x et y du chunk Ã  crÃ©er, < MAX_CHUNK_COO */
+ 	Chunk(GestionnaireTerrain* pTerrainMgr, std::pair<int, int> pos);
 
-	/* Constructeur */
-	/* sizeMap, taille du monde */
-	/* chunkSize, taille d'un chunk en mètres */
-	Chunk(unsigned int sizeMap, unsigned int chunkSize, GestionnaireTerrain* pGestTer, Ogre::Camera *pCam);
+ 	/* Destructeur */
+ 	~Chunk();
 
-	virtual ~Chunk();
+ 	 /* Charge le hkpRigidBody en mÃ©moire s'il ne l'est pas dÃ©jÃ  */
+	/* Renvoie true s'il Ã©tait chargÃ©, false sinon */
+ 	 /* LÃ¨ve une exception en cas de problÃ¨me */
+ 	 bool loadBody();
 
-	/* Ajoute l'adresse d'un élément du terrain */
-	/* pShape, un élément du terrain de la taille passée en paramètre au constructeur */
-	/* x, la position en x du chunk dans la grille */
-	/* y, la position en y du chunk dans la grille */
-	/* Note: Acquiert une référence sur l'objet */
-	bool addChunkPtr(hkpRigidBody* pBody, unsigned int x, unsigned int y);
+ 	 /* LibÃ¨re la mÃ©moire utilisÃ©e par le hkpRigidBody */
+ 	 /* Sur requÃªte du gestionnaire de terrain uniquement ! */
+ 	 /* LÃ¨ve une exception en cas de problÃ¨me */
+ 	 void destroyBody();
 
-	/* Valide la construction de la grille de chunks, tous les chunks doivent avoir été ajoutés, sinon lève une exception */
-	void ready();
+ private:
 
-	/* Supprime le chunk enregistré en x et y dans la grille */
-	/* Libère la référence */
-	/* L'objet peut s'auto-détruire */
-	bool removeChunkPtr(unsigned int x, unsigned int y);
-
-	/* Renvoie un tableau de 9 chunks  avec celui où se trouve le joueur au centre */
-	/* Si le joueur est au bord de la map certains pointeurs seront nullptr */
-	TableauChunks const& getCurrentChunks() const;
-
-	/* Mise à jour des chunks */
-	/* Lève une exception si les chunks ne sont pas 'ready' */
-	virtual bool frameRenderingQueued(Ogre::FrameEvent const& rEv) override; 
-};
+ 	bool mIsBodyInMemory;
+ 	hkpRigidBody* mpRigidBody;
+	GestionnaireTerrain* mpTerrainMgr;
+	std::pair<int, int> mPos;
+ };
