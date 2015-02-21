@@ -1,7 +1,6 @@
 #include "AppMain.h"
 #include "Eau.h"
 #include "Lumiere.h"
-#include "HeightFieldShape.h"
 #include "GestionnaireID.h"
 #include "ExceptionPerso.h"
 #include "InputListener.h"
@@ -17,9 +16,11 @@
 
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 
-#include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
+#include <boost/thread.hpp>
 
-#include <Physics2012/Utilities/Serialize/hkpPhysicsData.h>
+#include <Common/Base/hkBase.h>
+#include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
+#include <Physics2012/Dynamics/World/hkpWorld.h>
 
 #ifdef _DEBUG
 
@@ -63,6 +64,8 @@ AppMain::~AppMain()
 		mpWater = nullptr;
 	}
 
+	mpCeguiMain->destroySystem();
+
 	if (mpHkWorld != nullptr && mpHkWorld->getReferenceCount() > 0)
 	{
 		mpHkWorld->removeReference();
@@ -75,7 +78,7 @@ AppMain::~AppMain()
 	{
 		delete mpRoot;
 		mpRoot = nullptr;
-	}
+	}	
 
 	/* Destruction des singletons */
 	GestionnaireID::destroy();
@@ -181,8 +184,8 @@ bool AppMain::createBase()
 	mpSceneMgr->setShadowTechnique(SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
 
 	mpCam = mpSceneMgr->createCamera("Camera");
-	mpCam->setPosition(Vector3(0.0, 80.0, 100.0));
-	mpCam->lookAt(Vector3(0.0, 0.0, 0.0));
+	mpCam->setPosition(Vector3(0.0, 10.0, 0.0));
+	mpCam->lookAt(Vector3(10.0, 10.0, 10.0));
 	mpCam->setNearClipDistance(2.0f);
 	mpCam->setCastShadows(false);
 
@@ -206,6 +209,7 @@ bool AppMain::createSky()
 {
 	mpSky = new SkyX::SkyX(mpSceneMgr, new SkyX::BasicController());
 	mpSky->create();
+
 	mpRoot->addFrameListener(mpSky);
 	mpWindow->addListener(mpSky);
 
@@ -229,42 +233,9 @@ bool AppMain::createTerrain()
 
 	mpTerrain = new GestionnaireTerrain(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport());
 
-	hkpSampledHeightFieldBaseCinfo info;
+	//boost::thread ThTerrainCreationHavok(&AppMain::createTerrainHavokMultiThreaded, this);
 
-	info.m_maxHeight = -1;
-	info.m_minHeight = 0;
-	info.m_xRes = TAILLE_CHUNK;
-	info.m_zRes = TAILLE_CHUNK;
-
-	for (int i=0; i< 120; ++i)
-	{
-		for (int j=0; j < 120; ++j)
-		{
-			HeightFieldShape *pTerrainShape = new HeightFieldShape(info, mpTerrain, Vector2(i, j));
-
-			hkpRigidBodyCinfo rci;
-			rci.m_motionType = hkpMotion::MOTION_FIXED;
-			rci.m_position.setMul4(-0.5f, pTerrainShape->m_extents); // center the heightfield
-			rci.m_shape = pTerrainShape;
-			rci.m_friction = 0.2f;
-
-			hkpRigidBody* pBody = new hkpRigidBody( rci );
-
-			//mpHkWorld->addEntity(body);
-
-			mpTerrain->getPChunk()->addChunkPtr(pBody, i, j);
-
-			//hkSerializeMultiMap
-
-			pBody->removeReference();
-
-			pTerrainShape->removeReference();
-		}
-	}
-
-	mpTerrain->getPChunk()->ready();
-
-	mpRoot->addFrameListener(mpTerrain->getPChunk());
+	mpRoot->addFrameListener(mpTerrain->getPtrChunk());
 
 	mpWater = new Eau(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
 	mpRoot->addFrameListener(mpWater);
