@@ -1,12 +1,15 @@
 #include <OgreException.h>
 #include <OgrePlatform.h>
 
+#include <stdlib.h>
+#include <crtdbg.h>
 #include <fcntl.h>
 #include <tchar.h>
 #include <io.h>
 
 #include "AppMain.h"
 #include "GestionnaireID.h"
+
 
 /* Singletons */
 GestionnaireID* GestionnaireID::mpInstanceUnique = nullptr;
@@ -29,7 +32,7 @@ int main(int argc, char **argv) //Main standard
 	AllocConsole();
 	*stdout = *_tfdopen(_open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), _O_APPEND), _T("a"));
 
-	_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF|_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF));	//Fuite mémoire
+	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );	//Fuite mémoire
 #endif
 
 	// Flush all denormal/subnormal numbers (2^-1074 to 2^-1022) to zero.
