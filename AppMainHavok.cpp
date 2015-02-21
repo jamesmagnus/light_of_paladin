@@ -2,13 +2,21 @@
 
 #include "AppMain.h"
 #include "Structures.h"
+#include "enumerations.h"
+#include "HeightFieldShape.h"
+#include "GestionnaireTerrain.h"
 
 #include <OgreLogManager.h>
+#include <OgreVector2.h>
 
 #include <Common/Base/hkBase.h>
 #include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
+#include <Common/Base/Thread/Pool/hkThreadPool.h>
+#include <Common/Base/Thread/Thread/hkThread.h>
+#include <Common/Base/Memory/Allocator/Pooled/hkPooledAllocator.h>
 #include <Physics2012/Dynamics/World/hkpWorldCinfo.h>
 #include <Physics2012/Dynamics/World/hkpWorld.h>
+#include <Physics2012/Dynamics/Entity/hkpRigidBody.h>
 
 
 /* Fonction de gestion des erreurs pour Havok */
@@ -28,19 +36,22 @@ bool AppMain::initHavok()
 	hkpWorldCinfo HkWorldInfo;
 
 	HkWorldInfo.m_gravity.set(0, -9.81f, 0);
-	HkWorldInfo.setBroadPhaseWorldSize(3*TAILLE_CHUNK);	//Taille de la simulation 3 chunks sur 3 chunks
+	HkWorldInfo.setBroadPhaseWorldSize(3*TAILLE_CHUNK +20);	//Taille de la simulation 3 chunks sur 3 chunks
 	HkWorldInfo.setupSolverInfo(hkpWorldCinfo::SOLVER_TYPE_8ITERS_MEDIUM);
 	HkWorldInfo.m_simulationType = hkpWorldCinfo::SIMULATION_TYPE_CONTINUOUS;
 
 	mpHkWorld = new hkpWorld(HkWorldInfo);
+
+	mpHkWorld->shiftBroadPhase(hkVector4(900, 900, 900), hkVector4(), hkpWorld::SHIFT_BROADPHASE_UPDATE_ENTITY_AABBS);
 
 	Ogre::LogManager::getSingletonPtr()->logMessage("**** Havok successfully initialized ****");
 
 	return true;
 }
 
-
 #include <Common/Base/keycode.cxx>
+
+#define HK_CLASSES_FILE <Common/Serialize/Classlist/hkKeyCodeClasses.h>
 
 #include <Common/Base/Config/hkProductFeatures.cxx>
 
