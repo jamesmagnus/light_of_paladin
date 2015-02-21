@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Chunk.h"
+#include "ChunkManager.h"
 
 class GestionnaireID;
 
@@ -36,19 +36,8 @@ public:
     /* Lève une exception s'il n'y a plus de slot de terrain */
     unsigned long addTerrain(int x, int y, std::string nom);
 
-    /* Renvoie la blend map du terrain */
-    /* id, identifiant du terrain */
-    /* Lève une exception en cas d'erreur */
-    Ogre::TerrainLayerBlendMap* getBlendMap(unsigned long id) const;
-
-    /* Récupère les coordonnées x et y du terrain d'après son identifiant */
-    /* id, l'identifiant du terrain fourni par addTerrain() */
-    /* Retourne une std::pair<int x, int y> */
-    /* Lève une exception si l'id ne correspond pas à un terrain */
-    std::pair<int, int> getXYFromID(unsigned long id) const;
-
 	/* Renvoie l'adresse du gestionnaire de chunks (frameListener) */
-	Chunk* getPChunk();
+	ChunkManager* getPtrChunk();
 
 private:
 
@@ -59,7 +48,7 @@ private:
     Ogre::TerrainGlobalOptions *mpOptions;
     Ogre::Light *mpSoleil;
 
-	Chunk mChunksMgn;
+	ChunkManager mChunksMgn;
 
     GestionnaireID *mpIDGestion;
 
