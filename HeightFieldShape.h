@@ -1,9 +1,9 @@
 #pragma once
 
-#include <OgreVector2.h>
-
 #include <Physics2012/Collide/hkpCollide.h>
 #include <Physics2012/Collide/Shape/HeightField/SampledHeightField/hkpSampledHeightFieldShape.h>
+
+#include "Structures.h"
 
 class GestionnaireTerrain;
 class hkpSampledHeightFieldBaseCinfo;
@@ -16,8 +16,7 @@ class SphereCollisionOutput;
 class HeightFieldShape: public hkpSampledHeightFieldShape
 {
 private:
-	float const *mpHeightData;
-	Ogre::Vector2 mCooHeightField;
+	float **mpHeightData;
 
 	/* Constructeur de copie interdit */
 	HeightFieldShape(HeightFieldShape const& rOriginal);
@@ -30,8 +29,8 @@ public:
 	/* Constructeur */
 	/* rInfo, référence sur une structure qui décrit les paramètres de la HeightMap */
 	/* pTerrain, adresse du gestionnaire de terrains */
-	/* cooHeightField, Ogre::Vector2 avec les coordonnées (en chunk) de la zone de terrain à créer */
-	HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, Ogre::Vector2 cooHeightField);
+	/* cooHeightField, paire de coordonnées (en chunk) de la zone de terrain à créer */
+	HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, std::pair<int, int> coo);
 
 	/* Destructeur */
 	virtual ~HeightFieldShape();
