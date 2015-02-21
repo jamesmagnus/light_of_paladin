@@ -38,7 +38,7 @@ namespace Forests
 
 class AppMain
 {
-protected:
+private:
 	Ogre::Root *mpRoot;
 	Ogre::RenderWindow *mpWindow;
 	Ogre::SceneManager *mpSceneMgr;
@@ -65,7 +65,7 @@ public:
 	AppMain();
 
 	/* Destructeur */
-	virtual ~AppMain();
+	~AppMain();
 
 	/* Lance le jeu */
 	/* Retourne toujours true (système d'exception si erreur) */
