@@ -2,35 +2,36 @@
 #include "GestionnaireID.h"
 #include "ExceptionPerso.h"
 
+#include "Chunk.h"
+
 #include <OgreTerrainGroup.h>
 
 using namespace Ogre;
 
-GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort): mChunksMgn(tailleTerrain, TAILLE_CHUNK, this, pCam)
+GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort): mChunksMgn(pCam, this)
 {
     mpSceneMgr = pSceneMgr;
-    mTailleTerrain = tailleTerrain;
+    mTailleTerrain = tailleMonde;
     mTailleHeightMap = tailleHeightMap;
     mpOptions = nullptr;
     mpTerrainGroup = nullptr;
-    mpIDGestion = nullptr;
 
     mpIDGestion = GestionnaireID::getInstance();
 
     mpOptions = OGRE_NEW TerrainGlobalOptions();
-    mpOptions->setMaxPixelError(4);
-    mpOptions->setCompositeMapDistance(20000);
+    mpOptions->setMaxPixelError(1);
+    mpOptions->setCompositeMapDistance(10000);
     mpOptions->setLightMapDirection(mpSoleil->getDerivedDirection());
     mpOptions->setCompositeMapAmbient(mpSceneMgr->getAmbientLight());
     mpOptions->setCompositeMapDiffuse(mpSoleil->getDiffuseColour());
 
-    mpTerrainGroup = OGRE_NEW TerrainGroup(mpSceneMgr, Terrain::Alignment::ALIGN_X_Z, tailleHeightMap, static_cast<Real>(tailleTerrain));
-    mpTerrainGroup->setOrigin(Vector3::ZERO);
+    mpTerrainGroup = OGRE_NEW TerrainGroup(mpSceneMgr, Terrain::Alignment::ALIGN_X_Z, tailleHeightMap, static_cast<Real>(tailleMonde));
+    mpTerrainGroup->setOrigin(Vector3(tailleMonde/2.0f, 0.0f, tailleMonde/2.0f));
     mpTerrainGroup->setFilenameConvention("data","ter");
 
     Terrain::ImportData& imp = mpTerrainGroup->getDefaultImportSettings();
 	imp.inputBias=0.0f;
-    imp.inputScale = 2000.0f;
+    imp.inputScale = 1800.0f;
     imp.minBatchSize = 65;
     imp.maxBatchSize = 129;
 
@@ -78,17 +79,17 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 
 			Real height = mpTerrainGroup->getTerrain(0, 0)->getHeightAtTerrainPosition(terrainX, terrainY);
 
-			if (height >= 1800.0f)
+			if (height >= 1650.0f)
 			{
-				*pBlend++ = 1; //Neige au dessus de 1500
+				*pBlend++ = 1; //Neige au dessus de 1650
 			}
-			else if (height <= 1350.0f)
+			else if (height <= 1300.0f)
 			{
-				*pBlend++ = 255;    //Roche en dessous de 1200
+				*pBlend++ = 255;    //Roche en dessous de 1300
 			}
 			else
 			{
-				*pBlend++ = 255 + (height-1350)*(-255/450);   //Progressivement entre les deux
+				*pBlend++ = 255 + (height-1300)*(-255/350);   //Progressivement entre les deux
 			}
 		}
 	}
@@ -97,6 +98,9 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 	pBlendMap->update();
 
     mpTerrainGroup->freeTemporaryResources();
+
+	Chunk u(this, std::make_pair(1,1));
+	u.loadBody();
 }
 
 GestionnaireTerrain::~GestionnaireTerrain()
@@ -111,11 +115,6 @@ GestionnaireTerrain::~GestionnaireTerrain()
     {
         OGRE_DELETE mpOptions;
         mpOptions = nullptr;
-    }
-
-    if (mpIDGestion != nullptr)
-    {
-        mpIDGestion = nullptr;
     }
 }
 
@@ -157,27 +156,7 @@ TerrainGlobalOptions* GestionnaireTerrain::getOptions() const
     return mpOptions;
 }
 
-TerrainLayerBlendMap* GestionnaireTerrain::getBlendMap(unsigned long id) const
-{
-    int x = mID_XY.find(id)->second.first;
-    int y = mID_XY.find(id)->second.second;
-
-    return mpTerrainGroup->getTerrain(x, y)->getLayerBlendMap(1);
-}
-
-std::pair<int, int> GestionnaireTerrain::getXYFromID(unsigned long id) const
-{
-    std::map<unsigned long, std::pair<int, int>>::const_iterator it = mID_XY.find(id);
-
-    if (it == mID_XY.end())
-    {
-        throw ExceptionPerso("Terrain introuvable, id:" + id, INFO);
-    }
-
-    return it->second;
-}
-
-Chunk* GestionnaireTerrain::getPChunk()
+ChunkManager* GestionnaireTerrain::getPtrChunk()
 {
 	return &mChunksMgn;
 }
