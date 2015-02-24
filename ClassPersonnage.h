@@ -21,13 +21,6 @@ protected:
     int m_stat[EStat::ESTATMAX];
     Arme *mp_arme;
 
-private:
-    /* Constructeur de copie interdit */
-    Personnage(Personnage const& rPersonnage);   
-
-    /* Opérateur d'assignement interdit */
-    Personnage& operator=(Personnage const& rPersonnage);
-
 public:
 
     /* Constructeur */

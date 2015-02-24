@@ -1,26 +1,20 @@
 #pragma once
 
 #include <iostream>
+#include <boost/noncopyable.hpp>
 
 namespace Ogre
 {
 	class SceneNode;
 }
 
-/* Classe abstraite servant de base à tous les éléments affichables du jeu, sémantique d'entité */
-class Affichable
+/* Classe abstraite servant de base à tous les éléments affichables du jeu */
+/* Sémantique d'entité, hérite de boost::noncopyable */
+class Affichable: private boost::noncopyable
 {
 protected:
 	Ogre::SceneNode *mpNoeud;
 	bool mIsVisible;
-
-private:
-
-	/* Constructeur de copie interdit */
-	Affichable(Affichable const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	Affichable& operator=(Affichable const& rOriginal);
 
 public:
 

@@ -8,14 +8,6 @@ class Humanoide :public EntiteVivante
 private:
 	int mana;
 
-private:
-
-	/* Constructeur de copie interdit */
-	Humanoide(Humanoide const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	Humanoide& operator=(Humanoide const& rOriginal);
-
 public:
 
 	/* Constructeur */

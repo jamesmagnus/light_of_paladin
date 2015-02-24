@@ -5,7 +5,7 @@
 #include <OgreRenderWindow.h>
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
-#include <OIS//OISInputManager.h>
+#include <OIS/OISInputManager.h>
 
 using namespace Ogre;
 
@@ -15,7 +15,7 @@ InputListener::InputListener(RenderWindow *pWindow, Camera *pCam)
 	mpCamera = pCam;
 
 	mToucheAppuyee = false;
-	mVitesse = 600.0;
+	mVitesse = 1000.0;
 	mVitesseRotation = 0.25;
 
 	startOIS(); //Initialisation d'OIS

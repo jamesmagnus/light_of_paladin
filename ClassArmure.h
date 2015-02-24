@@ -13,12 +13,6 @@ private:
 	float mEtat;
 	ETypeArmure mType;
 
-	/* Constructeur par copie interdit */
-	Armure(Armure const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	Armure& operator=(Armure const& rOriginal);
-
 public:
 
 	/* Constructeur */

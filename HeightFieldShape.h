@@ -3,6 +3,8 @@
 #include <Physics2012/Collide/hkpCollide.h>
 #include <Physics2012/Collide/Shape/HeightField/SampledHeightField/hkpSampledHeightFieldShape.h>
 
+#include <boost/noncopyable.hpp>
+
 #include "Structures.h"
 
 class GestionnaireTerrain;
@@ -11,18 +13,12 @@ class CollideSpheresInput;
 class SphereCollisionOutput;
 
 /* Classe pour représenter un chunk de terrain dans Havok */
-/* Dérive de hkSampleHeightFieldShape */
-/* Sémantique d'entité */
-class HeightFieldShape: public hkpSampledHeightFieldShape
+/* Hérite de hkSampleHeightFieldShape */
+/* Sémantique d'entité, hérite boost::noncopyable */
+class HeightFieldShape: public hkpSampledHeightFieldShape, private boost::noncopyable
 {
 private:
 	float **mpHeightData;
-
-	/* Constructeur de copie interdit */
-	HeightFieldShape(HeightFieldShape const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	HeightFieldShape& operator=(HeightFieldShape const& rOriginal);
 
 public:
 

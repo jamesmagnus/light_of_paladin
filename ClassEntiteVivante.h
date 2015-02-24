@@ -18,14 +18,6 @@ protected:
 	std::string mNom;
 	Inventaire *mpInventaire;
 
-private:
-
-	/* Constructeur de copie interdit */
-	EntiteVivante(EntiteVivante const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	EntiteVivante& operator=(EntiteVivante const& rOriginal);
-
 public:
 
 	/* Constructeur */

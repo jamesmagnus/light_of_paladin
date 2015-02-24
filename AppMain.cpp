@@ -64,6 +64,12 @@ AppMain::~AppMain()
 		mpWater = nullptr;
 	}
 
+	if (mpLum != nullptr)
+	{
+		delete mpLum;
+		mpLum = nullptr;
+	}
+
 	mpCeguiMain->destroySystem();
 
 	if (mpHkWorld != nullptr && mpHkWorld->getReferenceCount() > 0)
@@ -73,6 +79,12 @@ AppMain::~AppMain()
 	}
 	hkBaseSystem::quit();
 	hkMemoryInitUtil::quit();
+
+	if (mpTerrain != nullptr)
+	{
+		delete mpTerrain;
+		mpTerrain = nullptr;
+	}
 
 	if(mpRoot != nullptr)
 	{
@@ -174,7 +186,7 @@ bool AppMain::createScene()
 	if(!(createBase() && createSky() && createTerrain() && createLight() && createObject() && createPersonnage()))
 	{
 		return false;
-	}    
+	}
 
 	return true;
 }
@@ -191,11 +203,11 @@ bool AppMain::createBase()
 
 	if (mpRoot->getRenderSystem()->getCapabilities()->hasCapability(RSC_INFINITE_FAR_PLANE))
 	{
-		mpCam->setFarClipDistance(60000);
+		mpCam->setFarClipDistance(50000);
 	}
 	else
 	{
-		mpCam->setFarClipDistance(30000);
+		mpCam->setFarClipDistance(25000);
 	}
 
 	Viewport *vp = mpWindow->addViewport(mpCam);
@@ -231,7 +243,7 @@ bool AppMain::createTerrain()
 	pSoleil->setDiffuseColour(ColourValue(0.8f, 0.68f, 0.73f));
 	pSoleil->setSpecularColour(ColourValue(0.8f, 0.68f, 0.73f));
 
-	mpTerrain = new GestionnaireTerrain(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport());
+	mpTerrain = new GestionnaireTerrain(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport(), mpRoot);
 
 	//boost::thread ThTerrainCreationHavok(&AppMain::createTerrainHavokMultiThreaded, this);
 
@@ -249,13 +261,13 @@ bool AppMain::createTerrain()
 
 	mpTrees->setCamera(mpCam);
 	mpTrees->setPageSize(50);
-	mpTrees->setBounds(Forests::TBounds(-5000, -5000, 5000, 5000));
+	mpTrees->setBounds(Forests::TBounds(0, 0, 10000, 10000));
 
 	mpTrees->addDetailLevel<Forests::BatchPage>(500, 50);
 	mpTrees->addDetailLevel<Forests::ImpostorPage>(1000, 100);
 
 	//Create a new TreeLoader3D object first
-	Forests::TreeLoader3D *treeLoader = new Forests::TreeLoader3D(mpTrees, Forests::TBounds(-5000, -5000, 5000, 5000));
+	Forests::TreeLoader3D *treeLoader = new Forests::TreeLoader3D(mpTrees, Forests::TBounds(0, 0, 10000, 10000));
 
 	Entity *pEnt1 = mpSceneMgr->createEntity("tree", "arbre.mesh"), *pEnt2 = mpSceneMgr->createEntity("lila", "lila.mesh"), *pEnt3 = mpSceneMgr->createEntity("apple tree", "pommier.mesh");
 
@@ -263,15 +275,15 @@ bool AppMain::createTerrain()
 
 	float x, y, z, yaw, scale;
 	int t;
-	for (int i = 0; i < 200; i++){
+	for (int i = 0; i < 100; i++){
 		yaw = Math::RangeRandom(0.0f, 360.0f);
-		x = Math::RangeRandom(-5000.0f, 5000.0f);
-		z = Math::RangeRandom(-5000.0f, 5000.0f);
+		x = Math::RangeRandom(0.0f, 10000.0f);
+		z = Math::RangeRandom(0.0f, 10000.0f);
 		scale = Math::RangeRandom(0.2f, 0.9f);
 		t = static_cast<int>(Math::RangeRandom(0, 3));
-		y = mpTerrain->getTerrains()->getTerrain(0, 0)->getHeightAtWorldPosition(x, 2000, z);
+		y = mpTerrain->getTerrains()->getTerrain(0, 0)->getHeightAtWorldPosition(x, 5000.0f, z);
 
-		if(y > 65.0f)
+		if(y > 300.0f)
 		{
 			treeLoader->addTree(vege[t], Vector3(x, y, z), Degree(yaw), scale);
 		}
@@ -291,7 +303,7 @@ bool AppMain::createObject()
 bool AppMain::createPersonnage()
 {
 	Entity *pEnt1 = mpSceneMgr->createEntity("pingouin", "penguin.mesh");
-	SceneNode *pNodePeng = mpSceneMgr->getRootSceneNode()->createChildSceneNode("nodePengouin", Vector3(100.0f, 50.0f, 0.0f));
+	SceneNode *pNodePeng = mpSceneMgr->getRootSceneNode()->createChildSceneNode("nodePengouin", Vector3(100.0f, 550.0f, 100.0f));
 	pNodePeng->attachObject(pEnt1);
 
 	Entity *pEnt2 = mpSceneMgr->createEntity("rylai", "rylai.mesh");

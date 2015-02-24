@@ -9,12 +9,6 @@ class Consommable :public Item
 private:
 	unsigned int mNombre;
 
-	/* Constructeur par copie interdit */
-	Consommable(Consommable const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	Consommable& operator=(Consommable const& rOriginal);
-
 public:
 	
 	/* Constructeur */

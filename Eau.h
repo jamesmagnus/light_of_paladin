@@ -1,6 +1,7 @@
 #pragma once
 
 #include <OgreFrameListener.h>
+#include <boost/noncopyable.hpp>
 
 namespace Hydrax
 {
@@ -12,10 +13,10 @@ namespace SkyX
 	class SkyX;
 }
 
-/* Classe non dérivable pour gérer l'eau, dérive de Ogre::FrameListener */
-/* Sémantique d'entité */
+/* Classe non dérivable pour gérer l'eau, hérite de Ogre::FrameListener */
+/* Sémantique d'entité, hérite de boost::noncopyable */
 /* Doit être ajouter à la liste des frameListener de Ogre */
-class Eau: public Ogre::FrameListener
+class Eau: public Ogre::FrameListener, private boost::noncopyable
 {
 private:
 
@@ -23,12 +24,6 @@ private:
 	SkyX::SkyX* mpSky;
 	Ogre::Real mH;
 	bool mNeedUpdate;
-
-	/* Constructeur de copie interdit */
-	Eau(Eau const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	Eau& operator=(Eau const& rOriginal);
 
 public:
 

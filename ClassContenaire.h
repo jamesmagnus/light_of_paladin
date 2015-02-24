@@ -12,12 +12,6 @@ class Contenaire: public Inventaire, Affichable
 private:
 	std::string mProprietaire, mNom;
 
-	/* Constructeur par copie interdit */
-	Contenaire(Contenaire const& rOriginal);
-
-	/* Opérateur d'affectation interdit */
-	Contenaire& operator=(Contenaire const& original);
-
 	/* Surcharge de la fonction héritée de Inventaire pour empécher qu'elle soit appelée par erreur */
 	void afficheDebugInv(std::ostream& rOst) const;
 

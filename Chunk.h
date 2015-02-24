@@ -6,6 +6,9 @@
 class GestionnaireTerrain;
 class hkpRigidBody;
 
+/* Classe qui représente un chunk de terrain, englobe un hkpRigidBody */
+/* Sémantique d'entité, hérite de boost::noncopyable */
+/* Utilisée par le gestionnaire de chunk */
 class Chunk: private boost::noncopyable
  {
  public:
@@ -34,4 +37,4 @@ class Chunk: private boost::noncopyable
  	hkpRigidBody* mpRigidBody;
 	GestionnaireTerrain* mpTerrainMgr;
 	std::pair<int, int> mPos;
- };
+};

@@ -2,6 +2,7 @@
 
 #include <OgreFrameListener.h>
 #include <OgreColourValue.h>
+#include <boost/noncopyable.hpp>
 
 namespace Ogre
 {
@@ -16,17 +17,11 @@ namespace SkyX
 	class SkyX;
 }
 
-/* Classe non dérivable pour gérer les différentes lumières de la scènes et les mettre à jour, hérite FrameListener */
-/* Sémantique d'entité */
-class GestionnaireLight: public Ogre::FrameListener
+/* Classe non dérivable pour gérer les différentes lumières de la scènes et les mettre à jour, hérite de Ogre::FrameListener */
+/* Sémantique d'entité, hérite de boost::noncopyable */
+class GestionnaireLight: public Ogre::FrameListener, private boost::noncopyable
 {
 private:
-
-	/* Constructeur par copie interdit */
-	GestionnaireLight(GestionnaireLight const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	GestionnaireLight& operator=(GestionnaireLight const& rOriginal);
 
 	Ogre::Light* mpSoleil;
 	Ogre::ColourValue mLumAmbiente;

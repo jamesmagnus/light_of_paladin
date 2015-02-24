@@ -13,14 +13,6 @@ protected:
 	int mDegat;
 	float mVitesse, mResistance;
 
-private:
-
-	/* Constructeur de copie interdit */
-	Arme(Arme const& original);
-
-	/* Opérateur d'assignement interdit */
-	Arme& operator=(Arme const& original);
-
 public:
 
 	/* Constructeur */

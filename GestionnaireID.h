@@ -22,12 +22,6 @@ private:
     /* Constructeur interne du singleton */
     GestionnaireID();
 
-	/* Constructeur par copie interdit */
-	GestionnaireID(GestionnaireID const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	GestionnaireID& operator=(GestionnaireID const& rOriginal);
-
     /* Destructeur interdit */
     ~GestionnaireID();
 

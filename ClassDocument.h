@@ -10,12 +10,6 @@ private:
 	std::string mContenu;
 	std::string mTitre;
 
-	/* Constructeur par copie interdit */
-	Document(Document const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	Document& operator=(Document const& rOriginal);
-
 public:
 
 	/* Constructeur */

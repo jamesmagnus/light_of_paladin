@@ -5,22 +5,32 @@
 #include "Chunk.h"
 
 #include <OgreTerrainGroup.h>
+#include <OgreRoot.h>
 
 using namespace Ogre;
 
-GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort): mChunksMgn(pCam, this)
+GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort, Root *pRoot): mChunksMgn(pCam, this)
 {
     mpSceneMgr = pSceneMgr;
     mTailleTerrain = tailleMonde;
     mTailleHeightMap = tailleHeightMap;
     mpOptions = nullptr;
     mpTerrainGroup = nullptr;
+	mpRoot = pRoot;
 
     mpIDGestion = GestionnaireID::getInstance();
 
     mpOptions = OGRE_NEW TerrainGlobalOptions();
     mpOptions->setMaxPixelError(1);
-    mpOptions->setCompositeMapDistance(10000);
+
+	if (mpRoot->getRenderSystem()->getCapabilities()->hasCapability(RSC_INFINITE_FAR_PLANE))
+	{
+		mpOptions->setCompositeMapDistance(50000);
+	}
+	else
+	{
+		mpOptions->setCompositeMapDistance(25000);
+	}
     mpOptions->setLightMapDirection(mpSoleil->getDerivedDirection());
     mpOptions->setCompositeMapAmbient(mpSceneMgr->getAmbientLight());
     mpOptions->setCompositeMapDiffuse(mpSoleil->getDiffuseColour());
@@ -35,13 +45,15 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
     imp.minBatchSize = 65;
     imp.maxBatchSize = 129;
 
-    imp.layerList.resize(2);
-    imp.layerList[0].worldSize = 140;
-    imp.layerList[0].textureNames.push_back("grass_green-01_diffusespecular.dds");
-    imp.layerList[0].textureNames.push_back("grass_green-01_normalheight.dds");
-    imp.layerList[1].worldSize = 120;
-    imp.layerList[1].textureNames.push_back("terrainsnow01.dds");
-    imp.layerList[1].textureNames.push_back("terrainsnow01_N.dds");
+    imp.layerList.resize(TEXTURE_MAX);
+    imp.layerList[HERBE1].worldSize = 15;
+    imp.layerList[HERBE1].textureNames.push_back("grass_green-01_diffusespecular.dds");
+    imp.layerList[HERBE1].textureNames.push_back("grass_green-01_normalheight.dds");
+	imp.layerList[HERBE2].worldSize = 15;
+	imp.layerList[HERBE2].textureNames.push_back("grass_1024.jpg");
+    imp.layerList[NEIGE1].worldSize = 15;
+    imp.layerList[NEIGE1].textureNames.push_back("terrainsnow01.dds");
+    imp.layerList[NEIGE1].textureNames.push_back("terrainsnow01_N.dds");
 
     int largeur = 1, longueur = 1;
 
@@ -66,7 +78,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
         }
     }
 
-	TerrainLayerBlendMap *pBlendMap = mpTerrainGroup->getTerrain(0, 0)->getLayerBlendMap(1);
+	TerrainLayerBlendMap *pBlendMap = mpTerrainGroup->getTerrain(0, 0)->getLayerBlendMap(NEIGE1);
 
 	float *pBlend = pBlendMap->getBlendPointer();
 	for (uint16 y=0; y < mpTerrainGroup->getTerrain(0, 0)->getLayerBlendMapSize(); y++)
@@ -98,9 +110,6 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 	pBlendMap->update();
 
     mpTerrainGroup->freeTemporaryResources();
-
-	Chunk u(this, std::make_pair(1,1));
-	u.loadBody();
 }
 
 GestionnaireTerrain::~GestionnaireTerrain()

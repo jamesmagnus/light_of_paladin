@@ -16,14 +16,6 @@ protected:
 	std::string mNom;
 	bool mIsUnique;
 
-private:
-
-	/* Constructeur par copie interdit */
-	Item(Item const& rOriginal);
-
-	/* Opérateur d'assignement interdit */
-	Item& operator=(Item const& rOriginal);
-
 public:
 
 	/* Constructeur */

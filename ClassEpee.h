@@ -5,14 +5,6 @@
 /* Classe finale, gére les épées */
 class Epee:public Arme
 {
-private:
-
-	/* Constructeur de copie interdit */
-	Epee(Epee const& original);
-
-	/* Opérateur d'assignement interdit */
-	Epee& operator=(Epee const& original);
-
 public:
 
 	/* Constructeur */

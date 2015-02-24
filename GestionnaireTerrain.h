@@ -12,6 +12,7 @@ namespace Ogre
 	class Viewport;
 	class SceneManager;
 	class TerrainLayerBlendMap;
+	class Root;
 }
 
 class GestionnaireTerrain
@@ -19,7 +20,7 @@ class GestionnaireTerrain
 public:
 
     /* Constructeur */
-    GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort);
+    GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot);
 
     /* Destructeur */
     virtual ~GestionnaireTerrain();
@@ -47,6 +48,7 @@ private:
     Ogre::TerrainGroup *mpTerrainGroup;
     Ogre::TerrainGlobalOptions *mpOptions;
     Ogre::Light *mpSoleil;
+	Ogre::Root *mpRoot;
 
 	ChunkManager mChunksMgn;
 
