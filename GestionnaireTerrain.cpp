@@ -9,7 +9,7 @@
 
 using namespace Ogre;
 
-GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort, Root *pRoot): mChunksMgn(pCam, this)
+GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort, Root *pRoot, hkpWorld *pHavokWorld): mChunksMgn(pCam, this, pHavokWorld)
 {
     mpSceneMgr = pSceneMgr;
     mTailleTerrain = tailleMonde;
@@ -17,6 +17,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
     mpOptions = nullptr;
     mpTerrainGroup = nullptr;
 	mpRoot = pRoot;
+	mpHavokWorld = pHavokWorld;
 
     mpIDGestion = GestionnaireID::getInstance();
 

@@ -70,6 +70,12 @@ AppMain::~AppMain()
 		mpLum = nullptr;
 	}
 
+	if (mpTerrain != nullptr)
+	{
+		delete mpTerrain;
+		mpTerrain = nullptr;
+	}
+
 	mpCeguiMain->destroySystem();
 
 	if (mpHkWorld != nullptr && mpHkWorld->getReferenceCount() > 0)
@@ -79,12 +85,6 @@ AppMain::~AppMain()
 	}
 	hkBaseSystem::quit();
 	hkMemoryInitUtil::quit();
-
-	if (mpTerrain != nullptr)
-	{
-		delete mpTerrain;
-		mpTerrain = nullptr;
-	}
 
 	if(mpRoot != nullptr)
 	{
@@ -243,7 +243,7 @@ bool AppMain::createTerrain()
 	pSoleil->setDiffuseColour(ColourValue(0.8f, 0.68f, 0.73f));
 	pSoleil->setSpecularColour(ColourValue(0.8f, 0.68f, 0.73f));
 
-	mpTerrain = new GestionnaireTerrain(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport(), mpRoot);
+	mpTerrain = new GestionnaireTerrain(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport(), mpRoot, mpHkWorld);
 
 	//boost::thread ThTerrainCreationHavok(&AppMain::createTerrainHavokMultiThreaded, this);
 

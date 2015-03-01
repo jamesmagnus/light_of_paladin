@@ -20,7 +20,7 @@ class GestionnaireTerrain
 public:
 
     /* Constructeur */
-    GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot);
+    GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot, hkpWorld *pHavokWorld);
 
     /* Destructeur */
     virtual ~GestionnaireTerrain();
@@ -50,6 +50,7 @@ private:
     Ogre::Light *mpSoleil;
 	Ogre::Root *mpRoot;
 
+	hkpWorld *mpHavokWorld;
 	ChunkManager mChunksMgn;
 
     GestionnaireID *mpIDGestion;
