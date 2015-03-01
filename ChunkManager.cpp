@@ -4,86 +4,87 @@
 #include "Chunk.h"
 
 #include <OgreCamera.h>
+#include <Physics2012/Dynamics/World/hkpWorld.h>
 
 using namespace Ogre;
 
-ChunkManager::ChunkManager(Ogre::Camera *pCam, GestionnaireTerrain *pTerrainMgr)
+ChunkManager::ChunkManager(Ogre::Camera *pCam, GestionnaireTerrain *pTerrainMgr, hkpWorld *pHavokWorld)
 {
 	assert(TAILLE_MONDE%TAILLE_CHUNK == 0);
 
 	mMaxChunkCoo = TAILLE_MONDE / TAILLE_CHUNK;
+	mpCam = pCam;
+	mpGestTerrain = pTerrainMgr;
+	mpHavokWorld = pHavokWorld;
 
-	mpppChunks = new Chunk **[mMaxChunkCoo];
+	mpppChunk = new Chunk**[mMaxChunkCoo];
 
 	for (int i=0; i<mMaxChunkCoo; ++i)
 	{
-		mpppChunks[i] = new Chunk*[mMaxChunkCoo];
+		mpppChunk[i] = new Chunk*[mMaxChunkCoo];
 
 		for (int j=0; j<mMaxChunkCoo; ++j)
 		{
-			mpppChunks[i][j] = nullptr;
+			mpppChunk[i][j] = new Chunk(pTerrainMgr, std::make_pair(i,j));
 		}
 	}
 
-	mpCam = pCam;
-	mpGestTerrain = pTerrainMgr;
-	mOffset = std::make_pair(0,0);
+	mActualChunk.offset = std::make_pair(0, 0);
+	mActualChunk.positionJoueur = Vector3::ZERO;
+	
+	for (int i=0; i<3; ++i)
+	{
+		for (int j=0; j<3; ++j)
+		{
+			mActualChunk.ppChunk[i][j]=nullptr;
+		}
+	}
 }
 
 
 ChunkManager::~ChunkManager()
 {
-	for (unsigned int i=0; i<5; ++i)
+	for (int i=0; i<mMaxChunkCoo; ++i)
 	{
-		for (unsigned int j=0; j<5; ++j)
+		for (int j=0; j<mMaxChunkCoo; ++j)
 		{
-			if (mpppChunks[i][j] != nullptr)
-			{
-				/*mpppChunks[i][j]->markForWrite();
-				mpppChunks[i][j]->removeReference();
-				mpppChunks[i][j]->unmarkForWrite();
-
-				mpppChunks[i][j] = nullptr;*/
-			}
+			delete mpppChunk[i][j];
+			mpppChunk[i][j] = nullptr;
 		}
+		delete[] mpppChunk[i];
+		mpppChunk[i] = nullptr;
 	}
+
+	delete[] mpppChunk;
+	mpppChunk = nullptr;
 
 	mpGestTerrain=nullptr;
 	mpCam=nullptr;
 }
 
-bool ChunkManager::createChunk(std::pair<int, int> coo)
+bool ChunkManager::activeChunk(std::pair<int, int> coo)
 {
-	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo)
+	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo || coo.first < 0 || coo.second < 0)
 	{
 		return false;
 	} 
 	else
 	{
-		
-
+		mpppChunk[coo.first][coo.second]->loadBody();
 		return true;
 	}
 }
 
-bool ChunkManager::destroyChunk(std::pair<int, int> coo)
+bool ChunkManager::releaseChunk(std::pair<int, int> coo)
 {
-	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo)
+	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo || coo.first < 0 || coo.second < 0)
 	{
 		return false;
-	}
-
-	if (mpppChunks[coo.first%5][coo.second%5] != nullptr)
-	{
-		/*mpppChunks[coo.first%5][coo.second%5]->markForWrite();
-		mpppChunks[coo.first%5][coo.second%5]->removeReference();
-		mpppChunks[coo.first%5][coo.second%5]->unmarkForWrite();
-		mpppChunks[coo.first%5][coo.second%5] = nullptr;*/
-		return true;
 	}
 	else
 	{
-		return false;
+		mpppChunk[coo.first][coo.second]->destroyBody();
+		return true;
 	}
 }
 
@@ -94,12 +95,24 @@ TableauChunks const& ChunkManager::getCurrentChunks() const
 
 bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 {
-	static double t=0;
-	t += rEv.timeSinceLastFrame;
-	if (t > 5)
-{
-	t=0;
-	TableauChunks tmp;
+	boost::chrono::system_clock::time_point debut = boost::chrono::system_clock::now();
+
+	boost::chrono::milliseconds elapsedTime = boost::chrono::duration_cast<boost::chrono::milliseconds>(debut - mTimeCount);
+	boost::chrono::milliseconds ref(1000);
+
+	if (elapsedTime >= ref)
+	{
+		TableauChunks tmp;
+
+		for (int i=0; i<3; ++i)
+		{
+			for (int j=0; j<3; ++j)
+			{
+				tmp.ppChunk[i][j]=nullptr;
+			}
+		}
+
+		tmp.offset = std::make_pair(0, 0);
 	
 		Vector3 pos = mpCam->getDerivedPosition();
 	
@@ -108,32 +121,38 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 		/* Coordonnées du chunk sur lequel est le joueur */
 		pos.x = Real(int(pos.x)/TAILLE_CHUNK);
 		pos.z = Real(int(pos.z)/TAILLE_CHUNK);
+
+		int k=0;
 	
-		unsigned int k=0;
-	
-		for (int i= int(pos.x)-1; i <= int(pos.x)+1; ++i)
+		for (int i=0; i<mMaxChunkCoo; ++i)
 		{
-			for (int j= int(pos.z)-1; j <= int(pos.z)+1; ++j)
+			for (int j=0; j<mMaxChunkCoo; ++j)
 			{
-				if (i>=0 && i<mMaxChunkCoo && j>=0 && j<mMaxChunkCoo)
+				if (i >= pos.x-1 && i <= pos.x+1 && j >= pos.z-1 && j <= pos.z+1)
 				{
-					std::cout << "chunk:" << i << " " << j << std::endl;
-					/*createChunk(i, j);
-					tmp.ppChunk[k] = mppChunks[i%5][j%5];
-					destroyChunk(i, j);*/
+					activeChunk(std::make_pair(i, j));
+					tmp.ppChunk[k/3][k%3] = mpppChunk[i][j];
+					k++;
 				} 
 				else
 				{
-					tmp.ppChunk[k] = nullptr;
+					releaseChunk(std::make_pair(i, j));
 				}
-				
-				k++;
 			}
 		}
-		std::cout<< std::endl;
 	
 		mActualChunk = tmp;
-}
+		mTimeCount = boost::chrono::system_clock::now();
+
+		//-----------------------------------------------------
+		mpHavokWorld->lock();
+		mpHavokWorld->markForWrite();
+
+		mpHavokWorld->removeEntity((hkpEntity*)tmp.ppChunk[0][0]->getBodyPtr());
+
+		mpHavokWorld->unmarkForWrite();
+		mpHavokWorld->unlock();
+	}
 
 	return true;
 }
