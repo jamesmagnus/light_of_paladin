@@ -53,10 +53,6 @@ bool Chunk::loadBody()
 		}
 	
 		pTerrainShape->removeReference();
-
-		mpRigidBody->markForWrite();
-		mpRigidBody->addReference();
-		mpRigidBody->unmarkForWrite();
 	
 		mIsBodyInMemory = true;
 	
@@ -99,4 +95,9 @@ void Chunk::destroyBody()
 
 		mIsBodyInMemory = false;
 	}
+}
+
+hkpRigidBody* Chunk::getBodyPtr() const
+{
+	return mpRigidBody;
 }

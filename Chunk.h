@@ -31,6 +31,10 @@ class Chunk: private boost::noncopyable
  	 /* Lève une exception en cas de problème */
  	 void destroyBody();
 
+	 /* Renvoie l'adresse du hkpRigidBody de ce chunk */
+	 /* Pour utiliser avec Havok directement */
+	 hkpRigidBody* getBodyPtr() const;
+
  private:
 
  	bool mIsBodyInMemory;
