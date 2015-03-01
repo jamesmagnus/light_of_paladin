@@ -16,7 +16,7 @@ HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, 
 	{
 		for (int j=0; j<TAILLE_CHUNK; ++j)
 		{
-			mpHeightData[i][j] = pTerrains->getTerrains()->getTerrain(0,0)->getHeightAtWorldPosition(coo.first*TAILLE_CHUNK +i, 5000.0f, coo.second*TAILLE_CHUNK +j);
+			mpHeightData[i][j] = pTerrains->getTerrains()->getTerrain(0,0)->getHeightAtWorldPosition(static_cast<Ogre::Real>(coo.first*TAILLE_CHUNK +i), 5000.0f, static_cast<Ogre::Real>(coo.second*TAILLE_CHUNK +j));
 		}
 	}
 }
