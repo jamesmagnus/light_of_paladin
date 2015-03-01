@@ -15,8 +15,8 @@ InputListener::InputListener(RenderWindow *pWindow, Camera *pCam)
 	mpCamera = pCam;
 
 	mToucheAppuyee = false;
-	mVitesse = 1000.0;
-	mVitesseRotation = 0.25;
+	mVitesse = 50.0f;	// <= 0.5 * TAILLE_CHUNK
+	mVitesseRotation = 0.25f;
 
 	startOIS(); //Initialisation d'OIS
 }
