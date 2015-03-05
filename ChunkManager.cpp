@@ -104,6 +104,23 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 	{
 		TableauChunks tmp;
 
+		mpHavokWorld->lock();
+		mpHavokWorld->markForWrite();
+
+		for (int i=0; i<3; ++i)
+		{
+			for (int j=0; j<3; ++j)
+			{
+				if (mActualChunk.ppChunk[i][j] != nullptr)
+				{
+					mpHavokWorld->removeEntity((hkpEntity*)mActualChunk.ppChunk[i][j]->getBodyPtr());
+				}
+			}
+		}
+
+		mpHavokWorld->unmarkForWrite();
+		mpHavokWorld->unlock();
+
 		for (int i=0; i<3; ++i)
 		{
 			for (int j=0; j<3; ++j)
@@ -148,7 +165,16 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 		mpHavokWorld->lock();
 		mpHavokWorld->markForWrite();
 
-		mpHavokWorld->removeEntity((hkpEntity*)tmp.ppChunk[0][0]->getBodyPtr());
+		for (int i=0; i<3; ++i)
+		{
+			for (int j=0; j<3; ++j)
+			{
+				if (mActualChunk.ppChunk[i][j] != nullptr)
+				{
+					mpHavokWorld->addEntity((hkpEntity*)mActualChunk.ppChunk[i][j]->getBodyPtr());
+				}
+			}
+		}
 
 		mpHavokWorld->unmarkForWrite();
 		mpHavokWorld->unlock();
