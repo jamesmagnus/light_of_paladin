@@ -1,6 +1,8 @@
 #include "HeightFieldShape.h"
-
 #include "GestionnaireTerrain.h"
+
+#include <algorithm>
+
 #include <OgreTerrainGroup.h>
 
 HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, std::pair<int, int> coo): hkpSampledHeightFieldShape(rInfo)
@@ -46,4 +48,27 @@ void HeightFieldShape::collideSpheres(CollideSpheresInput const& input, SphereCo
 HK_FORCE_INLINE hkReal HeightFieldShape::getHeightAtImpl(int x, int z) const 
 {
 	return mpHeightData[x][z];
+}
+
+std::pair<float, float> HeightFieldShape::getMinMaxHeight() const
+{
+	float min = mpHeightData[0][0], max = mpHeightData[0][0];
+
+	for (int i=0; i<TAILLE_CHUNK; ++i)
+	{
+		for (int j=0; j<TAILLE_CHUNK; ++j)
+		{
+			if (mpHeightData[i][j] < min)
+			{
+				min = mpHeightData[i][j];
+			}
+
+			if (mpHeightData[i][j] > max)
+			{
+				max = mpHeightData[i][j];
+			}
+		}
+	}
+
+	return std::make_pair(min, max);
 }
