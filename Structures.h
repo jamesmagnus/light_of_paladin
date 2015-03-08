@@ -6,11 +6,12 @@
 
 #include <OgreVector3.h>
 
+#include <vector>
+
 class Chunk;
 
 typedef struct sTableauChunks
 {
-	Chunk* ppChunk[3][3];
+	std::vector<Chunk*> vectPtrChunk;
 	Ogre::Vector3 positionJoueur;
-	std::pair<int, int> offset;
 } TableauChunks;
