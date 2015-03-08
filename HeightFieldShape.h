@@ -40,5 +40,8 @@ public:
 	/* Détermine la collision avec une sphère */
 	/* Fonction par défaut de Havok */
 	virtual void collideSpheres(CollideSpheresInput const& input, SphereCollisionOutput* outputArray) const;
+
+	/* Renvoie la hauteur minimale et maximale du terrain */
+	std::pair<float, float> getMinMaxHeight() const;
 };
 
