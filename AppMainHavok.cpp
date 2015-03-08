@@ -40,9 +40,9 @@ bool AppMain::initHavok()
 	HkWorldInfo.setupSolverInfo(hkpWorldCinfo::SOLVER_TYPE_8ITERS_MEDIUM);
 	HkWorldInfo.m_simulationType = hkpWorldCinfo::SIMULATION_TYPE_CONTINUOUS;
 
-	mpHkWorld = new hkpWorld(HkWorldInfo);
+	/* HkWorldInfo.m_broadPhaseBorderBehaviour = hkpWorldCinfo::BroadPhaseBorderBehaviour::BROADPHASE_BORDER_DO_NOTHING; */ //Uncomment to disable border check
 
-	mpHkWorld->shiftBroadPhase(hkVector4(900, 900, 900), hkVector4(), hkpWorld::SHIFT_BROADPHASE_UPDATE_ENTITY_AABBS);
+	mpHkWorld = new hkpWorld(HkWorldInfo);
 
 	Ogre::LogManager::getSingletonPtr()->logMessage("**** Havok successfully initialized ****");
 
