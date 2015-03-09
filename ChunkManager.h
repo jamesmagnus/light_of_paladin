@@ -1,7 +1,7 @@
 #pragma once
 
-#include <map>
 #include <OgreFrameListener.h>
+#include <OgreVector3.h>
 
 #include <boost/chrono/chrono.hpp>
 
@@ -27,6 +27,7 @@ private:
 	Ogre::Camera* mpCam;
 	Chunk*** mpppChunk;
 	boost::chrono::system_clock::time_point mTimeCount;
+	Ogre::Vector3 mOldOffset;
 
 public:
 
@@ -53,5 +54,8 @@ public:
 	TableauChunks const& getCurrentChunks() const;
 
 	/* Mise à jour des chunks en fonction de la position du joueur */
-	virtual bool frameRenderingQueued(Ogre::FrameEvent const& rEv) override; 
+	virtual bool frameRenderingQueued(Ogre::FrameEvent const& rEv) override;
+
+	/* Calcul la moyenne des moyennes de hauteur de chaque chunks */
+	Ogre::Real averageLocalHeight() const;
 };

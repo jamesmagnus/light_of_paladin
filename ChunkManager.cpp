@@ -3,6 +3,8 @@
 #include "HeightFieldShape.h"
 #include "Chunk.h"
 
+#include <boost/timer/timer.hpp>
+
 #include <OgreCamera.h>
 #include <Physics2012/Dynamics/World/hkpWorld.h>
 
@@ -29,16 +31,8 @@ ChunkManager::ChunkManager(Ogre::Camera *pCam, GestionnaireTerrain *pTerrainMgr,
 		}
 	}
 
-	mActualChunk.offset = std::make_pair(0, 0);
+	mOldOffset = Vector3::ZERO;
 	mActualChunk.positionJoueur = Vector3::ZERO;
-	
-	for (int i=0; i<3; ++i)
-	{
-		for (int j=0; j<3; ++j)
-		{
-			mActualChunk.ppChunk[i][j]=nullptr;
-		}
-	}
 }
 
 
@@ -98,38 +92,21 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 	boost::chrono::system_clock::time_point debut = boost::chrono::system_clock::now();
 
 	boost::chrono::milliseconds elapsedTime = boost::chrono::duration_cast<boost::chrono::milliseconds>(debut - mTimeCount);
-	boost::chrono::milliseconds ref(1000);
+	static boost::chrono::milliseconds ref(1000);
 
 	if (elapsedTime >= ref)
 	{
+		boost::timer::auto_cpu_timer timerStart;
+
 		TableauChunks tmp;
 
 		mpHavokWorld->lock();
 		mpHavokWorld->markForWrite();
 
-		for (int i=0; i<3; ++i)
+		for (Chunk* it : mActualChunk.vectPtrChunk)
 		{
-			for (int j=0; j<3; ++j)
-			{
-				if (mActualChunk.ppChunk[i][j] != nullptr)
-				{
-					mpHavokWorld->removeEntity((hkpEntity*)mActualChunk.ppChunk[i][j]->getBodyPtr());
-				}
-			}
+			mpHavokWorld->removeEntity((hkpEntity*)(it->getBodyPtr()));
 		}
-
-		mpHavokWorld->unmarkForWrite();
-		mpHavokWorld->unlock();
-
-		for (int i=0; i<3; ++i)
-		{
-			for (int j=0; j<3; ++j)
-			{
-				tmp.ppChunk[i][j]=nullptr;
-			}
-		}
-
-		tmp.offset = std::make_pair(0, 0);
 	
 		Vector3 pos = mpCam->getDerivedPosition();
 	
@@ -138,47 +115,75 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 		/* Coordonnées du chunk sur lequel est le joueur */
 		pos.x = Real(int(pos.x)/TAILLE_CHUNK);
 		pos.z = Real(int(pos.z)/TAILLE_CHUNK);
-
-		int k=0;
 	
-		for (int i=0; i<mMaxChunkCoo; ++i)
+		for (Chunk* it : mActualChunk.vectPtrChunk)
 		{
-			for (int j=0; j<mMaxChunkCoo; ++j)
+			std::pair<int, int> t = it->getPosition();
+
+			if (t.first >= pos.x-1 && t.first <= pos.x+1 && t.second >= pos.z-1 && t.second <= pos.z+1)
 			{
-				if (i >= pos.x-1 && i <= pos.x+1 && j >= pos.z-1 && j <= pos.z+1)
-				{
-					activeChunk(std::make_pair(i, j));
-					tmp.ppChunk[k/3][k%3] = mpppChunk[i][j];
-					k++;
-				} 
-				else
-				{
-					releaseChunk(std::make_pair(i, j));
-				}
+				activeChunk(t);
+				tmp.vectPtrChunk.push_back(mpppChunk[t.first][t.second]);
+			}
+			else
+			{
+				releaseChunk(t);
 			}
 		}
+				
 	
 		mActualChunk = tmp;
-		mTimeCount = boost::chrono::system_clock::now();
 
-		//-----------------------------------------------------
-		mpHavokWorld->lock();
-		mpHavokWorld->markForWrite();
+		//--------------------------------------------------
 
-		for (int i=0; i<3; ++i)
+		Ogre::Vector3 posJoueurReal = mActualChunk.positionJoueur;
+		std::pair<int, int> posJoueur = std::make_pair(static_cast<int>(posJoueurReal.x)/TAILLE_CHUNK, static_cast<int>(posJoueurReal.z)/TAILLE_CHUNK);
+		Ogre::Vector2 centre = Ogre::Vector2::ZERO;
+
+		for (Chunk* it : mActualChunk.vectPtrChunk)
 		{
-			for (int j=0; j<3; ++j)
+			if (it->getPosition() == posJoueur)
 			{
-				if (mActualChunk.ppChunk[i][j] != nullptr)
-				{
-					mpHavokWorld->addEntity((hkpEntity*)mActualChunk.ppChunk[i][j]->getBodyPtr());
-				}
+				centre = it->getCentre();
 			}
+		}
+
+		Vector3 newOffset(centre.x, averageLocalHeight(), centre.y);
+
+		mpHavokWorld->shiftBroadPhase(hkVector4(newOffset.x - mOldOffset.x, newOffset.y - mOldOffset.y, newOffset.z - mOldOffset.z), hkVector4(), hkpWorld::SHIFT_BROADPHASE_UPDATE_ENTITY_AABBS);
+
+		mOldOffset = newOffset;
+
+		for (Chunk* it : mActualChunk.vectPtrChunk)
+		{
+			mpHavokWorld->addEntity((hkpEntity*)(it->getBodyPtr()));
 		}
 
 		mpHavokWorld->unmarkForWrite();
 		mpHavokWorld->unlock();
+
+		mTimeCount = boost::chrono::system_clock::now();
 	}
 
 	return true;
+}
+
+Ogre::Real ChunkManager::averageLocalHeight() const
+{
+	int denom = mActualChunk.vectPtrChunk.size();
+	assert(denom <=9);
+
+	if (denom == 0)
+	{
+		return 0.0f;
+	}
+
+	Ogre::Real num = 0.0f;
+
+	for (auto it : mActualChunk.vectPtrChunk)
+	{
+		num += it->getAverageHeight();
+	}
+
+	return num/denom;
 }
