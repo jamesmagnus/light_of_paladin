@@ -17,6 +17,7 @@ Chunk::Chunk(GestionnaireTerrain* pTerrainMgr, pair<int, int> pos)
 	mPos = pos;
 
 	mpRigidBody  = nullptr;
+	mAverageHeight = 0.0f;
 }
 
 bool Chunk::loadBody()
@@ -51,6 +52,8 @@ bool Chunk::loadBody()
 			string mes = "Impossible de créer le chunk. Chunk: (" + to_string(mPos.first) + ',' + to_string(mPos.second) + ") dans la grille du monde";
 			throw ExceptionPerso(mes.c_str(), ERREUR);
 		}
+
+		mAverageHeight = static_cast<Ogre::Real>((pTerrainShape->getMinMaxHeight().first + pTerrainShape->getMinMaxHeight().second) /2.0f);
 	
 		pTerrainShape->removeReference();
 	
@@ -100,4 +103,22 @@ void Chunk::destroyBody()
 hkpRigidBody* Chunk::getBodyPtr() const
 {
 	return mpRigidBody;
+}
+
+std::pair<int, int> Chunk::getPosition() const
+{
+	return mPos;
+}
+
+Ogre::Real Chunk::getAverageHeight() const
+{
+	return mAverageHeight;
+}
+
+Ogre::Vector2 Chunk::getCentre() const
+{
+	Ogre::Real x = mPos.first*TAILLE_CHUNK + 0.5f*TAILLE_CHUNK;
+	Ogre::Real y = mPos.second*TAILLE_CHUNK + 0.5f*TAILLE_CHUNK;
+
+	return Ogre::Vector2(x, y);
 }

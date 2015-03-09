@@ -1,6 +1,10 @@
 #pragma once
 
 #include <utility>
+
+#include <OgrePrerequisites.h>
+#include <OgreVector2.h>
+
 #include <boost/noncopyable.hpp>
 
 class GestionnaireTerrain;
@@ -35,10 +39,20 @@ class Chunk: private boost::noncopyable
 	 /* Pour utiliser avec Havok directement */
 	 hkpRigidBody* getBodyPtr() const;
 
+	 /* Renvoie la position du chunk, en coordonnées de chunk */
+	 std::pair<int, int> getPosition() const;
+
+	 /* Renvoie la hauteur moyenne du chunk */
+	 Ogre::Real getAverageHeight() const;
+
+	 /* Renvoie les corrdonnées du centre du chunk, en coordonnées du monde */
+	 Ogre::Vector2 getCentre() const;
+
  private:
 
  	bool mIsBodyInMemory;
  	hkpRigidBody* mpRigidBody;
 	GestionnaireTerrain* mpTerrainMgr;
 	std::pair<int, int> mPos;
+	Ogre::Real mAverageHeight;
 };
