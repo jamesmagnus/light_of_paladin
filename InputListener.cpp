@@ -1,4 +1,5 @@
 #include "InputListener.h"
+#include "CeguiMgr.h"
 
 #include <OgreCamera.h>
 #include <OgreLogManager.h>
@@ -9,13 +10,15 @@
 
 using namespace Ogre;
 
-InputListener::InputListener(RenderWindow *pWindow, Camera *pCam)
+InputListener::InputListener(RenderWindow *pWindow, Camera *pCam, CeguiMgr *pCEGUI)
 {
+	assert(pWindow != nullptr && pCam != nullptr && pCEGUI != nullptr);
+
 	mpWindow = pWindow;
 	mpCamera = pCam;
+	mpCEGUIMgr = pCEGUI;
 
-	mToucheAppuyee = false;
-	mVitesse = 50.0f;	// <= 0.5 * TAILLE_CHUNK
+	mVitesse = 500.0f;	// <= 0.5 * TAILLE_CHUNK
 	mVitesseRotation = 0.25f;
 
 	startOIS(); //Initialisation d'OIS
@@ -74,6 +77,8 @@ bool InputListener::frameRenderingQueued(const FrameEvent& evt)
 
 	/* On récupère l'état de la souris */
 	const OIS::MouseState &mouseState = mpMouse->getMouseState();
+
+	mpCEGUIMgr->injectOISMouseRotation(mouseState.X.rel, mouseState.Y.rel, evt.timeSinceLastFrame);
 
 	/* On calcule la rotation à partir des coordonnées relatives à la dernière position */
 	mRotationX = Degree(-mouseState.Y.rel * mVitesseRotation);
