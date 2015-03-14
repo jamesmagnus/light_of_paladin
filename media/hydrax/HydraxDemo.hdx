@@ -4,17 +4,18 @@
 HydraxVersion=0.5.1
 
 #Main options field
-<vector3>Position=-5000x100x-5000
-<float>PlanesError=8.5
+<vector3>Position=0x100x0
+<float>PlanesError=1.5
 #Shader mode: 0=HLSL, 1=CG, 2=GLSL
 <int>ShaderMode=1
-<float>FullReflectionDistance=9e+05
-<float>GlobalTransparency=0
-<float>NormalDistortion=0.075
-<vector3>WaterColor=0.139765x0.359464x0.425373
+<float>FullReflectionDistance=3e+07
+<float>GlobalTransparency=0.2
+<float>NormalDistortion=0.095
+<vector3>WaterColor=0.139765x0.459464x0.425373
 
 #Components field
 Components=Sun|Foam|Depth|Smooth|Underwater|UnderwaterReflections|UnderwaterGodRays
+#Caustics
 
 #Sun parameters
 <vector3>SunPosition=0x10000x0
