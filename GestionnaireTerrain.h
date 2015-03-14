@@ -15,6 +15,9 @@ namespace Ogre
 	class Root;
 }
 
+/* Classe pour gérer le terrain: gestionnaire de chunks, création et chargement des meshs... */
+/* Classe non dérivable */
+/* Sémantique d'entité, hérite de boost::noncopyable */
 class GestionnaireTerrain
 {
 public:
@@ -23,7 +26,7 @@ public:
     GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot, hkpWorld *pHavokWorld);
 
     /* Destructeur */
-    virtual ~GestionnaireTerrain();
+    ~GestionnaireTerrain();
 
     /* Renvoie l'adresse de l'objet TerrainGlobalOptions */
     Ogre::TerrainGlobalOptions* getOptions() const;
@@ -51,7 +54,7 @@ private:
 	Ogre::Root *mpRoot;
 
 	hkpWorld *mpHavokWorld;
-	ChunkManager mChunksMgn;
+	ChunkManager *mpChunksMgn;
 
     GestionnaireID *mpIDGestion;
 
