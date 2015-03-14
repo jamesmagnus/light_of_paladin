@@ -9,17 +9,17 @@
 
 using namespace Ogre;
 
-GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort, Root *pRoot, hkpWorld *pHavokWorld): mChunksMgn(pCam, this, pHavokWorld)
+GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort, Root *pRoot, hkpWorld *pHavokWorld)
 {
     mpSceneMgr = pSceneMgr;
     mTailleTerrain = tailleMonde;
     mTailleHeightMap = tailleHeightMap;
-    mpOptions = nullptr;
-    mpTerrainGroup = nullptr;
 	mpRoot = pRoot;
 	mpHavokWorld = pHavokWorld;
 
     mpIDGestion = GestionnaireID::getInstance();
+
+	mpChunksMgn = new ChunkManager(pCam, this, pHavokWorld);
 
     mpOptions = OGRE_NEW TerrainGlobalOptions();
     mpOptions->setMaxPixelError(1);
@@ -42,7 +42,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 
     Terrain::ImportData& imp = mpTerrainGroup->getDefaultImportSettings();
 	imp.inputBias=0.0f;
-    imp.inputScale = 1800.0f;
+    imp.inputScale = 1200.0f;
     imp.minBatchSize = 65;
     imp.maxBatchSize = 129;
 
@@ -92,17 +92,17 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 
 			Real height = mpTerrainGroup->getTerrain(0, 0)->getHeightAtTerrainPosition(terrainX, terrainY);
 
-			if (height >= 1650.0f)
+			if (height >= 1050.0f)
 			{
-				*pBlend++ = 1; //Neige au dessus de 1650
+				*pBlend++ = 1.0f; //Neige au dessus de 1050
 			}
-			else if (height <= 1300.0f)
+			else if (height <= 825.0f)
 			{
-				*pBlend++ = 255;    //Roche en dessous de 1300
+				*pBlend++ = 255.0f;    //Roche en dessous de 825
 			}
 			else
 			{
-				*pBlend++ = 255 + (height-1300)*(-255/350);   //Progressivement entre les deux
+				*pBlend++ = 255.0f + (height-825.0f)*(-255.0f/275.0f);   //Progressivement entre les deux
 			}
 		}
 	}
@@ -115,6 +115,12 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 
 GestionnaireTerrain::~GestionnaireTerrain()
 {
+	if (mpChunksMgn != nullptr)
+	{
+		delete mpChunksMgn;
+		mpChunksMgn = nullptr;
+	}
+
     if(mpTerrainGroup != nullptr)
     {
         OGRE_DELETE mpTerrainGroup;
@@ -168,5 +174,5 @@ TerrainGlobalOptions* GestionnaireTerrain::getOptions() const
 
 ChunkManager* GestionnaireTerrain::getPtrChunk()
 {
-	return &mChunksMgn;
+	return mpChunksMgn;
 }
