@@ -5,16 +5,14 @@
 #include "ExceptionPerso.h"
 #include "InputListener.h"
 #include "GestionnaireTerrain.h"
+#include "CeguiMgr.h"
 
 #include <SkyX.h>
-
 #include <OgreTerrainGroup.h>
 #include <PagedGeometry.h>
 #include <BatchPage.h>
 #include <ImpostorPage.h>
 #include <TreeLoader3D.h>
-
-#include <CEGUI/RendererModules/Ogre/Renderer.h>
 
 #include <boost/thread.hpp>
 
@@ -43,7 +41,7 @@ AppMain::AppMain()
 	mpTrees = nullptr;
 	mpWater = nullptr;
 	mpCam = nullptr;
-	mpCeguiMain = nullptr;
+	mpCeguiMgr = nullptr;
 	mpHkWorld = nullptr;
 
 	std::srand(time(nullptr));
@@ -75,8 +73,11 @@ AppMain::~AppMain()
 		delete mpTerrain;
 		mpTerrain = nullptr;
 	}
-
-	mpCeguiMain->destroySystem();
+	if (mpCeguiMgr != nullptr)
+	{
+		delete mpCeguiMgr;
+		mpCeguiMgr = nullptr;
+	}
 
 	if (mpHkWorld != nullptr && mpHkWorld->getReferenceCount() > 0)
 	{
@@ -108,7 +109,15 @@ void AppMain::start()
 		throw ExceptionPerso("Erreur lors de l'initialisation du moteur Havok.", FATAL);
 	}
 
-	mpCeguiMain = &CEGUI::OgreRenderer::bootstrapSystem();
+	if (!createBase())
+	{
+		throw ExceptionPerso("Erreur lors de la création des éléments basiques du rendu", FATAL);
+	}
+
+	mpCeguiMgr = new CeguiMgr();
+
+	InputListener *pListener = new InputListener(mpWindow, mpCam, mpCeguiMgr);   //Ecouteur d'évènement pour les entrées utilisateurs
+	mpRoot->addFrameListener(pListener);
 
 	/* Création du singleton gestionnaire ID */
 	GestionnaireID::getInstance();
@@ -118,10 +127,6 @@ void AppMain::start()
 		throw ExceptionPerso("Erreur lors de la création de la scène.", ERREUR);
 	}
 
-	InputListener *listener = new InputListener(mpWindow, mpCam);   //Ecouteur d'évènement pour les entrées utilisateurs
-
-	mpRoot->addFrameListener(listener);
-
 	infiniteLoop(); //Boucle de rendu
 }
 
@@ -129,7 +134,6 @@ bool AppMain::initOGRE()
 {
 	Ogre::ConfigFile config;    //Gestionnaire de fichier de config Ogre
 
-	/* Chargement selon la compilation */
 #ifdef _DEBUG
 	mpRoot = new Root("plugins_d.cfg", "ogre.cfg", "Ogre_d.log");
 	config.load("resources_d.cfg");
@@ -183,7 +187,7 @@ bool AppMain::initOGRE()
 
 bool AppMain::createScene()
 {
-	if(!(createBase() && createSky() && createTerrain() && createLight() && createObject() && createPersonnage()))
+	if(!(createSky() && createTerrain() && createLight() && createObject() && createPersonnage()))
 	{
 		return false;
 	}
@@ -252,7 +256,7 @@ bool AppMain::createTerrain()
 	mpWater = new Eau(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
 	mpRoot->addFrameListener(mpWater);
 
-	mpWater->setHauteur(350.0f);
+	mpWater->setHauteur(0.0f);
 
 	// Create water
 	mpWater->create();
@@ -311,6 +315,11 @@ bool AppMain::createPersonnage()
 	pNodeRylai->pitch(Degree(45.0f));
 	pNodeRylai->scale(Vector3(10.0, 10.0, 10.0));
 	pNodeRylai->attachObject(pEnt2);
+
+	Entity *pEnt3 = mpSceneMgr->createEntity("tux", "palace.mesh");
+	SceneNode *pNodeTux = mpSceneMgr->getRootSceneNode()->createChildSceneNode("nodeTux", Vector3(200.0f, 500.0f, 200.0f));
+	pNodeTux->setScale(100.0f, 100.0f, 100.0f);
+	pNodeTux->attachObject(pEnt3);
 
 	ParticleSystem* sunParticle = mpSceneMgr->createParticleSystem("Boule de feu", "Particule/FireBall");
 	SceneNode* particleNode = pNodePeng->createChildSceneNode("ParticleFire");

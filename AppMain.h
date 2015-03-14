@@ -11,6 +11,7 @@ class Inventaire;
 class Eau;
 class GestionnaireLight;
 class hkpWorld;
+class CeguiMgr;
 
 namespace Ogre
 {
@@ -19,11 +20,6 @@ namespace Ogre
 	class SceneManager;
 	class Camera;
 	class SceneNode;
-}
-
-namespace CEGUI
-{
-	class OgreRenderer;
 }
 
 namespace SkyX
@@ -44,7 +40,7 @@ private:
 	Ogre::SceneManager *mpSceneMgr;
 	Ogre::Camera *mpCam;
 
-	CEGUI::OgreRenderer *mpCeguiMain;
+	CeguiMgr *mpCeguiMgr;
 
 	GestionnaireTerrain *mpTerrain;
 	Eau *mpWater;
@@ -75,8 +71,7 @@ public:
 	/* Retourne false en cas d'erreur */
 	bool createScene();
 
-	/* Crée les éléments basiques de la scène, viewport, caméra, éclairage ambient */
-	/* Appelée par createScene() */
+	/* Crée les éléments basiques, viewport, caméra, éclairage ambient */
 	/* Retourne false en cas d'erreur */
 	bool createBase();
 
