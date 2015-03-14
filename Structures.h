@@ -1,6 +1,6 @@
 #pragma once
 
-#define TAILLE_MONDE 50000
+#define TAILLE_MONDE 30000
 #define TAILLE_CHUNK 100
 #define TAILLE_IMG_HEIGHTMAP 2049
 
