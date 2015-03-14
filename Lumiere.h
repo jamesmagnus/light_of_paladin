@@ -40,7 +40,7 @@ public:
 	GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, Eau* pEau, Ogre::ColourValue lumAmbiente=Ogre::ColourValue(0.0f, 0.0f, 0.0f));
 
 	/* Destructeur */
-	~GestionnaireLight();
+	virtual ~GestionnaireLight();
 
 	/* Prédicat, renvoie true s'il fait nuit, false sinon */
 	bool IsNuit() const;

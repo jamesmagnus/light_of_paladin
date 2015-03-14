@@ -35,7 +35,7 @@ public:
 	Eau(Ogre::SceneManager* pMgn, Ogre::Camera* pCam, Ogre::Viewport* pView, SkyX::SkyX* pSky);
 
 	/* Destructeur */
-	~Eau();
+	virtual ~Eau();
 
 	/* Définie la hauteur de l'eau */
 	/* h, la hauteur en coordonnées du monde (mètres) */
