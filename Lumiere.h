@@ -37,7 +37,7 @@ public:
 	/* pSky, pointeur vers l'objet SkyX qui s'occupe du ciel */
 	/* pEau, pointeur vers les gestionnaire d'eau */
 	/* lumAmbiente, Ogre::Vector3 qui contient la valeur de la lumière ambiente */
-	GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, Eau* pEau, Ogre::ColourValue lumAmbiente=Ogre::ColourValue(0.0f, 0.0f, 0.0f));
+	GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, Eau* pEau, Ogre::ColourValue const& lumAmbiente=Ogre::ColourValue(0.0f, 0.0f, 0.0f));
 
 	/* Destructeur */
 	virtual ~GestionnaireLight();

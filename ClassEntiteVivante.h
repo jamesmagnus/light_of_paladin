@@ -25,7 +25,7 @@ public:
 	/* IsVisible, true si l'objet doit être rendu */
 	/* vie, la vie de l'entité */
 	/* nom, le nom de l'entité */
-	EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string nom="DefaultName");
+	EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom="DefaultName");
 
 	/* Destructeur */
 	virtual ~EntiteVivante();

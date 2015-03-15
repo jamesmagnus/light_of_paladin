@@ -38,7 +38,7 @@ public:
     /* x et y, sont les coordonnées du terrain dans le groupe */
     /* Retourne un ID correspondant au terrain */
     /* Lève une exception s'il n'y a plus de slot de terrain */
-    unsigned long addTerrain(int x, int y, std::string nom);
+    unsigned long addTerrain(int x, int y, std::string const& nom);
 
 	/* Renvoie l'adresse du gestionnaire de chunks (frameListener) */
 	ChunkManager* getPtrChunk();

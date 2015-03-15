@@ -4,7 +4,7 @@
 
 using namespace Ogre;
 
-Epee::Epee(SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string nom, bool IsUnique, bool IsVisible): Arme(pNode, degat, vitesse, resistance, prix, poid, nom, IsUnique, IsVisible)
+Epee::Epee(SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible): Arme(pNode, degat, vitesse, resistance, prix, poid, nom, IsUnique, IsVisible)
 {
 }
 

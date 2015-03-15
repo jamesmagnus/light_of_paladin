@@ -9,7 +9,7 @@ class ExceptionPerso : public std::exception
 public:
 
     /* Constructeur */
-    ExceptionPerso(const char* const & message, ENiveau niv) throw();
+    ExceptionPerso(const char* const& message, ENiveau niv) throw();
 
     /* Destructeur */
     virtual ~ExceptionPerso() throw();

@@ -390,7 +390,7 @@ void AppMain::infiniteLoop()
 	}
 }
 
-bool AppMain::ajoutPersonnage(Ogre::SceneNode *pNoeud, std::string nom, int stat[EStat::ESTATMAX], int niveau, int XP, Ogre::Vector3 position, Ogre::Vector3 rotation)
+bool AppMain::ajoutPersonnage(Ogre::SceneNode *pNoeud, std::string const& nom, int stat[EStat::ESTATMAX], int niveau, int XP, Ogre::Vector3 const& position, Ogre::Vector3 const& rotation)
 {
 	//Personnage *pPersonnage =  new Personnage(pNoeud, stat, true, nom, niveau, XP);
 
@@ -401,7 +401,7 @@ bool AppMain::ajoutPersonnage(Ogre::SceneNode *pNoeud, std::string nom, int stat
 	return retVal.second;
 }
 
-Personnage* AppMain::getPersonnage(std::string nom) const
+Personnage* AppMain::getPersonnage(std::string const& nom) const
 {
 	std::map<std::string, Personnage*>::const_iterator it;
 	it = mmapPersonnages.find(nom);

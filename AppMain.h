@@ -109,12 +109,12 @@ public:
 
 	/* Ajoute un nouveau Personnage */
 	/* Retourne false en cas d'erreur */
-	bool ajoutPersonnage(Ogre::SceneNode *pNoeud, std::string nom, int stat[EStat::ESTATMAX], int niveau, int XP, Ogre::Vector3 position, Ogre::Vector3 rotation);
+	bool ajoutPersonnage(Ogre::SceneNode *pNoeud, std::string const& nom, int stat[EStat::ESTATMAX], int niveau, int XP, Ogre::Vector3 const& position, Ogre::Vector3 const& rotation);
 
 	/* Retourne un personnage en fonction de son nom */
 	/* Renvoie un pointeur vers ce personnage */
 	/* Lève une exception sinon */
-	Personnage* getPersonnage(std::string nom) const;
+	Personnage* getPersonnage(std::string const& nom) const;
 
 	/* Initialise Havok */
 	bool initHavok();

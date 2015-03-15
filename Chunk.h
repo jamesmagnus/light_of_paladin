@@ -20,7 +20,7 @@ class Chunk: private boost::noncopyable
  	/* Constructeur */
  	/* pTerrainMgr, adresse du gestionnaire de terrain */
  	/* pos, position en x et y du chunk à créer, < MAX_CHUNK_COO */
- 	Chunk(GestionnaireTerrain* pTerrainMgr, std::pair<int, int> pos);
+ 	Chunk(GestionnaireTerrain* pTerrainMgr, std::pair<int, int>  const& pos);
 
  	/* Destructeur */
  	~Chunk();

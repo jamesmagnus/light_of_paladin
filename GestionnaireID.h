@@ -45,5 +45,5 @@ public:
     /* Memorise une liste d'IDs déjà utilisés afin qu'il ne soit plus générer */
     /* liste, un std::vector<unsigned long> contenant les IDs */
     /* Retourne true s'il reste des IDs disponibles après mémorisation */
-    bool memoriseID(std::vector<unsigned long> liste);
+    bool memoriseID(std::vector<unsigned long> const& liste);
 };

@@ -21,7 +21,7 @@ public:
 	/* IsUnique, true si l'armure ne peut se trouver 2 fois dans un même inventaire, false par défaut */
 	/* IsVisible, true si l'armure doit être rendue par Ogre */
 	/* pointProtection, etat, caractéristiques de l'armure */
-	Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix=0, float poid=1.0f, std::string nom="DefaultArmor", bool IsUnique=false, bool IsVisible=true, int pointProtection=0, float etat=1.0f);
+	Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix=0, float poid=1.0f, std::string const& nom="DefaultArmor", bool IsUnique=false, bool IsVisible=true, int pointProtection=0, float etat=1.0f);
 
 	/* Destructeur */
 	virtual ~Armure();

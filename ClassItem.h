@@ -23,7 +23,7 @@ public:
 	/* prix, poid, nom, caractéristiques de l'item */
 	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
 	/* IsVisible, true si l'item doit être rendu par Ogre */
-	Item(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string nom="defaultItem", bool IsUnique=false, bool IsVisible=true);
+	Item(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string const& nom="defaultItem", bool IsUnique=false, bool IsVisible=true);
 
 	/* Destructeur */
 	virtual ~Item();
@@ -48,10 +48,10 @@ public:
 	unsigned long getID() const;
 
 	/* Renvoie le nom de l'item */
-	std::string getNom() const;
+	std::string const& getNom() const;
 
 	/* Change le nom de l'item */
-	void setNom(std::string nom);
+	void setNom(std::string const& nom);
 
 	/* Renvoie true si l'item ne peut être 2 fois dans un même inventaire */
 	bool getIsUnique() const;

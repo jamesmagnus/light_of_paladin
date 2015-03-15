@@ -43,7 +43,7 @@ void Contenaire::afficheDebug(ostream& rOst) const
 }
 #endif
 
-void Contenaire::setProprietaire(string nom)
+void Contenaire::setProprietaire(string const& nom)
 {
 	if(nom == "")
 	{
@@ -60,7 +60,7 @@ string Contenaire::getProprietaire() const
 	return mProprietaire;
 }
 
-void Contenaire::setNom(string nom)
+void Contenaire::setNom(string const& nom)
 {
 	if (nom == "")
 	{

@@ -31,7 +31,7 @@ public:
 	/* Permet d'injecter un évènement pression d'une touche */
 	/* IsDown, true si la touche a été enfoncée, false sinon */
 	/* keyEvent, l'évènement pression d'une touche fourni par OIS */
-	void injectOISKeyEvent(bool IsDown, OIS::KeyEvent keyEvent);
+	void injectOISKeyEvent(bool IsDown, OIS::KeyEvent const& keyEvent);
 
 	/* Permet d'injecter un évènement bouton souris */
 	/* IsDown, true si le bouton a été enfoncée, false sinon */
@@ -42,5 +42,9 @@ public:
 	/* relativeX, relativeY, déplacements relatifs de la souris selon ses axes */
 	/* elapsedTime, le temps écoulé depuis la dernière frame */
 	void injectOISMouseRotation(float relativeX, float relativeY, float elapsedTime);
+
+	/* Charge un schéma XML */
+	/* scheme, le nom du fichier à charger */
+	void loadScheme(std::string const& scheme);
 };
 

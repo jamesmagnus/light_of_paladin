@@ -2,7 +2,7 @@
 #include <SkyX.h>
 
 
-GestionnaireLight::GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, Eau* pEau, Ogre::ColourValue lumAmbiente)
+GestionnaireLight::GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, Eau* pEau, Ogre::ColourValue const& lumAmbiente)
 {
 	assert(pSoleil != nullptr && pSky != nullptr && pEau != nullptr);
 

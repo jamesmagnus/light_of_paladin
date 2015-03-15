@@ -42,12 +42,12 @@ public:
 	/* Active un élément du terrain */
 	/* coo, une paire d'entier représentant les coordonnées du chunk dans la grille */
 	/* Renvoie true si le terrain a bien été généré, l'opération peut échouer si le couple(x,y) est incorrect */
-	bool activeChunk(std::pair<int, int> coo);
+	bool activeChunk(std::pair<int, int> const& coo);
 
 	/* Désactive le chunk */
 	/* coo, une paire d'entier représentant les coordonnées du chunk dans la grille */
 	/* Renvoie True si le chunk a été désactivé, False sinon */
-	bool releaseChunk(std::pair<int, int> coo);
+	bool releaseChunk(std::pair<int, int> const& coo);
 
 	/* Renvoie un tableau de 9 chunks  avec celui où se trouve le joueur au centre */
 	/* Si le joueur est au bord de la map certains pointeurs seront nullptr */

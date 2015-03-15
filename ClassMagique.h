@@ -11,7 +11,7 @@ public:
     /* IsVisible, true si l'objet doit être rendu */
     /* vie, la vie de l'entité */
     /* nom, le nom de l'entité */
-    Magique(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string nom="DefaultName");
+    Magique(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom="DefaultName");
 
     /* Destructeur */
     virtual ~Magique();

@@ -2,7 +2,7 @@
 
 #include <string>
 
-Document::Document(Ogre::SceneNode *pNode, int prix, float poid, std::string nom, bool IsUnique, bool IsVisible):Item(pNode, prix, poid, nom, IsUnique, IsVisible)
+Document::Document(Ogre::SceneNode *pNode, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible):Item(pNode, prix, poid, nom, IsUnique, IsVisible)
 {
 	mTitre="Default Title";
 	mContenu="Default Content";
@@ -13,7 +13,7 @@ Document::~Document()
 
 }
 
-void Document::setTitre(std::string titre)
+void Document::setTitre(std::string const& titre)
 {
 	if (titre != "")
 	{
@@ -21,12 +21,12 @@ void Document::setTitre(std::string titre)
 	}
 }
 
-std::string Document::getTitre() const
+std::string const& Document::getTitre() const
 {
 	return mTitre;
 }
 
-void Document::setContenu(std::string contenu)
+void Document::setContenu(std::string const& contenu)
 {
 	if (contenu != "")
 	{
@@ -34,7 +34,7 @@ void Document::setContenu(std::string contenu)
 	}
 }
 
-std::string Document::getContenu() const
+std::string const& Document::getContenu() const
 {
 	return mContenu;
 }

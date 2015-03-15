@@ -43,7 +43,7 @@ public:
 #endif
 	/* Défini le propriètaire du contenaire */
 	/* nom, le nom du propriètaire, par défaut "all", signifiant aucun propriètaire */
-	void setProprietaire(std::string nom);
+	void setProprietaire(std::string const& nom);
 
 	/* Renvoie le nom du propriètaire */
 	/* "all" pour aucun propriètaire */
@@ -51,7 +51,7 @@ public:
 
 	/* Défini le nom du contenaire */
 	/* nom, le nom du contenaire, par défaut "Coffre" */
-	void setNom(std::string nom);
+	void setNom(std::string const& nom);
 
 	/* Renvoie le nom du contenaire */
 	std::string getNom() const;

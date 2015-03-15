@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Arme::Arme(Ogre::SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string nom, bool IsUnique, bool IsVisible): Item(pNode, prix, poid, nom, IsUnique, IsVisible)
+Arme::Arme(Ogre::SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible): Item(pNode, prix, poid, nom, IsUnique, IsVisible)
 {
     if (degat >= 0)
     {

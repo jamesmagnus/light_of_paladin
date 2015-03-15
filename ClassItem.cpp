@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Item::Item(Ogre::SceneNode *pNode, int prix, float poid, string nom, bool IsUnique, bool IsVisible): Affichable(pNode, IsVisible)
+Item::Item(Ogre::SceneNode *pNode, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible): Affichable(pNode, IsVisible)
 {
     mID = GestionnaireID::getInstance()->newID();
 
@@ -53,7 +53,7 @@ float Item::getPoid() const
     return mPoid;
 }
 
-string Item::getNom() const
+string const& Item::getNom() const
 {
     return mNom;
 }
@@ -74,7 +74,7 @@ void Item::setPoid(float poid)
     }
 }
 
-void Item::setNom(std::string nom)
+void Item::setNom(std::string const& nom)
 {
     if (nom.length() > 0)
     {

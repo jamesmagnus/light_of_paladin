@@ -1,7 +1,7 @@
 #include "ClassEntiteVivante.h"
 
 
-EntiteVivante::EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string nom): Affichable(pNode, IsVisible)
+EntiteVivante::EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom): Affichable(pNode, IsVisible)
 {
 	mVie = vie;
 	mNom = nom;

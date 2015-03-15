@@ -134,7 +134,7 @@ GestionnaireTerrain::~GestionnaireTerrain()
     }
 }
 
-unsigned long GestionnaireTerrain::addTerrain(int x, int y, std::string nom)
+unsigned long GestionnaireTerrain::addTerrain(int x, int y, std::string const& nom)
 {
     unsigned long id = mpIDGestion->newID();
 

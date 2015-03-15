@@ -56,7 +56,7 @@ ChunkManager::~ChunkManager()
 	mpCam=nullptr;
 }
 
-bool ChunkManager::activeChunk(std::pair<int, int> coo)
+bool ChunkManager::activeChunk(std::pair<int, int> const& coo)
 {
 	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo || coo.first < 0 || coo.second < 0)
 	{
@@ -69,7 +69,7 @@ bool ChunkManager::activeChunk(std::pair<int, int> coo)
 	}
 }
 
-bool ChunkManager::releaseChunk(std::pair<int, int> coo)
+bool ChunkManager::releaseChunk(std::pair<int, int> const& coo)
 {
 	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo || coo.first < 0 || coo.second < 0)
 	{

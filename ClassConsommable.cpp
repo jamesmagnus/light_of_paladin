@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Consommable::Consommable(Ogre::SceneNode *pNode, int prix, float poid, std::string nom, bool IsUnique, bool IsVisible):Item(pNode, prix, poid, nom, IsUnique, IsVisible)
+Consommable::Consommable(Ogre::SceneNode *pNode, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible):Item(pNode, prix, poid, nom, IsUnique, IsVisible)
 {
 	mNombre = 1;
 }

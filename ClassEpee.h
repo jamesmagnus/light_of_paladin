@@ -13,7 +13,7 @@ public:
 	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
 	/* degat, vitesse, resistance, caractéristiques de l'épée */
 	/* IsVisible, true si l'épée doit être rendue par Ogre */
-	Epee(Ogre::SceneNode *pNode, int degat, float vitesse=1.0f, float resistance=1.0f, int prix=0, float poid=1.0f, std::string nom="defaultWeapon", bool IsUnique=false, bool IsVisible=true);
+	Epee(Ogre::SceneNode *pNode, int degat, float vitesse=1.0f, float resistance=1.0f, int prix=0, float poid=1.0f, std::string const& nom="defaultWeapon", bool IsUnique=false, bool IsVisible=true);
 
 	virtual ~Epee();
 

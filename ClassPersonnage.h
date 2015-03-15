@@ -30,7 +30,7 @@ public:
     /* nom, le nom du personnage */
     /* niveau, le niveau du personnage */
     /* XP, l'XP du personnage 0 -> 1000 */
-    Personnage(Ogre::SceneNode *pNode, int stat[EStat::ESTATMAX], bool IsVisible=true, std::string nom="DefaultName", int niveau=1, int XP=0); 
+    Personnage(Ogre::SceneNode *pNode, int stat[EStat::ESTATMAX], bool IsVisible=true, std::string const& nom="DefaultName", int niveau=1, int XP=0); 
 
     /* Destructeur */
     virtual ~Personnage(); 

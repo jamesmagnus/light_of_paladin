@@ -75,11 +75,9 @@ bool GestionnaireID::isMoreIDFree() const
     }
 }
 
-bool GestionnaireID::memoriseID(std::vector<unsigned long> liste)
+bool GestionnaireID::memoriseID(std::vector<unsigned long> const& liste)
 {
-    std::vector<unsigned long>::iterator it;
-
-    for (it=liste.begin(); it != liste.end(); ++it)
+    for (std::vector<unsigned long>::const_iterator it=liste.begin(); it != liste.end(); ++it)
     {
         auto retval = mIDExistants.insert(*it);
 		assert(retval.second);

@@ -21,7 +21,7 @@ public:
 	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
 	/* degat, vitesse, resistance, caractéristiques de l'arme */
 	/* IsVisible, true si l'arme doit être rendue par Ogre */
-	Arme(Ogre::SceneNode *pNode, int degat, float vitesse=1.0f, float resistance=1.0f, int prix=0, float poid=1.0f, std::string nom="defaultWeapon", bool IsUnique=false, bool IsVisible=true);
+	Arme(Ogre::SceneNode *pNode, int degat, float vitesse=1.0f, float resistance=1.0f, int prix=0, float poid=1.0f, std::string const& nom="defaultWeapon", bool IsUnique=false, bool IsVisible=true);
 
 	/* Destructeur */
 	virtual ~Arme();

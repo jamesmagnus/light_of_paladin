@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Chunk::Chunk(GestionnaireTerrain* pTerrainMgr, pair<int, int> pos)
+Chunk::Chunk(GestionnaireTerrain* pTerrainMgr, pair<int, int> const& pos)
 {
 	mpTerrainMgr = pTerrainMgr;
 	mIsBodyInMemory = false;

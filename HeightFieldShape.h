@@ -26,7 +26,7 @@ public:
 	/* rInfo, référence sur une structure qui décrit les paramètres de la HeightMap */
 	/* pTerrain, adresse du gestionnaire de terrains */
 	/* cooHeightField, paire de coordonnées (en chunk) de la zone de terrain à créer */
-	HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, std::pair<int, int> coo);
+	HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, std::pair<int, int> const& coo);
 
 	/* Destructeur */
 	virtual ~HeightFieldShape();

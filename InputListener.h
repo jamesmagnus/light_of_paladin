@@ -36,7 +36,7 @@ public:
 
     /* S'exécute pendant le rendu */
     /* Renvoie false si le programme doit s'arrêter */
-    bool frameRenderingQueued(const Ogre::FrameEvent& evt) override;
+    bool frameRenderingQueued(Ogre::FrameEvent const& evt) override;
 
     /* Initialise OIS, appelée par le constructeur */
     void startOIS();
