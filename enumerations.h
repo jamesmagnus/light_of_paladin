@@ -9,3 +9,5 @@ enum class EPopo{FAIBLE, MOYENNE, FORTE, LEGENDAIRE};
 enum ENiveau {INFO, ERREUR, FATAL};
 
 enum ETexture {HERBE1, HERBE2, NEIGE1, ROCK_LICHEN1, TEXTURE_MAX};
+
+enum class EMove{BACK, STOP, FORWARD};
