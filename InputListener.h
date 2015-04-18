@@ -1,9 +1,14 @@
 #pragma once
 
+#include "Structures.h"
+
 #include <OgrePrerequisites.h>
 #include <OgreMath.h>
 #include <OgreFrameListener.h>
 #include <OgreWindowEventUtilities.h>
+
+#include <OIS/OISKeyboard.h>
+#include <OIS/OISMouse.h>
 
 class CeguiMgr;
 
@@ -45,7 +50,10 @@ public:
     virtual void windowResized(Ogre::RenderWindow* rw) override;
 
     /* Appelée lors de la fermeture de la fenêtre */
-    virtual void windowClosed(Ogre::RenderWindow* rw) override;
+    virtual bool windowClosing(Ogre::RenderWindow* rw) override;
+
+	/* Détruit les écouteurs de périphériques d'OIS et entraine le retour de false au prochain appel de frameRenderingQueued() */
+	void clearInputListeners();
 
 protected:
     Ogre::RenderWindow *mpWindow;
@@ -57,10 +65,51 @@ protected:
 
     CeguiMgr *mpCEGUIMgr;
 
-    Ogre::Real mMouvement;
-    Ogre::Real mVitesse;
-    Ogre::Real mVitesseRotation;
+    Ogre::FrameEvent mCurrentEvent;
+	Ogre::Radian mRotationX;
+	Ogre::Radian mRotationY;
+};
 
-    Ogre::Radian mRotationX;
-    Ogre::Radian mRotationY;
+class KeyBoardEventListener: public OIS::KeyListener
+{
+private:
+	InputListener *mpInputListener;
+	OIS::Keyboard const *mpKeyBoard;
+	Vector3Move mActualMove;
+	Ogre::Camera *mpCamera;
+	CeguiMgr *mpCEGUIMgr;
+
+public:
+	/* Constructeur */
+	KeyBoardEventListener(InputListener *pListener, OIS::Keyboard const *pKeyBoard, CeguiMgr *pCeguiMgr);
+
+	/* Destructeur */
+	~KeyBoardEventListener();
+
+	/* Callback pour les événements du clavier */
+	virtual bool keyPressed(OIS::KeyEvent const& arg) override;
+	virtual bool keyReleased(OIS::KeyEvent const& arg) override;
+
+	/* Récupère la structure indiquant sur quels axes un déplacement est en cours */
+	Vector3Move const& getMove() const; 
+};
+
+class MouseEventListener: public OIS::MouseListener
+{
+private:
+	Ogre::Camera *mpCamera;
+	Ogre::FrameEvent const *mpEventTime;
+	CeguiMgr *mpCEGUIMgr;
+
+public:
+	/* Constructeur */
+	MouseEventListener(Ogre::Camera *pCam, Ogre::FrameEvent const *pEventTime, CeguiMgr *pCEGUIMgr);
+
+	/* Destructeur */
+	~MouseEventListener();
+
+	/* Callback pour les événements de la souris */
+	virtual bool mousePressed(OIS::MouseEvent const& arg, OIS::MouseButtonID id) override;
+	virtual bool mouseReleased(OIS::MouseEvent const& arg, OIS::MouseButtonID id) override;
+	virtual bool mouseMoved(OIS::MouseEvent const& arg);
 };

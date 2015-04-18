@@ -1,3 +1,4 @@
+#include "enumerations.h"
 #include "InputListener.h"
 #include "CeguiMgr.h"
 
@@ -5,7 +6,6 @@
 #include <OgreLogManager.h>
 #include <OgreRenderWindow.h>
 #include <OIS/OISMouse.h>
-#include <OIS/OISKeyboard.h>
 #include <OIS/OISInputManager.h>
 
 using namespace Ogre;
@@ -17,9 +17,7 @@ InputListener::InputListener(RenderWindow *pWindow, Camera *pCam, CeguiMgr *pCEG
 	mpWindow = pWindow;
 	mpCamera = pCam;
 	mpCEGUIMgr = pCEGUI;
-
-	mVitesse = 500.0f;	// <= 0.5 * TAILLE_CHUNK
-	mVitesseRotation = 0.25f;
+	mCurrentEvent = FrameEvent();
 
 	startOIS(); //Initialisation d'OIS
 }
@@ -27,13 +25,22 @@ InputListener::InputListener(RenderWindow *pWindow, Camera *pCam, CeguiMgr *pCEG
 InputListener::~InputListener()
 {
 	WindowEventUtilities::removeWindowEventListener(mpWindow, this);    //On déréférence cet écouteur d'évènements
-	windowClosed(mpWindow); //Appelée manuellement dans le destructeur si on ferme sans utiliser la croix
+	windowClosing(mpWindow); //Appelée manuellement dans le destructeur si la fenêtre est fermée par une source externe
 }
 
-bool InputListener::frameRenderingQueued(const FrameEvent& evt)
+bool InputListener::frameRenderingQueued(FrameEvent const& evt)
 {
+	Vector3 deplacement = Vector3::ZERO;
+	Real movement = evt.timeSinceLastFrame * VITESSE_TRANS_CAM;
+	mCurrentEvent = evt;
+
 	/* Si la fenêtre s'est fermée on coupe Ogre */
 	if (mpWindow->isClosed())
+	{
+		return false;
+	}
+
+	if (mpInputManager == nullptr)
 	{
 		return false;
 	}
@@ -42,51 +49,30 @@ bool InputListener::frameRenderingQueued(const FrameEvent& evt)
 	mpMouse->capture();
 	mpKeyBoard->capture();
 
-	/* On arrête Ogre si ECHAP est enfoncée */
-	if (mpKeyBoard->isKeyDown(OIS::KC_ESCAPE))
+	Vector3Move moving = dynamic_cast<KeyBoardEventListener*>(mpKeyBoard->getEventCallback())->getMove();
+
+	switch (moving.x)
 	{
-		return false;
+	case EMove::BACK:
+		deplacement.x += movement;
+		break;
+
+	case EMove::FORWARD:
+		deplacement.x -= movement;
+		break;
 	}
 
-	/* De même pour alt+F4 */
-	if (mpKeyBoard->isKeyDown(OIS::KC_F4) && mpKeyBoard->isModifierDown(OIS::Keyboard::Modifier::Alt))
+	switch (moving.z)
 	{
-		return false;
-	}
+	case EMove::BACK:
+		deplacement.z += movement;
+		break;
 
-	Ogre::Vector3 deplacement = Ogre::Vector3::ZERO;    //Vecteur de déplacement
-	mMouvement = mVitesse * evt.timeSinceLastFrame; //Valeur du déplacement en fonction des FPS
-
-	/* La touche A d'un clavier QWERTY correspond au Q sur un AZERTY */
-	if(mpKeyBoard->isKeyDown(OIS::KC_LEFT) || mpKeyBoard->isKeyDown(OIS::KC_A))
-	{
-		deplacement.x -= mMouvement;
+	case EMove::FORWARD:
+		deplacement.z -= movement;
 	}
-	if(mpKeyBoard->isKeyDown(OIS::KC_RIGHT) || mpKeyBoard->isKeyDown(OIS::KC_D))
-	{
-		deplacement.x += mMouvement;
-	}
-	if(mpKeyBoard->isKeyDown(OIS::KC_UP) || mpKeyBoard->isKeyDown(OIS::KC_W)) // W correspond au Z du AZERTY
-	{
-		deplacement.z -= mMouvement;
-	}
-	if(mpKeyBoard->isKeyDown(OIS::KC_DOWN) || mpKeyBoard->isKeyDown(OIS::KC_S))
-	{
-		deplacement.z += mMouvement;
-	}
-
-	/* On récupère l'état de la souris */
-	const OIS::MouseState &mouseState = mpMouse->getMouseState();
-
-	mpCEGUIMgr->injectOISMouseRotation(mouseState.X.rel, mouseState.Y.rel, evt.timeSinceLastFrame);
-
-	/* On calcule la rotation à partir des coordonnées relatives à la dernière position */
-	mRotationX = Degree(-mouseState.Y.rel * mVitesseRotation);
-	mRotationY = Degree(-mouseState.X.rel * mVitesseRotation);
 
 	/* Enfin on déplace la caméra */
-	mpCamera->yaw(mRotationY);
-	mpCamera->pitch(mRotationX);
 	mpCamera->moveRelative(deplacement);
 
 	return true;    //Ogre continue
@@ -96,21 +82,20 @@ void InputListener::startOIS()
 {
 	LogManager::getSingletonPtr()->logMessage("**** Init OIS ****");
 
-	OIS::ParamList pl;
 	size_t windowHnd = 0;
-	std::ostringstream windowHndStr;
 
 	/* On récupère les infos sur la fenêtre depuis l'OS */
 	mpWindow->getCustomAttribute("WINDOW", &windowHnd);
-	windowHndStr << windowHnd;
-	pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
 
 	/* On crée le gestionnaire */
-	mpInputManager = OIS::InputManager::createInputSystem(pl);
+	mpInputManager = OIS::InputManager::createInputSystem(windowHnd);
 
 	/* On crée les objets relatifs à chaque périphérique */
-	mpMouse = static_cast<OIS::Mouse*>(mpInputManager->createInputObject(OIS::OISMouse, false));
-	mpKeyBoard = static_cast<OIS::Keyboard*>(mpInputManager->createInputObject(OIS::OISKeyboard, false));
+	mpMouse = static_cast<OIS::Mouse*>(mpInputManager->createInputObject(OIS::OISMouse, true));
+	mpKeyBoard = static_cast<OIS::Keyboard*>(mpInputManager->createInputObject(OIS::OISKeyboard, true));
+
+	mpKeyBoard->setEventCallback(new KeyBoardEventListener(this, mpKeyBoard, mpCEGUIMgr));
+	mpMouse->setEventCallback(new MouseEventListener(mpCamera, &mCurrentEvent, mpCEGUIMgr));
 
 	windowResized(mpWindow);    //On appelle manuellement cette méthode une fois pour initialiser la taille de la fenêtre
 
@@ -133,19 +118,161 @@ void InputListener::windowResized(RenderWindow* rw)
 	ms.height = height;
 }
 
-void InputListener::windowClosed(RenderWindow* rw)
+bool InputListener::windowClosing(RenderWindow* rw)
 {
 	if (rw == mpWindow)  //Si la fenêtre fermée est bien la notre
 	{
-		/* On test si le gestionnaire existe toujours. On détruit les objets du gestionnaire, puis le gestionnaire */
-		if (mpInputManager != nullptr)  
-		{
-			mpInputManager->destroyInputObject(mpMouse);
-			mpInputManager->destroyInputObject(mpKeyBoard);
-
-			OIS::InputManager::destroyInputSystem(mpInputManager);
-
-			mpInputManager = nullptr;
-		}
+		clearInputListeners();
 	}
+
+	return false;
+}
+
+void InputListener::clearInputListeners()
+{
+	/* On test si le gestionnaire existe toujours. On détruit les objets du gestionnaire, puis le gestionnaire */
+	if (mpInputManager != nullptr)  
+	{
+		if (mpKeyBoard != nullptr)
+		{
+			if (mpKeyBoard->getEventCallback() != nullptr)
+			{
+				delete mpKeyBoard->getEventCallback();
+			}
+			mpInputManager->destroyInputObject(mpKeyBoard);
+			mpKeyBoard=nullptr;
+		}
+
+
+		if (mpMouse != nullptr)
+		{
+			if (mpMouse->getEventCallback() != nullptr)
+			{
+				delete mpMouse->getEventCallback();
+			}
+			mpInputManager->destroyInputObject(mpMouse);
+			mpMouse = nullptr;
+		}
+
+		OIS::InputManager::destroyInputSystem(mpInputManager);
+		mpInputManager = nullptr;
+	}
+}
+
+KeyBoardEventListener::KeyBoardEventListener(InputListener *pListener, OIS::Keyboard const *pKeyBoard, CeguiMgr *pCeguiMgr)
+{
+	mpInputListener = pListener;
+	mpKeyBoard = pKeyBoard;
+	mpCEGUIMgr = pCeguiMgr;
+
+	mActualMove.x = mActualMove.y = mActualMove.z = EMove::STOP;
+}
+
+KeyBoardEventListener::~KeyBoardEventListener()
+{
+}
+
+bool KeyBoardEventListener::keyPressed(OIS::KeyEvent const& arg)
+{
+	mpCEGUIMgr->injectOISKeyEvent(true, arg);
+	OIS::Keyboard::TextTranslationMode i = mpKeyBoard->getTextTranslation();
+
+	if (arg.key == OIS::KC_ESCAPE)
+	{
+		mpInputListener->clearInputListeners();
+		return false;
+	}
+
+	if (arg.key == OIS::KC_F4 && mpKeyBoard->isModifierDown(OIS::Keyboard::Alt))
+	{
+		mpInputListener->clearInputListeners();
+		return false;
+	}
+
+	switch (arg.key)
+	{
+	case OIS::KC_RIGHT: case OIS::KC_D:
+		mActualMove.x = EMove::BACK ;
+		break;
+
+	case OIS::KC_LEFT: case OIS::KC_A:
+		mActualMove.x = EMove::FORWARD;
+		break;
+
+	case OIS::KC_UP: case OIS::KC_W:
+		mActualMove.z = EMove::FORWARD;
+		break;
+
+	case OIS::KC_DOWN: case OIS::KC_S:
+		mActualMove.z = EMove::BACK;
+		break;
+	}
+
+	return true;
+}
+
+bool KeyBoardEventListener::keyReleased(OIS::KeyEvent const& arg)
+{
+	mpCEGUIMgr->injectOISKeyEvent(false, arg);
+
+	switch (arg.key)
+	{
+	case OIS::KC_RIGHT: case OIS::KC_D: case OIS::KC_LEFT: case OIS::KC_A:
+		mActualMove.x = EMove::STOP ;
+		break;
+
+	case OIS::KC_UP: case OIS::KC_W: case OIS::KC_DOWN: case OIS::KC_S:
+		mActualMove.z = EMove::STOP;
+		break;
+	}
+
+	return true;
+}
+
+Vector3Move const& KeyBoardEventListener::getMove() const
+{
+	return mActualMove;
+}
+
+MouseEventListener::MouseEventListener(Ogre::Camera *pCam, Ogre::FrameEvent const *pEventTime, CeguiMgr *pCEGUIMgr)
+{
+	mpCamera = pCam;
+	mpEventTime = pEventTime;
+	mpCEGUIMgr = pCEGUIMgr;
+}
+
+MouseEventListener::~MouseEventListener()
+{
+
+}
+
+bool MouseEventListener::mousePressed(OIS::MouseEvent const& arg, OIS::MouseButtonID id)
+{
+	mpCEGUIMgr->injectOISMouseButton(true, id);
+
+	return true;
+}
+
+bool MouseEventListener::mouseReleased(OIS::MouseEvent const& arg, OIS::MouseButtonID id)
+{
+	mpCEGUIMgr->injectOISMouseButton(false, id);
+
+	return true;
+}
+
+bool MouseEventListener::mouseMoved(OIS::MouseEvent const& arg)
+{
+	/* On récupère l'état de la souris */
+	const OIS::MouseState &mouseState = arg.state;
+
+	mpCEGUIMgr->injectOISMouseRotation(static_cast<float>(mouseState.X.rel), static_cast<float>(mouseState.Y.rel), mpEventTime->timeSinceLastFrame);
+
+	/* On calcule la rotation à partir des coordonnées relatives à la dernière position */
+	Radian mRotationX = Degree(-mouseState.Y.rel * VITESSE_ROTATION_CAM);
+	Radian mRotationY = Degree(-mouseState.X.rel * VITESSE_ROTATION_CAM);
+
+	mpCamera->yaw(mRotationY);
+	mpCamera->pitch(mRotationX);
+
+	return true;
 }
