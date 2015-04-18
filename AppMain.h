@@ -12,6 +12,7 @@ class Eau;
 class GestionnaireLight;
 class hkpWorld;
 class CeguiMgr;
+class InputListener;
 
 namespace Ogre
 {
@@ -44,7 +45,8 @@ private:
 
 	GestionnaireTerrain *mpTerrain;
 	Eau *mpWater;
-	GestionnaireLight* mpLum;
+	GestionnaireLight *mpLum;
+	InputListener *mpListener;
 
 	SkyX::SkyX *mpSky;
 	Forests::PagedGeometry *mpTrees;

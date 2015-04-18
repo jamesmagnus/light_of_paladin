@@ -6,6 +6,7 @@
 #include "InputListener.h"
 #include "GestionnaireTerrain.h"
 #include "CeguiMgr.h"
+#include "GameConsole.h"
 
 #include <SkyX.h>
 #include <OgreTerrainGroup.h>
@@ -31,6 +32,10 @@ using namespace Ogre;
 
 AppMain::AppMain()
 {
+	LogManager *pLogMgr = new LogManager();
+	LogManager::getSingletonPtr()->createLog("LoP.log", true);
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "!***! Light of Paladin started !***!");
+
 	mpRoot = nullptr;
 	mpWindow = nullptr;
 	mpSceneMgr = nullptr;
@@ -43,12 +48,19 @@ AppMain::AppMain()
 	mpCam = nullptr;
 	mpCeguiMgr = nullptr;
 	mpHkWorld = nullptr;
+	mpListener = nullptr;
 
 	std::srand(time(nullptr));
 }
 
 AppMain::~AppMain()
 {
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "AppMain destruction started...");
+
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Closing window...");
+	mpWindow->destroy();
+
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction paged geometry...");
 	if (mpTrees != nullptr && mpTrees->getPageLoader() != nullptr)
 	{
 		delete mpTrees->getPageLoader();
@@ -56,29 +68,42 @@ AppMain::~AppMain()
 		mpTrees = nullptr;
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction water manager...");
 	if (mpWater != nullptr)
 	{
 		delete mpWater;
 		mpWater = nullptr;
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction lights manager...");
 	if (mpLum != nullptr)
 	{
 		delete mpLum;
 		mpLum = nullptr;
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction terrains manager...");
 	if (mpTerrain != nullptr)
 	{
 		delete mpTerrain;
 		mpTerrain = nullptr;
 	}
+
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction window's event listener...");
+	if (mpListener != nullptr)
+	{
+		delete mpListener;
+		mpListener = nullptr;
+	}
+
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction CEGUI Manager...");
 	if (mpCeguiMgr != nullptr)
 	{
 		delete mpCeguiMgr;
 		mpCeguiMgr = nullptr;
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction Havok...");
 	if (mpHkWorld != nullptr && mpHkWorld->getReferenceCount() > 0)
 	{
 		mpHkWorld->removeReference();
@@ -87,6 +112,7 @@ AppMain::~AppMain()
 	hkBaseSystem::quit();
 	hkMemoryInitUtil::quit();
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction Ogre...");
 	if(mpRoot != nullptr)
 	{
 		delete mpRoot;
@@ -94,40 +120,53 @@ AppMain::~AppMain()
 	}	
 
 	/* Destruction des singletons */
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction singletons...");
+
 	GestionnaireID::destroy();
+	LogManager::getSingletonPtr()->destroyLog(LogManager::getSingletonPtr()->getDefaultLog());
+	delete LogManager::getSingletonPtr();
 }
 
 void AppMain::start()
 {
+
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting Ogre...");
 	if(!initOGRE()) //Démarrage de Ogre
 	{
 		throw ExceptionPerso("Erreur dans AppMain::initOGRE(), mais Ogre ne parait pas avoir levé une exception.", FATAL);
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting Havok...");
 	if (!initHavok()) //Physique et collision
 	{
 		throw ExceptionPerso("Erreur lors de l'initialisation du moteur Havok.", FATAL);
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create basics...");
 	if (!createBase())
 	{
 		throw ExceptionPerso("Erreur lors de la création des éléments basiques du rendu", FATAL);
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create CEGUI interface...");
 	mpCeguiMgr = new CeguiMgr();
 
-	InputListener *pListener = new InputListener(mpWindow, mpCam, mpCeguiMgr);   //Ecouteur d'évènement pour les entrées utilisateurs
-	mpRoot->addFrameListener(pListener);
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create window's event listener...");
+	mpListener = new InputListener(mpWindow, mpCam, mpCeguiMgr);   //Ecouteur d'évènement pour les entrées utilisateurs
+	mpRoot->addFrameListener(mpListener);
 
 	/* Création du singleton gestionnaire ID */
 	GestionnaireID::getInstance();
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Loading scene elements...");
 	if(!createScene())  //Création de la scène
 	{
 		throw ExceptionPerso("Erreur lors de la création de la scène.", ERREUR);
 	}
 
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting rendering loop...");
 	infiniteLoop(); //Boucle de rendu
+
 }
 
 bool AppMain::initOGRE()
@@ -135,12 +174,14 @@ bool AppMain::initOGRE()
 	Ogre::ConfigFile config;    //Gestionnaire de fichier de config Ogre
 
 #ifdef _DEBUG
-	mpRoot = new Root("plugins_d.cfg", "ogre.cfg", "Ogre_d.log");
+	mpRoot = new Root("plugins_d.cfg", "ogre.cfg");
 	config.load("resources_d.cfg");
 #else
-	mpRoot = new Root("plugins.cfg", "ogre.cfg", "Ogre.log");
+	mpRoot = new Root("plugins.cfg", "ogre.cfg");
 	config.load("resources.cfg");
 #endif
+
+	LogManager::getSingletonPtr()->setDefaultLog(LogManager::getSingletonPtr()->getLog("LoP.log"));
 
 	ConfigFile::SectionIterator sectionI = config.getSectionIterator();
 
@@ -345,6 +386,9 @@ void AppMain::infiniteLoop()
 {
 	Personnage *pSam = nullptr;
 	bool bSens = true;
+
+	GameConsole* p = new GameConsole(mpCeguiMgr);
+	p->CreateCEGUIWindow();
 
 
 	/* test */
