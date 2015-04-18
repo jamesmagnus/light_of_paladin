@@ -1,4 +1,5 @@
 #include "CeguiMgr.h"
+#include "GameConsole.h"
 
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
@@ -12,18 +13,11 @@ CeguiMgr::CeguiMgr()
 	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
 	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
 	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+	CEGUI::ImageManager::setImagesetDefaultResourceGroup("ImageSet");
 
-	CEGUI::SchemeManager::getSingletonPtr()->createFromFile("TaharezLook.scheme");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
 
 	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
 	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
-
-	CEGUI::Window *myImageWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/StaticImage","PrettyWindow" );
-	myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
-	myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,150), CEGUI::UDim(0,100)));
-	myImageWindow->setProperty("Image","TaharezLook/ButtonLeftNormal");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
 }
 
 
@@ -31,7 +25,7 @@ CeguiMgr::~CeguiMgr()
 {
 }
 
-void CeguiMgr::injectOISKeyEvent(bool IsDown, OIS::KeyEvent keyEvent)
+void CeguiMgr::injectOISKeyEvent(bool IsDown, OIS::KeyEvent const& keyEvent)
 {
 	if (IsDown)
 	{
@@ -50,7 +44,12 @@ void CeguiMgr::injectOISMouseRotation(float relativeX, float relativeY, float el
 	CEGUI::System::getSingletonPtr()->injectTimePulse(elapsedTime);
 }
 
-void injectOISMouseButton(bool IsDown, OIS::MouseButtonID buttonID)
+void CeguiMgr::loadScheme(std::string const& scheme)
+{
+	CEGUI::SchemeManager::getSingletonPtr()->createFromFile(scheme, "Schemes");
+}
+
+void CeguiMgr::injectOISMouseButton(bool IsDown, OIS::MouseButtonID buttonID)
 {
 	if (IsDown == true)
 	{
@@ -71,9 +70,6 @@ void injectOISMouseButton(bool IsDown, OIS::MouseButtonID buttonID)
 		case OIS::MB_Button4:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::X2Button);
 			break;
-		default:	
-			break;
-
 		}
 	}
 	else
@@ -94,8 +90,6 @@ void injectOISMouseButton(bool IsDown, OIS::MouseButtonID buttonID)
 			break;
 		case OIS::MB_Button4:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::X2Button);
-			break;
-		default:	
 			break;
 		}
 	}
