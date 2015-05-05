@@ -417,7 +417,7 @@ void AppMain::infiniteLoop()
 
 	while (true)
 	{
-		mpHkWorld->stepDeltaTime(0.001);
+		mpHkWorld->stepDeltaTime(0.001f);
 
 #ifdef _DEBUG
 		vdb->step(0);
