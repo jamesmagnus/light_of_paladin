@@ -112,7 +112,6 @@ bool Armure::canUse(Personnage *pJoueur) const
 bool Armure::compare(Item const& rSecondeArmure) const 
 {
 	/* D'après le RTTI l'Item passé en paramètre est une Armure */
-
 	const Armure& rSecondeArmureConvertie = dynamic_cast<Armure const&>(rSecondeArmure);
 
 	/* Leur id, leur état, leur affichage peuvent être différent mais le reste doit être identique */
