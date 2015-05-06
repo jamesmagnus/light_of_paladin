@@ -175,7 +175,6 @@ KeyBoardEventListener::~KeyBoardEventListener()
 bool KeyBoardEventListener::keyPressed(OIS::KeyEvent const& arg)
 {
 	mpCEGUIMgr->injectOISKeyEvent(true, arg);
-	OIS::Keyboard::TextTranslationMode i = mpKeyBoard->getTextTranslation();
 
 	if (arg.key == OIS::KC_ESCAPE)
 	{
@@ -206,6 +205,9 @@ bool KeyBoardEventListener::keyPressed(OIS::KeyEvent const& arg)
 	case OIS::KC_DOWN: case OIS::KC_S:
 		mActualMove.z = EMove::BACK;
 		break;
+
+	case OIS::KC_TAB:
+		mpCEGUIMgr->shiftMode(!mpCEGUIMgr->shiftMode());
 	}
 
 	return true;
