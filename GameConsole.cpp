@@ -5,6 +5,14 @@
 
 using namespace CEGUI;
 
+const std::set<std::string> GameConsole::msCommandes = GameConsole::staticSetInit();
+
+const std::set<std::string> GameConsole::staticSetInit()
+{
+	const std::string tmp[] = {"say", "quit", "help", "dance", "tp", "invoke", "kill"};
+	return std::set<std::string>(tmp, tmp + sizeof(tmp)/sizeof(tmp[0]));
+}
+
 GameConsole::GameConsole(CeguiMgr *pCeguiMgr)
 {
 	mConsoleWindow = nullptr;
@@ -25,6 +33,7 @@ void GameConsole::CreateCEGUIWindow()
 
 	if (mConsoleWindow != nullptr)
 	{
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
 		System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(mConsoleWindow);
 		this->RegisterHandlers();
 	}
@@ -70,12 +79,13 @@ void GameConsole::ParseText(CEGUI::String msg)
 		if (inString.at(0) == '/')
 		{
 			std::string::size_type commandEnd = inString.find(" ", 1);
-			if (commandEnd == std::string::npos)
-			{
-
-			}
 			std::string command = inString.substr(1, commandEnd - 1);
-			std::string commandArgs = inString.substr(commandEnd + 1, std::string::npos);
+			std::string commandArgs;
+
+			if (!(commandEnd==std::string::npos))
+			{
+				commandArgs = inString.substr(commandEnd + 1, std::string::npos);
+			}
 
 			for(std::string::size_type i=0; i < command.length(); i++)
 			{
@@ -84,9 +94,9 @@ void GameConsole::ParseText(CEGUI::String msg)
 
 			if (command == "say")
 			{
-					std::string outString = "Vous:" + commandArgs;
-					OutputText(outString);
-				
+				std::string outString = "Vous:" + commandArgs;
+				OutputText(outString);
+
 			}
 			else if (command == "quit")
 			{
@@ -94,8 +104,18 @@ void GameConsole::ParseText(CEGUI::String msg)
 			}
 			else if (command == "help")
 			{
-				std::string outString = "Liste des commandes:";
-				OutputText(outString);
+				std::string outString = "Liste des commandes: ";
+
+				std::set<std::string> cmd = getCommandes();
+
+				for (std::set<std::string>::const_iterator it = cmd.cbegin(); it != cmd.cend(); ++it)
+				{
+					outString += (*it)+", ";
+				}
+
+				outString.erase(outString.length()-2);
+
+				OutputText(outString, CEGUI::Colour(0.9f, 0.1f, 0.1f));
 			}
 			else
 			{
@@ -119,4 +139,9 @@ void GameConsole::OutputText(CEGUI::String msg, CEGUI::Colour const& colour)
 	newItem = new CEGUI::ListboxTextItem(msg);
 	newItem->setTextColours(colour);
 	outputWindow->addItem(newItem);
+}
+
+std::set<std::string> GameConsole::getCommandes()
+{
+	return msCommandes;
 }
