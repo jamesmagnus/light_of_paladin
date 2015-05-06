@@ -96,8 +96,6 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 
 	if (elapsedTime >= ref)
 	{
-		boost::timer::auto_cpu_timer timerStart;
-
 		TableauChunks tmp;
 
 		mpHavokWorld->lock();
