@@ -18,7 +18,10 @@ class CeguiMgr: private boost::noncopyable
 {
 private:
 	CEGUI::OgreRenderer* mpRenderer;
+	bool mIsMenuMode;
 
+	/* Met à jour les informations internes du gestionnaire après un changement de mode */
+	void updateMode();
 
 public:
 
@@ -46,5 +49,12 @@ public:
 	/* Charge un schéma XML */
 	/* scheme, le nom du fichier à charger */
 	void loadScheme(std::string const& scheme);
+
+	/* Bascule du mode menu au mode jeu */
+	/* mode, booléen false pour jeu, true pour menu */
+	/* pas de paramètre -> permet de connaitre le mode sans le changer */
+	/* Renvoie true si on était en mode menu false sinon */
+	bool shiftMode() const;
+	bool shiftMode(bool const mode);
 };
 

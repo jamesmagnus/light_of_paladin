@@ -18,6 +18,9 @@ CeguiMgr::CeguiMgr()
 
 	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
 	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
+	CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setVisible(true);
+
+	mIsMenuMode = true;
 }
 
 
@@ -94,4 +97,25 @@ void CeguiMgr::injectOISMouseButton(bool IsDown, OIS::MouseButtonID buttonID)
 		}
 	}
 
+}
+
+bool CeguiMgr::shiftMode() const
+{
+	return mIsMenuMode;
+}
+
+bool CeguiMgr::shiftMode(bool const mode)
+{
+	bool ret = mIsMenuMode;
+	mIsMenuMode = mode;
+
+	updateMode();
+
+	return ret;
+}
+
+void CeguiMgr::updateMode()
+{
+	//mpRenderer->setRenderingEnabled(mIsMenuMode);
+	CEGUI::System::getSingletonPtr()->setMutedState(true);
 }
