@@ -1,8 +1,8 @@
-#include "ClassDocument.h"
+ï»¿#include "ClassDocument.h"
 
 #include <string>
 
-Document::Document(Ogre::SceneNode *pNode, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible):Item(pNode, prix, poid, nom, IsUnique, IsVisible)
+Document::Document(Ogre::SceneNode *pNode, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible, Sort *pEnchantement):Enchante(pNode, prix, poid, nom, IsUnique, IsVisible, pEnchantement)
 {
 	mTitre="Default Title";
 	mContenu="Default Content";
@@ -38,16 +38,3 @@ std::string const& Document::getContenu() const
 {
 	return mContenu;
 }
-
-
-/* Surcharge des opérateurs externes */
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Document const& obj)
-{
-	obj.afficheDebug(rOst);
-
-	return rOst;
-}
-#endif

@@ -1,4 +1,4 @@
-#include <OgreException.h>
+ï»¿#include <OgreException.h>
 #include <OgrePlatform.h>
 
 #include <stdlib.h>
@@ -8,16 +8,17 @@
 #include <io.h>
 
 #include "AppMain.h"
-#include "GestionnaireID.h"
+#include "IDMgr.h"
 #include "ExceptionPerso.h"
 
 
 /* Singletons */
-GestionnaireID* GestionnaireID::mpInstanceUnique = nullptr;
+IDMgr* IDMgr::mpsInstanceUnique = nullptr;
+AppMain* AppMain::mpsUniqueInstance = nullptr;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WINRT || OGRE_PLATFORM == OGRE_PLATFORM_WIN32 //Windows x86
 
-#define WIN32_LEAN_AND_MEAN //Désactive les fonctionnalités inutiles
+#define WIN32_LEAN_AND_MEAN //DÃ©sactive les fonctionnalitÃ©s inutiles
 #include "windows.h"
 
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)   //Main pour Windows
@@ -33,19 +34,19 @@ int main(int argc, char **argv) //Main standard
 	AllocConsole();
 	*stdout = *_tfdopen(_open_osfhandle((intptr_t) GetStdHandle(STD_OUTPUT_HANDLE), _O_APPEND), _T("a"));
 
-	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );	//Fuite mémoire
+	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );	//Fuite mÃ©moire
 #endif
 
 	// Flush all denormal/subnormal numbers (2^-1074 to 2^-1022) to zero.
 	// Typically operations on denormals are very slow, up to 100 times slower than normal numbers.
 	_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
 
-	AppMain app;   //Le jeu
+	AppMain *pApp = AppMain::getInstance();   //Le jeu
 
-	/* On lance le jeu et on récupère les éventuelles exceptions levées pour les afficher */
+	/* On lance le jeu et on rÃ©cupÃ¨re les Ã©ventuelles exceptions levÃ©es pour les afficher */
 	try
 	{
-		app.start();
+		pApp->start();
 	}
 	catch(Ogre::Exception& e)
 	{

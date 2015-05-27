@@ -1,4 +1,4 @@
-#include "ClassConsommable.h"
+ï»¿#include "ClassConsommable.h"
 #include "ExceptionPerso.h"
 
 using namespace std;
@@ -64,15 +64,3 @@ bool Consommable::supprObjet(unsigned int nbr)
 		return false;
 	}
 }
-
-/* Surcharge des opérateurs externes */
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Consommable const& obj)
-{
-	obj.afficheDebug(rOst);
-
-	return rOst;
-}
-#endif

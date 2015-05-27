@@ -1,12 +1,13 @@
-#include "AppMain.h"
-#include "Eau.h"
-#include "Lumiere.h"
-#include "GestionnaireID.h"
+ï»¿#include "AppMain.h"
+#include "WaterMgr.h"
+#include "LightMgr.h"
+#include "IDMgr.h"
 #include "ExceptionPerso.h"
 #include "InputListener.h"
-#include "GestionnaireTerrain.h"
+#include "TerrainMgr.h"
 #include "CeguiMgr.h"
 #include "GameConsole.h"
+#include "FMODSoundMgr.h"
 
 #include <SkyX.h>
 #include <OgreTerrainGroup.h>
@@ -20,6 +21,8 @@
 #include <Common/Base/hkBase.h>
 #include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
 #include <Physics2012/Dynamics/World/hkpWorld.h>
+
+#include "ClassEpee.h"
 
 #ifdef _DEBUG
 
@@ -49,6 +52,7 @@ AppMain::AppMain()
 	mpCeguiMgr = nullptr;
 	mpHkWorld = nullptr;
 	mpListener = nullptr;
+	mpSoundMgr = nullptr;
 
 	std::srand(time(nullptr));
 }
@@ -117,23 +121,32 @@ AppMain::~AppMain()
 	{
 		delete mpRoot;
 		mpRoot = nullptr;
-	}	
+	}
+
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction FMOD...");
+	if (mpSoundMgr != nullptr)
+	{
+		delete mpSoundMgr;
+		mpSoundMgr = nullptr;
+	}
 
 	/* Destruction des singletons */
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction singletons...");
 
-	GestionnaireID::destroy();
+	IDMgr::destroy();
 	LogManager::getSingletonPtr()->destroyLog(LogManager::getSingletonPtr()->getDefaultLog());
 	delete LogManager::getSingletonPtr();
 }
 
 void AppMain::start()
 {
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting FMOD...");
+	mpSoundMgr = new FMODSoundMgr();
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting Ogre...");
-	if(!initOGRE()) //Démarrage de Ogre
+	if(!initOGRE()) //DÃ©marrage de Ogre
 	{
-		throw ExceptionPerso("Erreur dans AppMain::initOGRE(), mais Ogre ne parait pas avoir levé une exception.", FATAL);
+		throw ExceptionPerso("Erreur dans AppMain::initOGRE(), mais Ogre ne parait pas avoir levÃ© une exception.", FATAL);
 	}
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting Havok...");
@@ -145,24 +158,29 @@ void AppMain::start()
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create basics...");
 	if (!createBase())
 	{
-		throw ExceptionPerso("Erreur lors de la création des éléments basiques du rendu", FATAL);
+		throw ExceptionPerso("Erreur lors de la crÃ©ation des Ã©lÃ©ments basiques du rendu", FATAL);
 	}
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create CEGUI interface...");
 	mpCeguiMgr = new CeguiMgr();
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create window's event listener...");
-	mpListener = new InputListener(mpWindow, mpCam, mpCeguiMgr);   //Ecouteur d'évènement pour les entrées utilisateurs
+	mpListener = new InputListener(mpWindow, mpCam, mpCeguiMgr);   //Ecouteur d'Ã©vÃ¨nement pour les entrÃ©es utilisateurs
 	mpRoot->addFrameListener(mpListener);
 
-	/* Création du singleton gestionnaire ID */
-	GestionnaireID::getInstance();
+	/* CrÃ©ation du singleton gestionnaire ID */
+	IDMgr::getInstance();
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Loading scene elements...");
-	if(!createScene())  //Création de la scène
+	if(!createScene())  //CrÃ©ation de la scÃ¨ne
 	{
-		throw ExceptionPerso("Erreur lors de la création de la scène.", ERREUR);
+		throw ExceptionPerso("Erreur lors de la crÃ©ation de la scÃ¨ne.", ERREUR);
 	}
+
+	mpRoot->addFrameListener(mpSoundMgr);
+
+	mpSoundMgr->loadSound("media/fmod/music/ambiance_ballade.mp3", "ballade");
+	mpSoundMgr->playLoadedSound("ballade");
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting rendering loop...");
 	infiniteLoop(); //Boucle de rendu
@@ -187,7 +205,7 @@ bool AppMain::initOGRE()
 
 	String archName, secName, typeName;
 
-	while (sectionI.hasMoreElements())  //Tant qu'il reste des sections à lire
+	while (sectionI.hasMoreElements())  //Tant qu'il reste des sections Ã  lire
 	{
 		secName = sectionI.peekNextKey();
 		ConfigFile::SettingsMultiMap *pSettingsMap = sectionI.getNext();
@@ -203,25 +221,25 @@ bool AppMain::initOGRE()
 		}
 	}
 
-	/* Si on ne parvient pas à charger un fichier de config pour l'API de rendu, ni à lancer le dialogue de configuration, on quitte */
+	/* Si on ne parvient pas Ã  charger un fichier de config pour l'API de rendu, ni Ã  lancer le dialogue de configuration, on quitte */
 	if (!(mpRoot->restoreConfig() || mpRoot->showConfigDialog()))
 	{
 		return false;
 	}
 
-	/* Initialise la fenêtre de rendu avec son titre */
-	mpWindow = mpRoot->initialise(true, "Projet SAM");
+	/* Initialise la fenÃªtre de rendu avec son titre */
+	mpWindow = mpRoot->initialise(true, "Light of Paladin");
 
-	/* Niveau de mipMap (1x1x1) */
+	/* Niveau de mipMap (1x1) */
 	TextureManager::getSingleton().setDefaultNumMipmaps(MIP_UNLIMITED);
 	ResourceGroupManager::getSingleton().initialiseAllResourceGroups(); //On charge tout et on calcule les niveaux de mipMap
 
-	/* Création du scène manager */
-	mpSceneMgr = mpRoot->createSceneManager(ST_EXTERIOR_FAR, "SceneManager");
+	/* CrÃ©ation du scÃ¨ne manager */
+	mpSceneMgr = mpRoot->createSceneManager("OctreeSceneManager", "SceneManager");
 
 	/* Activation du filtrage anisotropique, niveau 8 */
 	MaterialManager::getSingleton().setDefaultTextureFiltering(TFO_ANISOTROPIC);
-	MaterialManager::getSingleton().setDefaultAnisotropy(8);
+	MaterialManager::getSingleton().setDefaultAnisotropy(16);
 
 	return true;
 }
@@ -248,11 +266,11 @@ bool AppMain::createBase()
 
 	if (mpRoot->getRenderSystem()->getCapabilities()->hasCapability(RSC_INFINITE_FAR_PLANE))
 	{
-		mpCam->setFarClipDistance(50000);
+		mpCam->setFarClipDistance(TAILLE_MONDE);
 	}
 	else
 	{
-		mpCam->setFarClipDistance(25000);
+		mpCam->setFarClipDistance(2000);
 	}
 
 	Viewport *vp = mpWindow->addViewport(mpCam);
@@ -288,16 +306,16 @@ bool AppMain::createTerrain()
 	pSoleil->setDiffuseColour(ColourValue(0.8f, 0.68f, 0.73f));
 	pSoleil->setSpecularColour(ColourValue(0.8f, 0.68f, 0.73f));
 
-	mpTerrain = new GestionnaireTerrain(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport(), mpRoot, mpHkWorld);
+	mpTerrain = new TerrainMgr(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport(), mpRoot, mpHkWorld);
 
 	//boost::thread ThTerrainCreationHavok(&AppMain::createTerrainHavokMultiThreaded, this);
 
 	mpRoot->addFrameListener(mpTerrain->getPtrChunk());
 
-	mpWater = new Eau(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
+	mpWater = new WaterMgr(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
 	mpRoot->addFrameListener(mpWater);
 
-	mpWater->setHauteur(0.0f);
+	mpWater->setHauteur(150.0f);
 
 	// Create water
 	mpWater->create();
@@ -314,7 +332,7 @@ bool AppMain::createTerrain()
 	//Create a new TreeLoader3D object first
 	Forests::TreeLoader3D *treeLoader = new Forests::TreeLoader3D(mpTrees, Forests::TBounds(0, 0, 10000, 10000));
 
-	Entity *pEnt1 = mpSceneMgr->createEntity("tree", "arbre.mesh"), *pEnt2 = mpSceneMgr->createEntity("lila", "lila.mesh"), *pEnt3 = mpSceneMgr->createEntity("apple tree", "pommier.mesh");
+	Entity *pEnt1 = mpSceneMgr->createEntity("tree", "bouleau.mesh"), *pEnt2 = mpSceneMgr->createEntity("lila", "lila.mesh"), *pEnt3 = mpSceneMgr->createEntity("apple tree", "pommier.mesh");
 
 	Entity* vege[] = {pEnt1, pEnt2, pEnt3};
 
@@ -357,9 +375,9 @@ bool AppMain::createPersonnage()
 	pNodeRylai->scale(Vector3(10.0, 10.0, 10.0));
 	pNodeRylai->attachObject(pEnt2);
 
-	Entity *pEnt3 = mpSceneMgr->createEntity("tux", "palace.mesh");
-	SceneNode *pNodeTux = mpSceneMgr->getRootSceneNode()->createChildSceneNode("nodeTux", Vector3(200.0f, 500.0f, 200.0f));
-	pNodeTux->setScale(100.0f, 100.0f, 100.0f);
+	Entity *pEnt3 = mpSceneMgr->createEntity("palace", "palace.mesh");
+	SceneNode *pNodeTux = mpSceneMgr->getRootSceneNode()->createChildSceneNode("nodePalace", Vector3(800.0f, 1500.0f, 800.0f));
+	pNodeTux->setScale(10.0f, 10.0f, 10.0f);
 	pNodeTux->attachObject(pEnt3);
 
 	ParticleSystem* sunParticle = mpSceneMgr->createParticleSystem("Boule de feu", "Particule/FireBall");
@@ -375,7 +393,7 @@ bool AppMain::createPersonnage()
 
 bool AppMain::createLight()
 {
-	mpLum = new GestionnaireLight(mpSceneMgr, mpSceneMgr->getLight("soleil"), mpSky, mpWater, ColourValue(0.8f, 0.8f, 0.8f));
+	mpLum = new LightMgr(mpSceneMgr, mpSceneMgr->getLight("soleil"), mpSky, mpWater, ColourValue(0.8f, 0.8f, 0.8f));
 
 	mpRoot->addFrameListener(mpLum);
 
@@ -390,6 +408,9 @@ void AppMain::infiniteLoop()
 	GameConsole* p = new GameConsole(mpCeguiMgr);
 	p->CreateCEGUIWindow();
 
+	Epee e(nullptr, 100);
+
+	std::cout << e;
 
 	/* test */
 	try
@@ -456,8 +477,27 @@ Personnage* AppMain::getPersonnage(std::string const& nom) const
 	}
 	else
 	{
-		std::string mesg = nom+": "+"Ce personnage n'existe pas. Opération abandonnée.";
+		std::string mesg = nom+": "+"Ce personnage n'existe pas. OpÃ©ration abandonnÃ©e.";
 		throw ExceptionPerso(mesg.c_str(), INFO);
 	}
 }
 
+FMODSoundMgr* AppMain::getFMODSoundMgr() const
+{
+	return mpSoundMgr;
+}
+
+AppMain* AppMain::getInstance()
+{
+	if (mpsUniqueInstance == nullptr)
+	{
+		mpsUniqueInstance = new AppMain;
+	}
+	
+	return mpsUniqueInstance;
+}
+
+void AppMain::destroy()
+{
+		delete mpsUniqueInstance;
+}

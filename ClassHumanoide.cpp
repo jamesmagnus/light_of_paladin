@@ -1,4 +1,4 @@
-#include "ClassHumanoide.h"
+﻿#include "ClassHumanoide.h"
 
 Humanoide::Humanoide(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom):EntiteVivante(pNode, IsVisible, vie, nom)
 {
@@ -8,7 +8,7 @@ Humanoide::~Humanoide()
 {
 }
 
-/* Surcharge des op�rateurs externes */
+/* Surcharge des opérateurs externes */
 
 #ifdef _DEBUG
 /* << */

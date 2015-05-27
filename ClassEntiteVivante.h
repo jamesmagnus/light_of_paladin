@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Affichable.h"
 
@@ -9,8 +9,8 @@ namespace Ogre
 
 class Inventaire;
 
-/* Classe de base abstraite pour les entités vivantes du jeu */
-/* Sémantique d'entité */
+/* Classe de base abstraite pour les entitÃ©s vivantes du jeu */
+/* SÃ©mantique d'entitÃ© */
 class EntiteVivante: public Affichable
 {
 protected:
@@ -21,16 +21,16 @@ protected:
 public:
 
 	/* Constructeur */
-	/* pNode, adresse du noeud de scène lié à l'objet */
-	/* IsVisible, true si l'objet doit être rendu */
-	/* vie, la vie de l'entité */
-	/* nom, le nom de l'entité */
+	/* pNode, adresse du noeud de scÃ¨ne liÃ© Ã  l'objet */
+	/* IsVisible, true si l'objet doit Ãªtre rendu */
+	/* vie, la vie de l'entitÃ© */
+	/* nom, le nom de l'entitÃ© */
 	EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom="DefaultName");
 
 	/* Destructeur */
 	virtual ~EntiteVivante();
 
-	/* Clonage, méthode virtuelle pure */
+	/* Clonage, mÃ©thode virtuelle pure */
 	virtual EntiteVivante* clone() const override=0;
 
 #ifdef _DEBUG
@@ -40,7 +40,7 @@ public:
 };
 
 
-/* Surcharge des opérateurs externes */
+/* Surcharge des opÃ©rateurs externes */
 
 #ifdef _DEBUG
 /* << */

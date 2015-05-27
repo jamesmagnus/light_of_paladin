@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ClassConsommable.h"
 
@@ -8,9 +8,9 @@ public:
 
     /* Constructeur */
     /* pNode, l'adresse du noeud de Ogre */
-    /* prix, poid, nom, caractéristiques de l'item */
-    /* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
-    /* IsVisible, true si l'item doit être rendu par Ogre */
+    /* prix, poid, nom, caractÃ©ristiques de l'item */
+    /* IsUnique, true si l'item ne peut se trouver 2 fois dans un mÃªme inventaire, false par dÃ©faut */
+    /* IsVisible, true si l'item doit Ãªtre rendu par Ogre */
     Ingredient(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string const& nom="defaultIngredient", bool IsUnique=false, bool IsVisible=true);
 
     /* Destructeur */

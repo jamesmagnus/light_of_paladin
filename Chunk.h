@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <utility>
 
@@ -7,7 +7,7 @@
 
 #include <boost/noncopyable.hpp>
 
-class GestionnaireTerrain;
+class TerrainMgr;
 class hkpRigidBody;
 
 /* Classe qui représente un chunk de terrain, englobe un hkpRigidBody */
@@ -20,7 +20,7 @@ class Chunk: private boost::noncopyable
  	/* Constructeur */
  	/* pTerrainMgr, adresse du gestionnaire de terrain */
  	/* pos, position en x et y du chunk à créer, < MAX_CHUNK_COO */
- 	Chunk(GestionnaireTerrain* pTerrainMgr, std::pair<int, int>  const& pos);
+ 	Chunk(TerrainMgr* pTerrainMgr, std::pair<int, int>  const& pos);
 
  	/* Destructeur */
  	~Chunk();
@@ -52,7 +52,7 @@ class Chunk: private boost::noncopyable
 
  	bool mIsBodyInMemory;
  	hkpRigidBody* mpRigidBody;
-	GestionnaireTerrain* mpTerrainMgr;
+	TerrainMgr* mpTerrainMgr;
 	std::pair<int, int> mPos;
 	Ogre::Real mAverageHeight;
 };

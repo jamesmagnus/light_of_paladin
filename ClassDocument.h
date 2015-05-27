@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
-#include "ClassItem.h"
+#include "ClassEnchante.h"
 
-/* Classe abstraite pour gérer créer les différents documents du jeu */
-/* Sémantique d'entité */
-class Document: public Item
+/* Classe abstraite pour gÃ©rer crÃ©er les diffÃ©rents documents du jeu */
+/* SÃ©mantique d'entitÃ© */
+class Document: public Enchante
 {
 private:
 	std::string mContenu;
@@ -14,10 +14,11 @@ public:
 
 	/* Constructeur */
 	/* pNode, l'adresse du noeud de Ogre */
-	/* prix, poid, nom, caractéristiques de l'item */
-	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
-	/* IsVisible, true si l'item doit être rendu par Ogre */
-	Document(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string const& nom="defaultDocument", bool IsUnique=false, bool IsVisible=true);
+	/* prix, poid, nom, caractÃ©ristiques de l'item */
+	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un mÃªme inventaire, false par dÃ©faut */
+	/* IsVisible, true si l'item doit Ãªtre rendu par Ogre */
+	/* pEnchantement, pointeur vers un sort qui constitue l'enchantement du document ou nullptr si pas d'enchantement */
+	Document(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string const& nom="defaultDocument", bool IsUnique=false, bool IsVisible=true, Sort *pEnchantement=nullptr);
 
 	/* Modifie le titre du document */
 	/* titre, une std::string */
@@ -34,18 +35,10 @@ public:
 	std::string const& getContenu() const;
 
 #ifdef _DEBUG
-	/* Affiche des informations sur l'objet dans la console, DEBUG , méthode virtuelle pure*/
+	/* Affiche des informations sur l'objet dans la console, DEBUG , mÃ©thode virtuelle pure*/
 	virtual void afficheDebug(std::ostream& rOst) const override=0;
 #endif
 
 	/* Destructeur */
 	virtual ~Document();
 };
-
-
-/* Surcharge des opérateurs externes */
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Document const& obj);
-#endif

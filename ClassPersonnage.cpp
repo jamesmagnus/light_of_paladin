@@ -1,4 +1,4 @@
-#include "ClassPersonnage.h"
+﻿#include "ClassPersonnage.h"
 #include "ClassInventaire.h"
 #include "ClassArme.h"
 

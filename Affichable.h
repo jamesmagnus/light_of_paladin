@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <iostream>
 #include <boost/noncopyable.hpp>
@@ -8,8 +8,8 @@ namespace Ogre
 	class SceneNode;
 }
 
-/* Classe abstraite servant de base à tous les éléments affichables du jeu */
-/* Sémantique d'entité, hérite de boost::noncopyable */
+/* Classe abstraite servant de base Ã  tous les Ã©lÃ©ments affichables du jeu */
+/* SÃ©mantique d'entitÃ©, hÃ©rite de boost::noncopyable */
 class Affichable: private boost::noncopyable
 {
 protected:
@@ -19,18 +19,18 @@ protected:
 public:
 
 	/* Constructeur */
-	/* pNode, adresse du noeud de scène lié à l'objet */
-	/* IsVisible, true si l'objet doit être rendu, true par défaut */
+	/* pNode, adresse du noeud de scÃ¨ne liÃ© Ã  l'objet */
+	/* IsVisible, true si l'objet doit Ãªtre rendu, true par dÃ©faut */
 	Affichable(Ogre::SceneNode *pNode, bool IsVisible=true);
 
-	/* Clonage, méthode virtuelle pure */
+	/* Clonage, mÃ©thode virtuelle pure */
 	virtual Affichable* clone() const =0;
 
 	/* Destructeur */
-	/* Le noeud de scène n'est pas détruit */
+	/* Le noeud de scÃ¨ne n'est pas dÃ©truit */
 	virtual ~Affichable();
 
-	/* Modifie l'état d'affichage */
+	/* Modifie l'Ã©tat d'affichage */
 	void setVisibility(bool visible);
 
 	/* Renvoie true si l'objet est rendu par Ogre */
@@ -50,7 +50,7 @@ public:
 	
 };
 
-/* Surcharge opérateurs externes */
+/* Surcharge opÃ©rateurs externes */
 
 #ifdef _DEBUG
 /* << */

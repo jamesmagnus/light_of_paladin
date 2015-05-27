@@ -1,4 +1,4 @@
-#include "Chunk.h"
+ï»¿#include "Chunk.h"
 
 #include "Structures.h"
 #include "HeightFieldShape.h"
@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Chunk::Chunk(GestionnaireTerrain* pTerrainMgr, pair<int, int> const& pos)
+Chunk::Chunk(TerrainMgr* pTerrainMgr, pair<int, int> const& pos)
 {
 	mpTerrainMgr = pTerrainMgr;
 	mIsBodyInMemory = false;
@@ -35,12 +35,12 @@ bool Chunk::loadBody()
 
 		if (pTerrainShape == nullptr)
 		{
-			string mes = "Impossible de créer le modèle de terrain. Chunk: (" + to_string(mPos.first) + ',' + to_string(mPos.second) + ") dans la grille du monde";
+			string mes = "Impossible de crÃ©er le modÃ¨le de terrain. Chunk: (" + to_string(mPos.first) + ',' + to_string(mPos.second) + ") dans la grille du monde";
 			throw ExceptionPerso(mes.c_str(), ERREUR);
 		}
 	
 		hkpRigidBodyCinfo bodyInfo;
-		bodyInfo.m_motionType = hkpMotion::MOTION_FIXED; //Décor
+		bodyInfo.m_motionType = hkpMotion::MOTION_FIXED; //DÃ©cor
 		bodyInfo.m_position= hkVector4(static_cast<hkFloat32>(mPos.first*TAILLE_CHUNK), 0.0f, static_cast<hkFloat32>(mPos.second*TAILLE_CHUNK));
 		bodyInfo.m_shape = pTerrainShape;
 		bodyInfo.m_friction = 0.3f;
@@ -49,7 +49,7 @@ bool Chunk::loadBody()
 
 		if (mpRigidBody == nullptr)
 		{
-			string mes = "Impossible de créer le chunk. Chunk: (" + to_string(mPos.first) + ',' + to_string(mPos.second) + ") dans la grille du monde";
+			string mes = "Impossible de crÃ©er le chunk. Chunk: (" + to_string(mPos.first) + ',' + to_string(mPos.second) + ") dans la grille du monde";
 			throw ExceptionPerso(mes.c_str(), ERREUR);
 		}
 
@@ -88,7 +88,7 @@ void Chunk::destroyBody()
 	{
 		if (mpRigidBody->getReferenceCount() != 1)
 		{
-			string mes = "Impossible de supprimer le chunk, encore utilisé ... Chunk: (" + to_string(mPos.first) + ',' + to_string(mPos.second) + ") dans la grille du monde";
+			string mes = "Impossible de supprimer le chunk, encore utilisÃ© ... Chunk: (" + to_string(mPos.first) + ',' + to_string(mPos.second) + ") dans la grille du monde";
 			throw ExceptionPerso(mes.c_str() ,ERREUR);
 		}
 

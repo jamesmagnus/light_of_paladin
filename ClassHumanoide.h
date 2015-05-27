@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ClassEntiteVivante.h"
 
-/* Classe abstraite pour gérer les humanoïdes, sémantique d'entité */
+/* Classe abstraite pour gÃ©rer les humanoÃ¯des, sÃ©mantique d'entitÃ© */
 class Humanoide :public EntiteVivante
 {
 private:
@@ -11,16 +11,16 @@ private:
 public:
 
 	/* Constructeur */
-	/* pNode, adresse du noeud de scène lié à l'objet */
-	/* IsVisible, true si l'objet doit être rendu */
-	/* vie, la vie de l'entité */
-	/* nom, le nom de l'entité */
+	/* pNode, adresse du noeud de scÃ¨ne liÃ© Ã  l'objet */
+	/* IsVisible, true si l'objet doit Ãªtre rendu */
+	/* vie, la vie de l'entitÃ© */
+	/* nom, le nom de l'entitÃ© */
 	Humanoide(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom="DefaultHuma");
 
 	/* Destructeur */
 	virtual ~Humanoide();
 
-	/* Clonage, méthode virtuelle pure */
+	/* Clonage, mÃ©thode virtuelle pure */
 	virtual Humanoide* clone() const override=0;
 
 #ifdef _DEBUG
@@ -30,7 +30,7 @@ public:
 };
 
 
-/* Surcharge des opérateurs externes */
+/* Surcharge des opÃ©rateurs externes */
 
 #ifdef _DEBUG
 /* << */

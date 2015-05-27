@@ -1,4 +1,4 @@
-#include "ClassEntiteVivante.h"
+﻿#include "ClassEntiteVivante.h"
 
 
 EntiteVivante::EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom): Affichable(pNode, IsVisible)
@@ -12,7 +12,7 @@ EntiteVivante::~EntiteVivante()
 {
 }
 
-/* Surcharge des op�rateurs externes */
+/* Surcharge des opérateurs externes */
 
 #ifdef _DEBUG
 /* << */

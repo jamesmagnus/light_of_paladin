@@ -1,11 +1,11 @@
-#include "HeightFieldShape.h"
-#include "GestionnaireTerrain.h"
+﻿#include "HeightFieldShape.h"
+#include "TerrainMgr.h"
 
 #include <algorithm>
 
 #include <OgreTerrainGroup.h>
 
-HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, std::pair<int, int> const& coo): hkpSampledHeightFieldShape(rInfo)
+HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, TerrainMgr const *pTerrains, std::pair<int, int> const& coo): hkpSampledHeightFieldShape(rInfo)
 {
 	mpHeightData = new float*[TAILLE_CHUNK];
 

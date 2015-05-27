@@ -1,8 +1,8 @@
-//{{NO_DEPENDENCIES}}
+﻿//{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by JeuRPGSamOgre.rc
 
-// Valeurs par d�faut suivantes des nouveaux objets
+// Valeurs par défaut suivantes des nouveaux objets
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS

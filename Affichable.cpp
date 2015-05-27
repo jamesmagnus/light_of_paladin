@@ -1,4 +1,4 @@
-#include "Affichable.h"
+ï»¿#include "Affichable.h"
 
 using namespace Ogre;
 
@@ -10,7 +10,7 @@ Affichable::Affichable(SceneNode *pNode, bool IsVisible)
 
 Affichable::~Affichable()
 {
-    mpNoeud = nullptr;     //On ne détruit pas le noeud de scène, il est géré par Ogre
+    mpNoeud = nullptr;     //On ne dÃ©truit pas le noeud de scÃ¨ne, il est gÃ©rÃ© par Ogre
 }
 
 void Affichable::setVisibility(bool visible)
@@ -49,7 +49,7 @@ void Affichable::afficheDebug(std::ostream& rOst) const
 }
 #endif
 
-/* Surcharge des opérateurs externes */
+/* Surcharge des opÃ©rateurs externes */
 
 #ifdef _DEBUG
 /* << */

@@ -1,10 +1,10 @@
-/* Méthodes de AppMain relatives à Havok */
+ï»¿/* MÃ©thodes de AppMain relatives Ã  Havok */
 
 #include "AppMain.h"
 #include "Structures.h"
 #include "enumerations.h"
 #include "HeightFieldShape.h"
-#include "GestionnaireTerrain.h"
+#include "TerrainMgr.h"
 
 #include <OgreLogManager.h>
 #include <OgreVector2.h>
@@ -29,9 +29,9 @@ bool AppMain::initHavok()
 {
 	Ogre::LogManager::getSingletonPtr()->logMessage("**** Init Havok ****");
 
-	hkMemoryRouter* pMemoryRouter = hkMemoryInitUtil::initDefault(hkMallocAllocator::m_defaultMallocAllocator, hkMemorySystem::FrameInfo(1024*5*1024)); // Alloue 5 mB de mémoire pour le solveur
+	hkMemoryRouter* pMemoryRouter = hkMemoryInitUtil::initDefault(hkMallocAllocator::m_defaultMallocAllocator, hkMemorySystem::FrameInfo(1024*5*1024)); // Alloue 5 mB de mÃ©moire pour le solveur
 
-	hkBaseSystem::init(pMemoryRouter, errorReportHavok);	//Initialisation de Havok et de ses sous-systèmes
+	hkBaseSystem::init(pMemoryRouter, errorReportHavok);	//Initialisation de Havok et de ses sous-systÃ¨mes
 
 	hkpWorldCinfo HkWorldInfo;
 

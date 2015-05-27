@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <Physics2012/Collide/hkpCollide.h>
 #include <Physics2012/Collide/Shape/HeightField/SampledHeightField/hkpSampledHeightFieldShape.h>
@@ -7,14 +7,14 @@
 
 #include "Structures.h"
 
-class GestionnaireTerrain;
+class TerrainMgr;
 class hkpSampledHeightFieldBaseCinfo;
 class CollideSpheresInput;
 class SphereCollisionOutput;
 
-/* Classe pour représenter un chunk de terrain dans Havok */
-/* Hérite de hkSampleHeightFieldShape */
-/* Sémantique d'entité, hérite boost::noncopyable */
+/* Classe pour reprÃ©senter un chunk de terrain dans Havok */
+/* HÃ©rite de hkSampleHeightFieldShape */
+/* SÃ©mantique d'entitÃ©, hÃ©rite boost::noncopyable */
 class HeightFieldShape: public hkpSampledHeightFieldShape, private boost::noncopyable
 {
 private:
@@ -23,22 +23,22 @@ private:
 public:
 
 	/* Constructeur */
-	/* rInfo, référence sur une structure qui décrit les paramètres de la HeightMap */
+	/* rInfo, rÃ©fÃ©rence sur une structure qui dÃ©crit les paramÃ¨tres de la HeightMap */
 	/* pTerrain, adresse du gestionnaire de terrains */
-	/* cooHeightField, paire de coordonnées (en chunk) de la zone de terrain à créer */
-	HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, GestionnaireTerrain const *pTerrains, std::pair<int, int> const& coo);
+	/* cooHeightField, paire de coordonnÃ©es (en chunk) de la zone de terrain Ã  crÃ©er */
+	HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, TerrainMgr const *pTerrains, std::pair<int, int> const& coo);
 
 	/* Destructeur */
 	virtual ~HeightFieldShape();
 
-	/* Récupération de la hauteur du terrain */
+	/* RÃ©cupÃ©ration de la hauteur du terrain */
 	HK_FORCE_INLINE hkReal getHeightAtImpl(int x, int z) const;
 
-	/* Sens de découpage des rectangles en triangles */
+	/* Sens de dÃ©coupage des rectangles en triangles */
 	HK_FORCE_INLINE hkBool getTriangleFlipImpl() const;
 
-	/* Détermine la collision avec une sphère */
-	/* Fonction par défaut de Havok */
+	/* DÃ©termine la collision avec une sphÃ¨re */
+	/* Fonction par dÃ©faut de Havok */
 	virtual void collideSpheres(CollideSpheresInput const& input, SphereCollisionOutput* outputArray) const;
 
 	/* Renvoie la hauteur minimale et maximale du terrain */

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Structures.h"
 
@@ -6,6 +6,8 @@
 #include <OgreMath.h>
 #include <OgreFrameListener.h>
 #include <OgreWindowEventUtilities.h>
+
+#include <boost/noncopyable.hpp>
 
 #include <OIS/OISKeyboard.h>
 #include <OIS/OISMouse.h>
@@ -25,34 +27,36 @@ namespace OIS
 	class Keyboard;
 }
 
-/* Classe pour gérer les entrées utilisateurs */
-/* Hérite de Ogre::FrameListener et Ogre::WindowEventListener */
-class InputListener: public Ogre::FrameListener, Ogre::WindowEventListener
+/* Classe pour gÃ©rer les entrÃ©es utilisateurs */
+/* HÃ©rite de Ogre::FrameListener et Ogre::WindowEventListener */
+/* Classe finale, non dÃ©rivable */
+/* SÃ©mantique d'entitÃ©, hÃ©rite de boost::noncopyable */
+class InputListener: public Ogre::FrameListener, Ogre::WindowEventListener, private boost::noncopyable
 {
 public:
 
     /* Constructeur */
-    /* pWindow, pointeur sur la fenêtre de rendue de Ogre */
-    /* pCam, pointeur sur la caméra */
+    /* pWindow, pointeur sur la fenÃªtre de rendue de Ogre */
+    /* pCam, pointeur sur la camÃ©ra */
     InputListener(Ogre::RenderWindow *pWindow, Ogre::Camera *pCam, CeguiMgr *pCEGUI);
 
     /* Destructeur */
     virtual ~InputListener();
 
-    /* S'exécute pendant le rendu */
-    /* Renvoie false si le programme doit s'arrêter */
+    /* S'exÃ©cute pendant le rendu */
+    /* Renvoie false si le programme doit s'arrÃªter */
     bool frameRenderingQueued(Ogre::FrameEvent const& evt) override;
 
-    /* Initialise OIS, appelée par le constructeur */
+    /* Initialise OIS, appelÃ©e par le constructeur */
     void startOIS();
 
-    /* Appelée lors du redimensionnement de la fenêtre */
+    /* AppelÃ©e lors du redimensionnement de la fenÃªtre */
     virtual void windowResized(Ogre::RenderWindow* rw) override;
 
-    /* Appelée lors de la fermeture de la fenêtre */
+    /* AppelÃ©e lors de la fermeture de la fenÃªtre */
     virtual bool windowClosing(Ogre::RenderWindow* rw) override;
 
-	/* Détruit les écouteurs de périphériques d'OIS et entraine le retour de false au prochain appel de frameRenderingQueued() */
+	/* DÃ©truit les Ã©couteurs de pÃ©riphÃ©riques d'OIS et entraine le retour de false au prochain appel de frameRenderingQueued() */
 	void clearInputListeners();
 
 protected:
@@ -86,11 +90,11 @@ public:
 	/* Destructeur */
 	~KeyBoardEventListener();
 
-	/* Callback pour les événements du clavier */
+	/* Callback pour les Ã©vÃ©nements du clavier */
 	virtual bool keyPressed(OIS::KeyEvent const& arg) override;
 	virtual bool keyReleased(OIS::KeyEvent const& arg) override;
 
-	/* Récupère la structure indiquant sur quels axes un déplacement est en cours */
+	/* RÃ©cupÃ¨re la structure indiquant sur quels axes un dÃ©placement est en cours */
 	Vector3Move const& getMove() const; 
 };
 
@@ -108,7 +112,7 @@ public:
 	/* Destructeur */
 	~MouseEventListener();
 
-	/* Callback pour les événements de la souris */
+	/* Callback pour les Ã©vÃ©nements de la souris */
 	virtual bool mousePressed(OIS::MouseEvent const& arg, OIS::MouseButtonID id) override;
 	virtual bool mouseReleased(OIS::MouseEvent const& arg, OIS::MouseButtonID id) override;
 	virtual bool mouseMoved(OIS::MouseEvent const& arg);

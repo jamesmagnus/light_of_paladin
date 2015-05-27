@@ -1,4 +1,4 @@
-#include "CeguiMgr.h"
+﻿#include "CeguiMgr.h"
 #include "GameConsole.h"
 
 #include <CEGUI/CEGUI.h>
@@ -30,21 +30,27 @@ CeguiMgr::~CeguiMgr()
 
 void CeguiMgr::injectOISKeyEvent(bool IsDown, OIS::KeyEvent const& keyEvent)
 {
-	if (IsDown)
+	if (mIsMenuMode)
 	{
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectKeyDown((CEGUI::Key::Scan)keyEvent.key);
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectChar(keyEvent.text);
-	} 
-	else
-	{
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectKeyUp((CEGUI::Key::Scan)keyEvent.key);
+		if (IsDown)
+		{
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectKeyDown((CEGUI::Key::Scan)keyEvent.key);
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectChar(keyEvent.text);
+		} 
+		else
+		{
+			CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectKeyUp((CEGUI::Key::Scan)keyEvent.key);
+		}
 	}
 }
 
 void CeguiMgr::injectOISMouseRotation(float relativeX, float relativeY, float elapsedTime)
 {
-	CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectMouseMove(relativeX, relativeY);
-	CEGUI::System::getSingletonPtr()->injectTimePulse(elapsedTime);
+	if (mIsMenuMode)
+	{
+		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().injectMouseMove(relativeX, relativeY);
+		CEGUI::System::getSingletonPtr()->injectTimePulse(elapsedTime);
+	}
 }
 
 void CeguiMgr::loadScheme(std::string const& scheme)
@@ -54,46 +60,49 @@ void CeguiMgr::loadScheme(std::string const& scheme)
 
 void CeguiMgr::injectOISMouseButton(bool IsDown, OIS::MouseButtonID buttonID)
 {
-	if (IsDown == true)
+	if (mIsMenuMode)
 	{
-		switch (buttonID)
+		if (IsDown == true)
 		{
-		case OIS::MB_Left:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
-			break;
-		case OIS::MB_Middle:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::MiddleButton);
-			break;
-		case OIS::MB_Right:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
-			break;
-		case OIS::MB_Button3:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::X1Button);
-			break;
-		case OIS::MB_Button4:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::X2Button);
-			break;
+			switch (buttonID)
+			{
+			case OIS::MB_Left:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::LeftButton);
+				break;
+			case OIS::MB_Middle:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::MiddleButton);
+				break;
+			case OIS::MB_Right:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::RightButton);
+				break;
+			case OIS::MB_Button3:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::X1Button);
+				break;
+			case OIS::MB_Button4:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::X2Button);
+				break;
+			}
 		}
-	}
-	else
-	{
-		switch (buttonID)
+		else
 		{
-		case OIS::MB_Left:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
-			break;
-		case OIS::MB_Middle:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::MiddleButton);
-			break;
-		case OIS::MB_Right:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
-			break;
-		case OIS::MB_Button3:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::X1Button);
-			break;
-		case OIS::MB_Button4:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::X2Button);
-			break;
+			switch (buttonID)
+			{
+			case OIS::MB_Left:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::LeftButton);
+				break;
+			case OIS::MB_Middle:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::MiddleButton);
+				break;
+			case OIS::MB_Right:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::RightButton);
+				break;
+			case OIS::MB_Button3:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::X1Button);
+				break;
+			case OIS::MB_Button4:
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::X2Button);
+				break;
+			}
 		}
 	}
 
@@ -116,6 +125,6 @@ bool CeguiMgr::shiftMode(bool const mode)
 
 void CeguiMgr::updateMode()
 {
-	//mpRenderer->setRenderingEnabled(mIsMenuMode);
-	CEGUI::System::getSingletonPtr()->setMutedState(true);
+	mpRenderer->setRenderingEnabled(mIsMenuMode);
+	CEGUI::System::getSingletonPtr()->setMutedState(!mIsMenuMode);
 }

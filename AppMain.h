@@ -1,18 +1,19 @@
-#pragma once
+Ôªø#pragma once
 
 #include <OgreVector3.h>
 
 #include "enumerations.h"
 
-class GestionnaireTerrain;
+class TerrainMgr;
 class Personnage;
 class Item;
 class Inventaire;
-class Eau;
-class GestionnaireLight;
+class WaterMgr;
+class LightMgr;
 class hkpWorld;
 class CeguiMgr;
 class InputListener;
+class FMODSoundMgr;
 
 namespace Ogre
 {
@@ -33,20 +34,25 @@ namespace Forests
 	class PagedGeometry;
 }
 
+/* Application du jeu */
+/* Singleton */
 class AppMain
 {
 private:
+
+	static AppMain *mpsUniqueInstance;
+
 	Ogre::Root *mpRoot;
 	Ogre::RenderWindow *mpWindow;
 	Ogre::SceneManager *mpSceneMgr;
 	Ogre::Camera *mpCam;
 
 	CeguiMgr *mpCeguiMgr;
-
-	GestionnaireTerrain *mpTerrain;
-	Eau *mpWater;
-	GestionnaireLight *mpLum;
+	TerrainMgr *mpTerrain;
+	WaterMgr *mpWater;
+	LightMgr *mpLum;
 	InputListener *mpListener;
+	FMODSoundMgr *mpSoundMgr;
 
 	SkyX::SkyX *mpSky;
 	Forests::PagedGeometry *mpTrees;
@@ -57,56 +63,68 @@ private:
 	std::map<std::string, Item*> mmapItem;
 	std::map<std::string, Inventaire*> mmapInventaire;
 
-public:
-
-	/* Constructeur */
+	/* Constructeur interne du singleton */
 	AppMain();
 
-	/* Destructeur */
+	/* Destructeur interne */
 	~AppMain();
 
+	/* Constructeur par copie interdit */
+	AppMain(AppMain const& rOriginal);
+
+	/* Op√©rateur d'affectation interdit */
+	AppMain& operator=(AppMain const& rOriginal);
+
+public:
+
+	/* Renvoie l'adresse de l'instance unique */
+	static AppMain* getInstance();
+
+	/* D√©truit l'unique instance */
+	static void destroy();
+
 	/* Lance le jeu */
-	/* Retourne toujours true (systËme d'exception si erreur) */
+	/* Retourne toujours true (syst√®me d'exception si erreur) */
 	void start();
 
-	/* CrÈe la scËne, appelÈe par start() */
+	/* Cr√©e la sc√®ne, appel√©e par start() */
 	/* Retourne false en cas d'erreur */
 	bool createScene();
 
-	/* CrÈe les ÈlÈments basiques, viewport, camÈra, Èclairage ambient */
+	/* Cr√©e les √©l√©ments basiques, viewport, cam√©ra, √©clairage ambient */
 	/* Retourne false en cas d'erreur */
 	bool createBase();
 
-	/* CrÈe le terrain */
-	/* AppelÈe par createScene() */
+	/* Cr√©e le terrain */
+	/* Appel√©e par createScene() */
 	/* Retourne false en cas d'erreur */
 	bool createTerrain();
 
-	/* CrÈe le ciel */
-	/* AppelÈe par createScene() */
+	/* Cr√©e le ciel */
+	/* Appel√©e par createScene() */
 	/* Retourne false en cas d'erreur */
 	bool createSky();
 
-	/* CrÈe les objets autres que les personnages */
-	/* AppelÈe par createScene() */
+	/* Cr√©e les objets autres que les personnages */
+	/* Appel√©e par createScene() */
 	/* Retourne false en cas d'erreur */
 	bool createObject();
 
-	/* CrÈe les personnages */
-	/* AppelÈe par createScene() */
+	/* Cr√©e les personnages */
+	/* Appel√©e par createScene() */
 	/* Retourne false en cas d'erreur */
 	bool createPersonnage();
 
-	/* CrÈe et enregistre le gestionnaire des lumiËres */
-	/* AppelÈe par createScene() */
+	/* Cr√©e et enregistre le gestionnaire des lumi√®res */
+	/* Appel√©e par createScene() */
 	/* Retourne false en cas d'erreur */
 	bool createLight();
 
-	/* Charge et initialise Ogre, appelÈe par start() */
+	/* Charge et initialise Ogre, appel√©e par start() */
 	/* Retourne false en cas d'erreur */
 	bool initOGRE();
 
-	/* Lance la boucle de rendu, appelÈe par start() */
+	/* Lance la boucle de rendu, appel√©e par start() */
 	void infiniteLoop();
 
 	/* Ajoute un nouveau Personnage */
@@ -115,9 +133,12 @@ public:
 
 	/* Retourne un personnage en fonction de son nom */
 	/* Renvoie un pointeur vers ce personnage */
-	/* LËve une exception sinon */
+	/* L√®ve une exception sinon */
 	Personnage* getPersonnage(std::string const& nom) const;
 
 	/* Initialise Havok */
 	bool initHavok();
+
+	/* Renvoie l'adresse du gestionnaire de son FMOD */
+	FMODSoundMgr* getFMODSoundMgr() const;
 };

@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 
 #include "ClassHumanoide.h"
 #include "enumerations.h"
@@ -12,7 +12,7 @@ class Arme;
 class Inventaire;
 class Item;
 
-/* Cette classe est utilisÈe pour gÈrer les personnages du jeu, sÈmantique d'entitÈ */
+/* Cette classe est utilis√©e pour g√©rer les personnages du jeu, s√©mantique d'entit√© */
 class Personnage: public Humanoide
 {
 protected:
@@ -24,9 +24,9 @@ protected:
 public:
 
     /* Constructeur */
-    /* pNode, adresse du noeud de scËne liÈ au personnage */
-    /* stat, tableau de int qui reprÈsente les compÈtences du personnage */
-    /* IsVisible, true si le personnage doit Ítre rendu par Ogre */
+    /* pNode, adresse du noeud de sc√®ne li√© au personnage */
+    /* stat, tableau de int qui repr√©sente les comp√©tences du personnage */
+    /* IsVisible, true si le personnage doit √™tre rendu par Ogre */
     /* nom, le nom du personnage */
     /* niveau, le niveau du personnage */
     /* XP, l'XP du personnage 0 -> 1000 */
@@ -44,22 +44,22 @@ public:
     /* Fait boire une potion de mana */
     bool boitPopoMana(EPopo type);
 
-    /* Inflige des dÈg‚ts au personnage */
-    /* nbDegat: quantitÈ de dÈg‚t brut */
-    /* type: type de dÈg‚t (physique, magique) */
+    /* Inflige des d√©g√¢ts au personnage */
+    /* nbDegat: quantit√© de d√©g√¢t brut */
+    /* type: type de d√©g√¢t (physique, magique) */
     void prendDegat(int nbDegat, EDegat type);
 
     /* Attaque un autre personnage */
-    /* rCible: rÈfÈrence vers la cible */
+    /* rCible: r√©f√©rence vers la cible */
     void attaque(Personnage& rCible) const;
 
     /* Permet de changer l'arme */
     /* nouvelleArme: std::string nom de la nouvelle arme */
-    /* Renvoie si le changement ‡ rÈussi */
+    /* Renvoie si le changement √† r√©ussi */
     bool changeArme(Arme *pNouvelleArme);
 
     /* Affecte un inventaire au personnage */
-    /* Renvoie true s'il n'y avait pas d'inventaire dÈj‡ liÈ, sinon false et l'inventaire n'est pas remplacer */
+    /* Renvoie true s'il n'y avait pas d'inventaire d√©j√† li√©, sinon false et l'inventaire n'est pas remplacer */
     bool setInventaire(Inventaire *pInventaire);
 
     /* Supprime l'inventaire du personnage mais l'objet continue d'exister */
@@ -67,21 +67,21 @@ public:
     bool supprInventaire();
 
     /* Permet au personnage de placer un objet dans son inventaire */
-    /* Renvoie l'ID de l'item ajoutÈ ou -1 si l'inventaire est plein */
+    /* Renvoie l'ID de l'item ajout√© ou -1 si l'inventaire est plein */
     int placerItem(Item& rItem);
     int placerItem(Item* const pItem);
 
     /* Renvoie un pointeur vers l'arme actuelle */
     Arme* quelleArme();
 
-    /* Renvoie la valeur des attaques physiques calculÈe ‡ partir de l'arme et des stats du personnage */
+    /* Renvoie la valeur des attaques physiques calcul√©e √† partir de l'arme et des stats du personnage */
     int valeurAttaqueBase() const;
 
     /* Vide l'inventaire mais il conserve sa taille max, appeler SetMax() pour la changer */
-    /* Retourne true s'il y avait un inventaire ‡ vider */
+    /* Retourne true s'il y avait un inventaire √† vider */
     bool viderInventaire();
 
-	/* Clonage, mÈthode virtuelle pure */
+	/* Clonage, m√©thode virtuelle pure */
 	virtual Personnage* clone() const override=0;
 
 #ifdef _DEBUG
@@ -90,7 +90,7 @@ public:
 #endif
 };
 
-/* Surcharge des opÈrateurs externes */
+/* Surcharge des op√©rateurs externes */
 
 #ifdef _DEBUG
 /* << */
