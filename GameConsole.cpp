@@ -1,5 +1,7 @@
-#include "GameConsole.h"
+﻿#include "GameConsole.h"
 #include "ExceptionPerso.h"
+#include "AppMain.h"
+#include "FMODSoundMgr.h"
 
 #include <OgreLogManager.h>
 
@@ -9,7 +11,7 @@ const std::set<std::string> GameConsole::msCommandes = GameConsole::staticSetIni
 
 const std::set<std::string> GameConsole::staticSetInit()
 {
-	const std::string tmp[] = {"say", "quit", "help", "dance", "tp", "invoke", "kill"};
+	const std::string tmp[] = {"say", "quit", "help", "dance", "tp", "invoke", "kill", "playSound"};
 	return std::set<std::string>(tmp, tmp + sizeof(tmp)/sizeof(tmp[0]));
 }
 
@@ -116,6 +118,10 @@ void GameConsole::ParseText(CEGUI::String msg)
 				outString.erase(outString.length()-2);
 
 				OutputText(outString, CEGUI::Colour(0.9f, 0.1f, 0.1f));
+			}
+			else if (command == "playSound")
+			{
+				AppMain::getInstance()->getFMODSoundMgr()->playLoadedSound(commandArgs);
 			}
 			else
 			{
