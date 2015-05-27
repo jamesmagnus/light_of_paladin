@@ -1,8 +1,8 @@
-#include "Lumiere.h"
+﻿#include "LightMgr.h"
 #include <SkyX.h>
 
 
-GestionnaireLight::GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, Eau* pEau, Ogre::ColourValue const& lumAmbiente)
+LightMgr::LightMgr(Ogre::SceneManager* pSceneMgr, Ogre::Light* pSoleil, SkyX::SkyX* pSky, WaterMgr* pEau, Ogre::ColourValue const& lumAmbiente)
 {
 	assert(pSoleil != nullptr && pSky != nullptr && pEau != nullptr);
 
@@ -13,16 +13,16 @@ GestionnaireLight::GestionnaireLight(Ogre::SceneManager* pSceneMgr, Ogre::Light*
 	mpSceneMgr = pSceneMgr;
 }
 
-GestionnaireLight::~GestionnaireLight()
+LightMgr::~LightMgr()
 {
 
 }
 
-bool GestionnaireLight::IsNuit() const
+bool LightMgr::IsNuit() const
 {
 	Ogre::Vector3 time = static_cast<SkyX::BasicController*>(mpSky->getController())->getTime();
 
-	if (time.x < time.y || time.x > time.z) // Il fait nuit avant le lever du soleil ou apr�s son coucher
+	if (time.x < time.y || time.x > time.z) // Il fait nuit avant le lever du soleil ou après son coucher
 	{
 		return true;
 	}
@@ -32,7 +32,7 @@ bool GestionnaireLight::IsNuit() const
 	}
 }
 
-bool GestionnaireLight::frameStarted(Ogre::FrameEvent const& rEvt)
+bool LightMgr::frameStarted(Ogre::FrameEvent const& rEvt)
 {
 	if (!IsNuit())
 	{
