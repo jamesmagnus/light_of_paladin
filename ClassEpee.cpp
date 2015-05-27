@@ -1,4 +1,4 @@
-#include "ClassEpee.h"
+ï»¿#include "ClassEpee.h"
 
 #include <string>
 
@@ -25,7 +25,7 @@ Epee* Epee::clone() const
 	return new Epee(mpNoeud, mDegat, mVitesse, mResistance, mPrix, mPoid, mNom, mIsUnique, mIsVisible);
 }
 
-bool Epee::canUse(Personnage *pJoueur) const 
+bool Epee::canUse(Personnage const& rJoueur) const 
 {
 	//TODO
 	return true;
@@ -33,28 +33,10 @@ bool Epee::canUse(Personnage *pJoueur) const
 
 bool Epee::compare(Item const& rSecondeEpee) const 
 {
-	/* D'après le RTTI l'Item passé en paramètre est une Epée */
+	/* D'aprÃ¨s le RTTI l'Item passÃ© en paramÃ¨tre est une EpÃ©e */
 
-	const Epee& rSecondeEpeeConvertie = dynamic_cast<Epee const&>(rSecondeEpee);
+	Epee const& rSecondeEpeeConvertie = dynamic_cast<Epee const&>(rSecondeEpee);
 
-	/* Leur id, leur état, leur affichage peuvent être différent mais le reste doit être identique */
-	return (mIsUnique == rSecondeEpeeConvertie.mIsUnique && 
-		mNom == rSecondeEpeeConvertie.mNom && 
-		mPoid == rSecondeEpeeConvertie.mPoid && 
-		mPrix == rSecondeEpeeConvertie.mPrix && 
-		mResistance == rSecondeEpeeConvertie.mResistance && 
-		mDegat == rSecondeEpeeConvertie.mDegat && 
-		mVitesse == rSecondeEpeeConvertie.mVitesse);
+	/* Leur id, leur Ã©tat, leur affichage peuvent Ãªtre diffÃ©rent mais le reste doit Ãªtre identique */
+	return (Arme::compare(rSecondeEpee));
 }
-
-/* Surcharge des opérateurs externes */
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Epee const& obj)
-{
-	obj.afficheDebug(rOst);
-
-	return rOst;
-}
-#endif

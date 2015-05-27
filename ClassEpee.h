@@ -1,40 +1,33 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ClassArme.h"
 
-/* Classe finale, gére les épées */
+/* Classe finale, gÃ©re les Ã©pÃ©es */
 class Epee:public Arme
 {
 public:
 
 	/* Constructeur */
 	/* pNode, adresse du noeud de Ogre */
-	/* prix, poid, nom, caractéristiques de l'item */
-	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
-	/* degat, vitesse, resistance, caractéristiques de l'épée */
-	/* IsVisible, true si l'épée doit être rendue par Ogre */
+	/* prix, poid, nom, caractÃ©ristiques de l'item */
+	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un mÃªme inventaire, false par dÃ©faut */
+	/* degat, vitesse, resistance, caractÃ©ristiques de l'Ã©pÃ©e */
+	/* IsVisible, true si l'Ã©pÃ©e doit Ãªtre rendue par Ogre */
 	Epee(Ogre::SceneNode *pNode, int degat, float vitesse=1.0f, float resistance=1.0f, int prix=0, float poid=1.0f, std::string const& nom="defaultWeapon", bool IsUnique=false, bool IsVisible=true);
 
 	virtual ~Epee();
 
-	/* Prédicat, renvoie true si les deux épées sont équivalentes (les mêmes sauf leur id) */
+	/* PrÃ©dicat, renvoie true si les deux Ã©pÃ©es sont Ã©quivalentes (les mÃªmes sauf leur id) */
 	virtual bool compare(Item const& rSecondeEpee) const override;
 
 	/* Clonage */
 	virtual Epee* clone() const override;
 
-	/* Le personnage peut-il s'équiper de cette épée */
-	virtual bool canUse(Personnage *pJoueur) const override;
+	/* Le personnage peut-il s'Ã©quiper de cette Ã©pÃ©e */
+	virtual bool canUse(Personnage const& rJoueur) const override;
 
 #ifdef _DEBUG
 	/* Affiche des informations sur l'objet dans la console, DEBUG */
 	virtual void afficheDebug(std::ostream& rOst) const override;
 #endif
 };
-
-/* Surcharge opérateurs externes */
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Epee const& obj);
-#endif
