@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Affichable.h"
 
 class Personnage;
 
-/* Classe abstraite qui sert de base à tous les objets du jeu */
-/* Sémantique d'entité */
+/* Classe abstraite qui sert de base Ã  tous les objets du jeu */
+/* SÃ©mantique d'entitÃ© */
 class Item: public Affichable
 {
 protected:
@@ -20,17 +20,17 @@ public:
 
 	/* Constructeur */
 	/* pNode, l'adresse du noeud de Ogre */
-	/* prix, poid, nom, caractéristiques de l'item */
-	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un même inventaire, false par défaut */
-	/* IsVisible, true si l'item doit être rendu par Ogre */
+	/* prix, poid, nom, caractÃ©ristiques de l'item */
+	/* IsUnique, true si l'item ne peut se trouver 2 fois dans un mÃªme inventaire, false par dÃ©faut */
+	/* IsVisible, true si l'item doit Ãªtre rendu par Ogre */
 	Item(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string const& nom="defaultItem", bool IsUnique=false, bool IsVisible=true);
 
 	/* Destructeur */
 	virtual ~Item();
 
 	/* Renvoie true si le joueur peut utiliser l'item */
-	/* Méthode virtuelle pure */
-	virtual bool canUse(Personnage *pJoueur) const = 0;
+	/* MÃ©thode virtuelle pure */
+	virtual bool canUse(Personnage const& rJoueur) const = 0;
 
 	/* Renvoie le prix de l'item */
 	int getPrix() const;
@@ -53,17 +53,17 @@ public:
 	/* Change le nom de l'item */
 	void setNom(std::string const& nom);
 
-	/* Renvoie true si l'item ne peut être 2 fois dans un même inventaire */
+	/* Renvoie true si l'item ne peut Ãªtre 2 fois dans un mÃªme inventaire */
 	bool getIsUnique() const;
 
-	/* Défini si un item peut être plusieurs fois dans un même inventaire */
+	/* DÃ©fini si un item peut Ãªtre plusieurs fois dans un mÃªme inventaire */
 	void setIsUnique(bool IsUnique);
 
-	/* Clonage, méthode virtuelle pure */
+	/* Clonage, mÃ©thode virtuelle pure */
 	virtual Item* clone() const =0;
 
-	/* Méthode virtuelle pure de comparaison entre deux objets */
-	virtual bool compare(Item const& secondItem) const =0;
+	/* MÃ©thode virtuelle de comparaison entre deux objets */
+	virtual bool compare(Item const& secondItem) const;
 
 #ifdef _DEBUG
 	/* Affiche des informations sur l'objet dans la console, DEBUG */
@@ -71,12 +71,7 @@ public:
 #endif
 };
 
-/* Surcharge des opérateurs externes */
+/* Surcharge des opÃ©rateurs externes */
 
 /* == */
-bool operator==(Item const& inv1, Item const& inv2);
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Item const& obj);
-#endif
+bool operator==(Item const& obj1, Item const& obj2);

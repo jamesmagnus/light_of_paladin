@@ -1,13 +1,13 @@
-#include <string>
+﻿#include <string>
 
 #include "ClassItem.h"
-#include "GestionnaireID.h"
+#include "IDMgr.h"
 
 using namespace std;
 
 Item::Item(Ogre::SceneNode *pNode, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible): Affichable(pNode, IsVisible)
 {
-    mID = GestionnaireID::getInstance()->newID();
+    mID = IDMgr::getInstance()->newID();
 
     if (prix >= 0)
     {
@@ -96,8 +96,16 @@ void Item::afficheDebug(std::ostream& rOst) const
 }
 #endif
 
+bool Item::compare(Item const& rSecondItem) const
+{
+	return (mIsUnique == rSecondItem.mIsUnique &&
+		mNom == rSecondItem.mNom &&
+		mPoid == rSecondItem.mPoid &&
+		mPrix == rSecondItem.mPrix);
+}
 
-/* Surcharge op�rateurs externes */
+
+/* Surcharge opérateurs externes */
 
 /* == */
 bool operator==(Item const& item1, Item const& item2)
@@ -111,13 +119,3 @@ bool operator==(Item const& item1, Item const& item2)
 		return false;
 	}
 }
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Item const& obj)
-{
-	obj.afficheDebug(rOst);
-
-	return rOst;
-}
-#endif
