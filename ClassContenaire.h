@@ -1,38 +1,38 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ClassInventaire.h"
 #include "Affichable.h"
 
 
-/* Classe finale, non héritable */
-/* Permet de créer des objets affichable avec un inventaire tel des coffres, ... */
-/* Sémantique d'entité */
+/* Classe finale, non hÃ©ritable */
+/* Permet de crÃ©er des objets affichable avec un inventaire tel des coffres, ... */
+/* SÃ©mantique d'entitÃ© */
 class Contenaire: public Inventaire, Affichable
 {
 private:
 	std::string mProprietaire, mNom;
 
-	/* Surcharge de la fonction héritée de Inventaire pour empécher qu'elle soit appelée par erreur */
+	/* Surcharge de la fonction hÃ©ritÃ©e de Inventaire pour empÃ©cher qu'elle soit appelÃ©e par erreur */
 	void afficheDebugInv(std::ostream& rOst) const;
 
 public:
 
 	/* Constructeur */
-	/* pNode, adresse du noeud de scène lié à l'objet */
-	/* IsVisible, true si l'objet doit être rendu, true par défaut */
+	/* pNode, adresse du noeud de scÃ¨ne liÃ© Ã  l'objet */
+	/* IsVisible, true si l'objet doit Ãªtre rendu, true par dÃ©faut */
 	/* max, la taille de l'inventaire du contenaire */
 	Contenaire(Ogre::SceneNode *pNode, bool IsVisible=true, int max=10);
 
 	/* Constructeur */
-	/* pNode, adresse du noeud de scène lié à l'objet */
-	/* IsVisible, true si l'objet doit être rendu, true par défaut */
-	/* inv, l'inventaire à partir duquel construire le contenaire, vide cet inventaire */
+	/* pNode, adresse du noeud de scÃ¨ne liÃ© Ã  l'objet */
+	/* IsVisible, true si l'objet doit Ãªtre rendu, true par dÃ©faut */
+	/* inv, l'inventaire Ã  partir duquel construire le contenaire, vide cet inventaire */
 	Contenaire(Ogre::SceneNode *pNode, Inventaire& inv, bool IsVisible=true);
 
 	/* Destructeur */
 	virtual ~Contenaire();
 
-	/* clone un contenaire, devant être libéré */
+	/* clone un contenaire, devant Ãªtre libÃ©rÃ© */
 	/* Renvoie un pointeur */
 	/* clone les objets de l'inventaire du contenaire original */
 	virtual Contenaire* clone() const override;
@@ -41,23 +41,23 @@ public:
 	/* Affiche des informations sur l'objet dans la console, DEBUG */
 	virtual void afficheDebug(std::ostream& rOst) const override;
 #endif
-	/* Défini le propriètaire du contenaire */
-	/* nom, le nom du propriètaire, par défaut "all", signifiant aucun propriètaire */
+	/* DÃ©fini le propriÃ¨taire du contenaire */
+	/* nom, le nom du propriÃ¨taire, par dÃ©faut "all", signifiant aucun propriÃ¨taire */
 	void setProprietaire(std::string const& nom);
 
-	/* Renvoie le nom du propriètaire */
-	/* "all" pour aucun propriètaire */
+	/* Renvoie le nom du propriÃ¨taire */
+	/* "all" pour aucun propriÃ¨taire */
 	std::string getProprietaire() const;
 
-	/* Défini le nom du contenaire */
-	/* nom, le nom du contenaire, par défaut "Coffre" */
+	/* DÃ©fini le nom du contenaire */
+	/* nom, le nom du contenaire, par dÃ©faut "Coffre" */
 	void setNom(std::string const& nom);
 
 	/* Renvoie le nom du contenaire */
 	std::string getNom() const;
 };
 
-/* Surcharge des opérateurs externes */
+/* Surcharge des opÃ©rateurs externes */
 
 #ifdef _DEBUG
 /* << */

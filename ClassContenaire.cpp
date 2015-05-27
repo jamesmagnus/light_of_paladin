@@ -1,4 +1,4 @@
-#include "ClassContenaire.h"
+ï»¿#include "ClassContenaire.h"
 #include "ClassItem.h"
 
 #include <string>
@@ -39,7 +39,7 @@ Contenaire* Contenaire::clone() const
 #ifdef _DEBUG
 void Contenaire::afficheDebug(ostream& rOst) const 
 {
-	rOst << "Type: Contenaire" << endl << "Occupation:" << mNb << " sur" << mMax << endl << "Poid:" << mPoidTotal << "Nom:" << mNom << "Propriétaire:" << mProprietaire << endl << endl;
+	rOst << "Type: Contenaire" << endl << "Occupation:" << mNb << " sur" << mMax << endl << "Poid:" << mPoidTotal << "Nom:" << mNom << "PropriÃ©taire:" << mProprietaire << endl << endl;
 }
 #endif
 
@@ -77,7 +77,7 @@ string Contenaire::getNom() const
 	return mNom;
 }
 
-/* Surcharge des opérateurs externes */
+/* Surcharge des opÃ©rateurs externes */
 
 #ifdef _DEBUG
 /* << */
