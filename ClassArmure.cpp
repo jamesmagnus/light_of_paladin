@@ -1,10 +1,10 @@
-#include "ClassArmure.h"
+ï»¿#include "ClassArmure.h"
 
 #include <OgreMath.h>
 
 using namespace std;
 
-Armure::Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible, int pointProtection, float etat): Item(pNode, prix, poid, nom, IsUnique, IsVisible)
+Armure::Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible, int pointProtection, float etat, Sort *pEnchantement): Enchante(pNode, prix, poid, nom, IsUnique, IsVisible, pEnchantement)
 {
 	if (pointProtection >= 0)
 	{
@@ -98,40 +98,13 @@ void Armure::setType(ETypeArmure type)
 	mType = type;
 }
 
-Armure* Armure::clone() const 
-{
-	return new Armure(mpNoeud, mType, mPrix, mPoid, mNom, mIsUnique, mIsVisible, mPtsProtection, mEtat);
-}
-
-bool Armure::canUse(Personnage *pJoueur) const 
-{
-	/*TODO*/
-	return true;
-}
-
 bool Armure::compare(Item const& rSecondeArmure) const 
 {
-	/* D'après le RTTI l'Item passé en paramètre est une Armure */
+	/* D'aprÃ¨s le RTTI l'Item passÃ© en paramÃ¨tre est une Armure */
 	const Armure& rSecondeArmureConvertie = dynamic_cast<Armure const&>(rSecondeArmure);
 
-	/* Leur id, leur état, leur affichage peuvent être différent mais le reste doit être identique */
-	return (mIsUnique == rSecondeArmureConvertie.mIsUnique && 
-		mNom == rSecondeArmureConvertie.mNom && 
-		mPoid == rSecondeArmureConvertie.mPoid && 
-		mPrix == rSecondeArmureConvertie.mPrix && 
+	/* Leur id, leur Ã©tat, leur affichage peuvent Ãªtre diffÃ©rent mais le reste doit Ãªtre identique */
+	return (Enchante::compare(rSecondeArmure) && 
 		mPtsProtection == rSecondeArmureConvertie.mPtsProtection && 
 		mType == rSecondeArmureConvertie.mType);
 }
-
-
-/* Surcharge des opérateurs externes */
-
-#ifdef _DEBUG
-/* << */
-ostream& operator<<(ostream& rOst, Armure const& obj)
-{
-	obj.afficheDebug(rOst);
-
-	return rOst;
-}
-#endif

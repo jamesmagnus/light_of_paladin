@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 
-#include "ClassItem.h"
+#include "ClassEnchante.h"
 
 enum class ETypeArmure{CASQUE, PLASTRON, GANT_G, GANT_D, BOTTE_G, BOTTE_D, JAMBIERE_G, JAMBIERE_D};
 
-/* Classe finale qui sert à manipuler les différentes parties d'armure */
-/* Sémantique d'entité */
-class Armure : public Item
+/* Classe abstraite qui sert Ã  manipuler les diffÃ©rentes parties d'armure */
+/* SÃ©mantique d'entitÃ© */
+class Armure : public Enchante
 {
 private:
 	int mPtsProtection;
@@ -17,30 +17,30 @@ public:
 
 	/* Constructeur */
 	/* pNode, adresse du noeud de Ogre */
-	/* prix, poid, nom, caractéristiques de l'item */
-	/* IsUnique, true si l'armure ne peut se trouver 2 fois dans un même inventaire, false par défaut */
-	/* IsVisible, true si l'armure doit être rendue par Ogre */
-	/* pointProtection, etat, caractéristiques de l'armure */
-	Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix=0, float poid=1.0f, std::string const& nom="DefaultArmor", bool IsUnique=false, bool IsVisible=true, int pointProtection=0, float etat=1.0f);
+	/* prix, poid, nom, caractÃ©ristiques de l'armure */
+	/* IsUnique, true si l'armure ne peut se trouver 2 fois dans un mÃªme inventaire, false par dÃ©faut */
+	/* IsVisible, true si l'armure doit Ãªtre rendue par Ogre */
+	/* pointProtection, etat, caractÃ©ristiques de l'armure */
+	Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix=0, float poid=1.0f, std::string const& nom="DefaultArmor", bool IsUnique=false, bool IsVisible=true, int pointProtection=0, float etat=1.0f, Sort *pEnchantement=nullptr);
 
 	/* Destructeur */
 	virtual ~Armure();
 
-	/* Renvoie le nombre de points de protection de la pièce d'armure */
+	/* Renvoie le nombre de points de protection de la piÃ¨ce d'armure */
 	int getPtsProtection() const;
 
-	/* Change le nombre de points de protection fourni par la pièce d'armure */
+	/* Change le nombre de points de protection fourni par la piÃ¨ce d'armure */
 	/* pts, le nouveau nombre de points */
 	void setPtsProtection(int pts);
 
-	/* Renvoie l'état de la pièce d'armure 0.0 -> 1.0 */
+	/* Renvoie l'Ã©tat de la piÃ¨ce d'armure 0.0 -> 1.0 */
 	float getEtat() const;
 
-	/* Change l'état de la pièce d'armure */
-	/* etat, le nouvel état de la pièce 0.0 -> 1.0 */
+	/* Change l'Ã©tat de la piÃ¨ce d'armure */
+	/* etat, le nouvel Ã©tat de la piÃ¨ce 0.0 -> 1.0 */
 	void setEtat(float etat);
 
-	/* Renvoie le type d'armure, appartient à l'enum ETypeArmure */
+	/* Renvoie le type d'armure, appartient Ã  l'enum ETypeArmure */
 	ETypeArmure getType() const;
 
 	/* Modifie le type de l'armure, attention il faut modifier le mesh ! */
@@ -48,12 +48,13 @@ public:
 	void setType(ETypeArmure type);
 
 	/* Clonage */
-	virtual Armure* clone() const override;
+	/* MÃ©thode virtuelle pure */
+	virtual Armure* clone() const override =0;
 
-	/* Prédicat, renvoie true si le personnage peut s'équiper de la pièce d'armure */
-	virtual bool canUse(Personnage *pJoueur) const override;
+	/* PrÃ©dicat, renvoie true si le personnage peut s'Ã©quiper de la piÃ¨ce d'armure */
+	virtual bool canUse(Personnage const& rJoueur) const override =0;
 
-	/* Prédicat, renvoie true si les deux armures sont équivalentes (les mêmes sauf leur id) */
+	/* PrÃ©dicat, renvoie true si les deux armures sont Ã©quivalentes (les mÃªmes sauf leur id) */
 	virtual bool compare(Item const& rSecondeArmure) const override;
 
 #ifdef _DEBUG
@@ -61,10 +62,3 @@ public:
 	virtual void afficheDebug(std::ostream& rOst) const override;
 #endif
 };
-
-/* Surcharge des opérateurs externes */
-
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Armure const& obj);
-#endif
