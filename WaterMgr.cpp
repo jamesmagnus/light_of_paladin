@@ -1,49 +1,61 @@
-#include "Eau.h"
+﻿#include "WaterMgr.h"
 
 #include <Hydrax.h>
 #include <Noise/Perlin/Perlin.h>
+#include <Noise/FFT/FFT.h>
 #include <Modules/ProjectedGrid/ProjectedGrid.h>
+#include <Modules/SimpleGrid/SimpleGrid.h>
+#include <Modules/RadialGrid/RadialGrid.h>
 #include <SkyX.h>
 
 #include <OgrePrerequisites.h>
 
 
-Eau::Eau(Ogre::SceneManager* pMgn, Ogre::Camera* pCam, Ogre::Viewport* pView, SkyX::SkyX* pSky): Ogre::FrameListener()
+WaterMgr::WaterMgr(Ogre::SceneManager* pMgn, Ogre::Camera* pCam, Ogre::Viewport* pView, SkyX::SkyX* pSky): Ogre::FrameListener()
 {
 	mpHydrax = new Hydrax::Hydrax(pMgn, pCam, pView);
 	mNeedUpdate = true;
 	mpSky = pSky;
 }
 
-Eau::~Eau()
+WaterMgr::~WaterMgr()
 {	
 	if (mpHydrax != nullptr)
 	{
 		delete mpHydrax;
+		mpHydrax = nullptr;
 	}
 }
 
-void Eau::setHauteur(Ogre::Real h)
+void WaterMgr::setHauteur(Ogre::Real h)
 {
 	mH = h;
 	mNeedUpdate = true;
 }
 
-Ogre::Real Eau::getHauteur() const
+Ogre::Real WaterMgr::getHauteur() const
 {
 	return mH;
 }
 
-Hydrax::Hydrax* Eau::getHydrax() const
+Hydrax::Hydrax* WaterMgr::getHydrax() const
 {
 	return mpHydrax;
 }
 
-bool Eau::create()
+bool WaterMgr::create()
 {
 	mpHydrax->loadCfg("HydraxDemo.hdx");
 
-	Hydrax::Module::ProjectedGrid *module = new Hydrax::Module::ProjectedGrid(mpHydrax, new Hydrax::Noise::Perlin(), Ogre::Plane(Ogre::Vector3::UNIT_Y, 0.0), Hydrax::MaterialManager::NM_VERTEX, Hydrax::Module::ProjectedGrid::Options());
+	const int complexity_num = 264;
+	const int mesh_size = 2100;
+	struct Hydrax::Size mesh_struct;
+	mesh_struct.setSize(mesh_size);
+	struct Hydrax::Module::SimpleGrid::Options options_struct;
+	options_struct.Complexity = complexity_num;
+	options_struct.MeshSize = mesh_struct;
+
+	Hydrax::Module::RadialGrid *module = new Hydrax::Module::RadialGrid(mpHydrax, new Hydrax::Noise::FFT(), Hydrax::MaterialManager::NM_RTT, Hydrax::Module::RadialGrid::Options());
 
 	mpHydrax->setModule(module);
 
@@ -62,7 +74,7 @@ bool Eau::create()
 	}
 }
 
-bool Eau::frameStarted(Ogre::FrameEvent const& rEvt)
+bool WaterMgr::frameStarted(Ogre::FrameEvent const& rEvt)
 {
 	if (mNeedUpdate)
 	{
@@ -72,7 +84,7 @@ bool Eau::frameStarted(Ogre::FrameEvent const& rEvt)
 
 	assert(mpSky != nullptr);
 
-	mpSky->setStarfieldEnabled(true);
+	//mpSky->setStarfieldEnabled(true);
 
 	Ogre::Vector3 sunPos = mpHydrax->getCamera()->getDerivedPosition() + mpSky->getController()->getSunDirection()*mpSky->getMeshManager()->getSkydomeRadius(mpHydrax->getCamera())*10.0f;
 	mpHydrax->setSunPosition(sunPos);
