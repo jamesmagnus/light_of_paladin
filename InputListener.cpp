@@ -1,4 +1,4 @@
-#include "enumerations.h"
+ï»¿#include "enumerations.h"
 #include "InputListener.h"
 #include "CeguiMgr.h"
 
@@ -24,8 +24,8 @@ InputListener::InputListener(RenderWindow *pWindow, Camera *pCam, CeguiMgr *pCEG
 
 InputListener::~InputListener()
 {
-	WindowEventUtilities::removeWindowEventListener(mpWindow, this);    //On déréférence cet écouteur d'évènements
-	windowClosing(mpWindow); //Appelée manuellement dans le destructeur si la fenêtre est fermée par une source externe
+	WindowEventUtilities::removeWindowEventListener(mpWindow, this);    //On dÃ©rÃ©fÃ©rence cet Ã©couteur d'Ã©vÃ¨nements
+	windowClosing(mpWindow); //AppelÃ©e manuellement dans le destructeur si la fenÃªtre est fermÃ©e par une source externe
 }
 
 bool InputListener::frameRenderingQueued(FrameEvent const& evt)
@@ -34,20 +34,20 @@ bool InputListener::frameRenderingQueued(FrameEvent const& evt)
 	Real movement = evt.timeSinceLastFrame * VITESSE_TRANS_CAM;
 	mCurrentEvent = evt;
 
-	/* Si la fenêtre s'est fermée on coupe Ogre */
+	/* Si la fenÃªtre s'est fermÃ©e on coupe Ogre */
 	if (mpWindow->isClosed())
 	{
 		return false;
 	}
 
+	/* Mise Ã  jour des pÃ©riphÃ©riques d'entrÃ©e */
+	mpMouse->capture();
+	mpKeyBoard->capture();
+
 	if (mpInputManager == nullptr)
 	{
 		return false;
 	}
-
-	/* Mise à jour des périphériques d'entrée */
-	mpMouse->capture();
-	mpKeyBoard->capture();
 
 	Vector3Move moving = dynamic_cast<KeyBoardEventListener*>(mpKeyBoard->getEventCallback())->getMove();
 
@@ -72,7 +72,7 @@ bool InputListener::frameRenderingQueued(FrameEvent const& evt)
 		deplacement.z -= movement;
 	}
 
-	/* Enfin on déplace la caméra */
+	/* Enfin on dÃ©place la camÃ©ra */
 	mpCamera->moveRelative(deplacement);
 
 	return true;    //Ogre continue
@@ -84,22 +84,22 @@ void InputListener::startOIS()
 
 	size_t windowHnd = 0;
 
-	/* On récupère les infos sur la fenêtre depuis l'OS */
+	/* On rÃ©cupÃ¨re les infos sur la fenÃªtre depuis l'OS */
 	mpWindow->getCustomAttribute("WINDOW", &windowHnd);
 
-	/* On crée le gestionnaire */
+	/* On crÃ©e le gestionnaire */
 	mpInputManager = OIS::InputManager::createInputSystem(windowHnd);
 
-	/* On crée les objets relatifs à chaque périphérique */
+	/* On crÃ©e les objets relatifs Ã  chaque pÃ©riphÃ©rique */
 	mpMouse = static_cast<OIS::Mouse*>(mpInputManager->createInputObject(OIS::OISMouse, true));
 	mpKeyBoard = static_cast<OIS::Keyboard*>(mpInputManager->createInputObject(OIS::OISKeyboard, true));
 
 	mpKeyBoard->setEventCallback(new KeyBoardEventListener(this, mpKeyBoard, mpCEGUIMgr));
 	mpMouse->setEventCallback(new MouseEventListener(mpCamera, &mCurrentEvent, mpCEGUIMgr));
 
-	windowResized(mpWindow);    //On appelle manuellement cette méthode une fois pour initialiser la taille de la fenêtre
+	windowResized(mpWindow);    //On appelle manuellement cette mÃ©thode une fois pour initialiser la taille de la fenÃªtre
 
-	WindowEventUtilities::addWindowEventListener(mpWindow, this);   //On lie l'écouteur avec la fenêtre
+	WindowEventUtilities::addWindowEventListener(mpWindow, this);   //On lie l'Ã©couteur avec la fenÃªtre
 }
 
 void InputListener::windowResized(RenderWindow* rw)
@@ -107,20 +107,20 @@ void InputListener::windowResized(RenderWindow* rw)
 	unsigned int width, height, depth;
 	int left, top;
 
-	/* On récupère les nouvelles dimensions/positions de la fenêtre */
+	/* On rÃ©cupÃ¨re les nouvelles dimensions/positions de la fenÃªtre */
 	rw->getMetrics(width, height, depth, left, top);
 
-	/* On récupère l'état de la souris */
+	/* On rÃ©cupÃ¨re l'Ã©tat de la souris */
 	const OIS::MouseState &ms = mpMouse->getMouseState();
 
-	/* On le met à jour avec les nouvelles valeurs */
+	/* On le met Ã  jour avec les nouvelles valeurs */
 	ms.width = width;
 	ms.height = height;
 }
 
 bool InputListener::windowClosing(RenderWindow* rw)
 {
-	if (rw == mpWindow)  //Si la fenêtre fermée est bien la notre
+	if (rw == mpWindow)  //Si la fenÃªtre fermÃ©e est bien la notre
 	{
 		clearInputListeners();
 	}
@@ -130,7 +130,7 @@ bool InputListener::windowClosing(RenderWindow* rw)
 
 void InputListener::clearInputListeners()
 {
-	/* On test si le gestionnaire existe toujours. On détruit les objets du gestionnaire, puis le gestionnaire */
+	/* On test si le gestionnaire existe toujours. On dÃ©truit les objets du gestionnaire, puis le gestionnaire */
 	if (mpInputManager != nullptr)  
 	{
 		if (mpKeyBoard != nullptr)
@@ -181,33 +181,37 @@ bool KeyBoardEventListener::keyPressed(OIS::KeyEvent const& arg)
 		mpInputListener->clearInputListeners();
 		return false;
 	}
-
-	if (arg.key == OIS::KC_F4 && mpKeyBoard->isModifierDown(OIS::Keyboard::Alt))
+	else if(arg.key == OIS::KC_F4 && mpKeyBoard->isModifierDown(OIS::Keyboard::Alt))
 	{
 		mpInputListener->clearInputListeners();
 		return false;
 	}
-
-	switch (arg.key)
+	else if (arg.key==OIS::KC_TAB)
 	{
-	case OIS::KC_RIGHT: case OIS::KC_D:
-		mActualMove.x = EMove::BACK ;
-		break;
-
-	case OIS::KC_LEFT: case OIS::KC_A:
-		mActualMove.x = EMove::FORWARD;
-		break;
-
-	case OIS::KC_UP: case OIS::KC_W:
-		mActualMove.z = EMove::FORWARD;
-		break;
-
-	case OIS::KC_DOWN: case OIS::KC_S:
-		mActualMove.z = EMove::BACK;
-		break;
-
-	case OIS::KC_TAB:
 		mpCEGUIMgr->shiftMode(!mpCEGUIMgr->shiftMode());
+	}
+
+
+	if (!mpCEGUIMgr->shiftMode())
+	{
+		switch (arg.key)
+		{
+		case OIS::KC_RIGHT: case OIS::KC_D:
+			mActualMove.x = EMove::BACK ;
+			break;
+	
+		case OIS::KC_LEFT: case OIS::KC_A:
+			mActualMove.x = EMove::FORWARD;
+			break;
+	
+		case OIS::KC_UP: case OIS::KC_W:
+			mActualMove.z = EMove::FORWARD;
+			break;
+	
+		case OIS::KC_DOWN: case OIS::KC_S:
+			mActualMove.z = EMove::BACK;
+			break;
+		}
 	}
 
 	return true;
@@ -264,12 +268,12 @@ bool MouseEventListener::mouseReleased(OIS::MouseEvent const& arg, OIS::MouseBut
 
 bool MouseEventListener::mouseMoved(OIS::MouseEvent const& arg)
 {
-	/* On récupère l'état de la souris */
+	/* On rÃ©cupÃ¨re l'Ã©tat de la souris */
 	const OIS::MouseState &mouseState = arg.state;
 
 	mpCEGUIMgr->injectOISMouseRotation(static_cast<float>(mouseState.X.rel), static_cast<float>(mouseState.Y.rel), mpEventTime->timeSinceLastFrame);
 
-	/* On calcule la rotation à partir des coordonnées relatives à la dernière position */
+	/* On calcule la rotation Ã  partir des coordonnÃ©es relatives Ã  la derniÃ¨re position */
 	Radian mRotationX = Degree(-mouseState.Y.rel * VITESSE_ROTATION_CAM);
 	Radian mRotationY = Degree(-mouseState.X.rel * VITESSE_ROTATION_CAM);
 
