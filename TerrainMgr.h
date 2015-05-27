@@ -1,8 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
-#include "ChunkManager.h"
+#include "ChunkMgr.h"
 
-class GestionnaireID;
+#include <boost/noncopyable.hpp>
+
+class IDMgr;
 
 namespace Ogre
 {
@@ -15,18 +17,18 @@ namespace Ogre
 	class Root;
 }
 
-/* Classe pour gérer le terrain: gestionnaire de chunks, création et chargement des meshs... */
-/* Classe non dérivable */
-/* Sémantique d'entité, hérite de boost::noncopyable */
-class GestionnaireTerrain
+/* Classe pour gÃ©rer le terrain: gestionnaire de chunks, crÃ©ation et chargement des meshs... */
+/* Classe non dÃ©rivable */
+/* SÃ©mantique d'entitÃ©, hÃ©rite de boost::noncopyable */
+class TerrainMgr: private boost::noncopyable
 {
 public:
 
     /* Constructeur */
-    GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot, hkpWorld *pHavokWorld);
+    TerrainMgr(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot, hkpWorld *pHavokWorld);
 
     /* Destructeur */
-    ~GestionnaireTerrain();
+    ~TerrainMgr();
 
     /* Renvoie l'adresse de l'objet TerrainGlobalOptions */
     Ogre::TerrainGlobalOptions* getOptions() const;
@@ -35,13 +37,13 @@ public:
     Ogre::TerrainGroup* getTerrains() const;
 
     /* Ajoute un terrain */
-    /* x et y, sont les coordonnées du terrain dans le groupe */
+    /* x et y, sont les coordonnÃ©es du terrain dans le groupe */
     /* Retourne un ID correspondant au terrain */
-    /* Lève une exception s'il n'y a plus de slot de terrain */
+    /* LÃ¨ve une exception s'il n'y a plus de slot de terrain */
     unsigned long addTerrain(int x, int y, std::string const& nom);
 
 	/* Renvoie l'adresse du gestionnaire de chunks (frameListener) */
-	ChunkManager* getPtrChunk();
+	ChunkMgr* getPtrChunk();
 
 private:
 
@@ -54,9 +56,9 @@ private:
 	Ogre::Root *mpRoot;
 
 	hkpWorld *mpHavokWorld;
-	ChunkManager *mpChunksMgn;
+	ChunkMgr *mpChunksMgn;
 
-    GestionnaireID *mpIDGestion;
+    IDMgr *mpIDGestion;
 
     std::map<unsigned long, std::pair<int, int>> mID_XY;
 };

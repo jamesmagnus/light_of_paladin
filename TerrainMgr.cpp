@@ -1,5 +1,5 @@
-#include "GestionnaireTerrain.h"
-#include "GestionnaireID.h"
+﻿#include "TerrainMgr.h"
+#include "IDMgr.h"
 #include "ExceptionPerso.h"
 
 #include "Chunk.h"
@@ -9,7 +9,7 @@
 
 using namespace Ogre;
 
-GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort, Root *pRoot, hkpWorld *pHavokWorld)
+TerrainMgr::TerrainMgr(unsigned int tailleHeightMap, unsigned int tailleMonde, SceneManager *pSceneMgr, Light *mpSoleil, Camera *pCam, Viewport *pViewPort, Root *pRoot, hkpWorld *pHavokWorld)
 {
     mpSceneMgr = pSceneMgr;
     mTailleTerrain = tailleMonde;
@@ -17,9 +17,9 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
 	mpRoot = pRoot;
 	mpHavokWorld = pHavokWorld;
 
-    mpIDGestion = GestionnaireID::getInstance();
+    mpIDGestion = IDMgr::getInstance();
 
-	mpChunksMgn = new ChunkManager(pCam, this, pHavokWorld);
+	mpChunksMgn = new ChunkMgr(pCam, this, pHavokWorld);
 
     mpOptions = OGRE_NEW TerrainGlobalOptions();
     mpOptions->setMaxPixelError(1);
@@ -113,7 +113,7 @@ GestionnaireTerrain::GestionnaireTerrain(unsigned int tailleHeightMap, unsigned 
     mpTerrainGroup->freeTemporaryResources();
 }
 
-GestionnaireTerrain::~GestionnaireTerrain()
+TerrainMgr::~TerrainMgr()
 {
 	if (mpChunksMgn != nullptr)
 	{
@@ -134,7 +134,7 @@ GestionnaireTerrain::~GestionnaireTerrain()
     }
 }
 
-unsigned long GestionnaireTerrain::addTerrain(int x, int y, std::string const& nom)
+unsigned long TerrainMgr::addTerrain(int x, int y, std::string const& nom)
 {
     unsigned long id = mpIDGestion->newID();
 
@@ -162,17 +162,17 @@ unsigned long GestionnaireTerrain::addTerrain(int x, int y, std::string const& n
     return id;
 }
 
-TerrainGroup* GestionnaireTerrain::getTerrains() const
+TerrainGroup* TerrainMgr::getTerrains() const
 {
     return mpTerrainGroup;
 }
 
-TerrainGlobalOptions* GestionnaireTerrain::getOptions() const
+TerrainGlobalOptions* TerrainMgr::getOptions() const
 {
     return mpOptions;
 }
 
-ChunkManager* GestionnaireTerrain::getPtrChunk()
+ChunkMgr* TerrainMgr::getPtrChunk()
 {
 	return mpChunksMgn;
 }
