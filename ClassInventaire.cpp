@@ -1,4 +1,4 @@
-#include <assert.h>
+ï»¿#include <assert.h>
 
 #include "ClassInventaire.h"
 #include "ClassItem.h"
@@ -118,7 +118,7 @@ bool Inventaire::suppr(Item* const pItem)
 {
 	if(existe(pItem))
 	{
-		mStuff.erase(mStuff.find(pItem->getID()));  //Supprime le premier élément correspondant seulement
+		mStuff.erase(mStuff.find(pItem->getID()));  //Supprime le premier Ã©lÃ©ment correspondant seulement
 
 		mNb--;
 
@@ -141,7 +141,7 @@ bool Inventaire::suppr(unsigned long ID)
 {
 	if (existe(ID))
 	{
-		mStuff.erase(mStuff.find(ID));  //Supprime le premier élément correspondant seulement
+		mStuff.erase(mStuff.find(ID));  //Supprime le premier Ã©lÃ©ment correspondant seulement
 
 		mPoidTotal -= getItem(ID)->getPoid();
 
@@ -172,7 +172,7 @@ bool Inventaire::clear()
 	} 
 	else
 	{
-		return true;    //Inventaire déjà vide
+		return true;    //Inventaire dÃ©jÃ  vide
 	}
 }
 
@@ -211,7 +211,7 @@ void Inventaire::afficheDebugInv(ostream& rOst) const
 #endif
 
 /* --------------------------- */
-/* Surcharge des opérateurs internes */
+/* Surcharge des opÃ©rateurs internes */
 
 Inventaire& Inventaire::operator+=(Inventaire const& inv)
 {
@@ -224,7 +224,7 @@ Inventaire& Inventaire::operator+=(Inventaire const& inv)
 
 	mPoidTotal += inv.getPoidTotal();
 
-	multimap<unsigned long, Item*>::const_iterator it;
+	map<unsigned long, Item*>::const_iterator it;
 
 	for (it = inv.mStuff.cbegin(); it != inv.mStuff.cend(); ++it)
 	{
@@ -236,7 +236,7 @@ Inventaire& Inventaire::operator+=(Inventaire const& inv)
 
 
 /* -------------------------- */
-/* Surcharge des opérateurs externes */
+/* Surcharge des opÃ©rateurs externes */
 
 Inventaire operator+(Inventaire const& inv1, Inventaire const& inv2)
 {

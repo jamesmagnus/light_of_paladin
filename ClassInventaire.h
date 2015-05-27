@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 #include <map>
 
 class Item;
 
-/* Classe pour gérer un inventaire, sémantique de valeur */
+/* Classe pour gÃ©rer un inventaire, sÃ©mantique de valeur */
 class Inventaire
 {
 	friend bool operator==(Inventaire const& inv1, Inventaire const& inv2);
@@ -12,7 +12,7 @@ class Inventaire
 
 protected:
 
-	std::multimap<unsigned long, Item*> mStuff; //Pointeurs sur des Items, repérés par l'id
+	std::map<unsigned long, Item*> mStuff; //Pointeurs sur des Items, repÃ©rÃ©s par l'id
 	int mNb, mMax;
 	float mPoidTotal;
 
@@ -25,7 +25,7 @@ public:
 	/* Constructeur par copie, clone les items */
 	Inventaire(Inventaire const& rOriginal);
 
-	/* Opérateur d'assignement, clone les items */
+	/* OpÃ©rateur d'assignement, clone les items */
 	Inventaire& operator=(Inventaire const& rOriginal);
 
 	/* Destructeur */
@@ -38,18 +38,18 @@ public:
 	int getMax() const;
 
 	/* Modifie le nombre max d'emplacement */
-	/* Renvoie si le nombre max a pu être modifié ( trop d'item ) */
+	/* Renvoie si le nombre max a pu Ãªtre modifiÃ© ( trop d'item ) */
 	bool setMax(int newMax);
 
 	/* Renvoie le poid de tous les objets contenus dans l'inventaire */
 	float getPoidTotal() const;
 
-	/* Ajoute un item par référence */
-	/* Renvoie l'ID de l'item ajouté ou 0 en cas de problème */
+	/* Ajoute un item par rÃ©fÃ©rence */
+	/* Renvoie l'ID de l'item ajoutÃ© ou 0 en cas de problÃ¨me */
 	unsigned long ajout(Item& rItem);
 
 	/* Ajoute un item par pointeur */
-	/* Renvoie l'ID de l'item ajouté ou 0 en cas de problème */
+	/* Renvoie l'ID de l'item ajoutÃ© ou 0 en cas de problÃ¨me */
 	unsigned long ajout(Item* const pItem);
 
 	/* Supprime un item par son pointeur */
@@ -61,15 +61,15 @@ public:
 	bool suppr(unsigned long ID);
 
 	/* Vide l'inventaire */
-	/* Renvoie si true si l'inventaire était vide */
+	/* Renvoie si true si l'inventaire Ã©tait vide */
 	bool clear();
 
-	/* Récupère un item par son ID */
+	/* RÃ©cupÃ¨re un item par son ID */
 	/* ID, l'identifiant de l'item */
 	/* Retourne l'adresse de l'item ou nullptr */
 	Item* getItem(unsigned long ID) const;
 
-	/* Renvoie true si l'item demandé, ou son ID, est trouvé */
+	/* Renvoie true si l'item demandÃ©, ou son ID, est trouvÃ© */
 	bool existe(unsigned long ID) const;
 	bool existe(Item* pItem) const;
 
@@ -79,24 +79,24 @@ public:
 #endif
 
 
-	/* Surcharge des opérateurs internes */
+	/* Surcharge des opÃ©rateurs internes */
 
 	/* += */
 	Inventaire& operator+=(Inventaire const& inv);
 };
 
 
-/* Surcharge des opérateurs externes*/
+/* Surcharge des opÃ©rateurs externes*/
 
 /* + */
 Inventaire operator+(Inventaire const& inv1, Inventaire const& inv2);
 
 /* == */
-/* Deux inventaires sont égaux s'ils ont le même nombre d'objets et que ces objets sont les mêmes */
+/* Deux inventaires sont Ã©gaux s'ils ont le mÃªme nombre d'objets et que ces objets sont les mÃªmes */
 bool operator==(Inventaire const& inv1, Inventaire const& inv2);
 
 /* < */
-/* Un inventaire est inférieur à un autre s'il contient moins d'objet */
+/* Un inventaire est infÃ©rieur Ã  un autre s'il contient moins d'objet */
 bool operator<(Inventaire const& inv1, Inventaire const& inv2);
 
 #ifdef _DEBUG
