@@ -1,4 +1,4 @@
-#include "ChunkManager.h"
+﻿#include "ChunkMgr.h"
 #include "ExceptionPerso.h"
 #include "HeightFieldShape.h"
 #include "Chunk.h"
@@ -10,7 +10,7 @@
 
 using namespace Ogre;
 
-ChunkManager::ChunkManager(Ogre::Camera *pCam, GestionnaireTerrain *pTerrainMgr, hkpWorld *pHavokWorld)
+ChunkMgr::ChunkMgr(Ogre::Camera *pCam, TerrainMgr *pTerrainMgr, hkpWorld *pHavokWorld)
 {
 	assert(TAILLE_MONDE%TAILLE_CHUNK == 0);
 
@@ -36,7 +36,7 @@ ChunkManager::ChunkManager(Ogre::Camera *pCam, GestionnaireTerrain *pTerrainMgr,
 }
 
 
-ChunkManager::~ChunkManager()
+ChunkMgr::~ChunkMgr()
 {
 	for (int i=0; i<mMaxChunkCoo; ++i)
 	{
@@ -56,7 +56,7 @@ ChunkManager::~ChunkManager()
 	mpCam=nullptr;
 }
 
-bool ChunkManager::activeChunk(std::pair<int, int> const& coo)
+bool ChunkMgr::activeChunk(std::pair<int, int> const& coo)
 {
 	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo || coo.first < 0 || coo.second < 0)
 	{
@@ -69,7 +69,7 @@ bool ChunkManager::activeChunk(std::pair<int, int> const& coo)
 	}
 }
 
-bool ChunkManager::releaseChunk(std::pair<int, int> const& coo)
+bool ChunkMgr::releaseChunk(std::pair<int, int> const& coo)
 {
 	if (coo.first >= mMaxChunkCoo || coo.second >= mMaxChunkCoo || coo.first < 0 || coo.second < 0)
 	{
@@ -82,12 +82,12 @@ bool ChunkManager::releaseChunk(std::pair<int, int> const& coo)
 	}
 }
 
-TableauChunks const& ChunkManager::getCurrentChunks() const
+TableauChunks const& ChunkMgr::getCurrentChunks() const
 {
 	return mActualChunk;
 }
 
-bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
+bool ChunkMgr::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 {
 	boost::chrono::system_clock::time_point debut = boost::chrono::system_clock::now();
 
@@ -110,7 +110,7 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 	
 		tmp.positionJoueur = pos;
 	
-		/* Coordonn�es du chunk sur lequel est le joueur */
+		/* Coordonnées du chunk sur lequel est le joueur */
 		pos.x = Real(int(pos.x)/TAILLE_CHUNK);
 		pos.z = Real(int(pos.z)/TAILLE_CHUNK);
 	
@@ -166,7 +166,7 @@ bool ChunkManager::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 	return true;
 }
 
-Ogre::Real ChunkManager::averageLocalHeight() const
+Ogre::Real ChunkMgr::averageLocalHeight() const
 {
 	int denom = mActualChunk.vectPtrChunk.size();
 	assert(denom <=9);
