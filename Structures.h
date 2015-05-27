@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define TAILLE_MONDE 30000
 #define TAILLE_CHUNK 100
