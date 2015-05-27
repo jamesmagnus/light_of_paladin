@@ -1,11 +1,11 @@
-#include "ClassArme.h"
+﻿#include "ClassArme.h"
 
 #include <OgreMath.h>
 
 
 using namespace std;
 
-Arme::Arme(Ogre::SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible): Item(pNode, prix, poid, nom, IsUnique, IsVisible)
+Arme::Arme(Ogre::SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible, Sort *pEnchantement): Enchante(pNode, prix, poid, nom, IsUnique, IsVisible, pEnchantement)
 {
     if (degat >= 0)
     {
@@ -90,27 +90,14 @@ void Arme::afficheDebug(std::ostream& rOst) const
 }
 #endif
 
-/* Surcharge op�rateurs externes */
-
-/* == */
-bool operator==(Arme const& item1, Arme const& item2)
+bool Arme::compare(Item const& rSecondeArme) const 
 {
-	if (typeid(item1) == typeid(item2))
-	{
-		return item1.compare(item2);	//Comportement polymorphique
-	} 
-	else
-	{
-		return false;
-	}
-}
+	/* D'après le RTTI on sait que l'item est une arme */
 
-#ifdef _DEBUG
-/* << */
-std::ostream& operator<<(std::ostream& rOst, Arme const& obj)
-{
-	obj.afficheDebug(rOst);
+	Arme const& rSecArme = dynamic_cast<Arme const&>(rSecondeArme);
 
-	return rOst;
+	return (Enchante::compare(rSecondeArme) &&
+		mDegat == rSecArme.mDegat &&
+		mResistance == rSecArme.mResistance &&
+		mVitesse == rSecArme.mVitesse);
 }
-#endif
