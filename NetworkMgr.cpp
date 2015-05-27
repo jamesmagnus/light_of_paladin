@@ -1,4 +1,4 @@
-#include "NetworkMgn.h"
+﻿#include "NetworkMgr.h"
 
 #include <RakPeerInterface.h>
 #include <MessageIdentifiers.h>
@@ -8,7 +8,7 @@
 #define MAX_CLIENTS 60000
 
 
-NetworkMgn::NetworkMgn()
+NetworkMgr::NetworkMgr()
 {
 	RakNet::RakPeerInterface *peer = RakNet::RakPeerInterface::GetInstance();
 
@@ -26,6 +26,6 @@ NetworkMgn::NetworkMgn()
 }
 
 
-NetworkMgn::~NetworkMgn()
+NetworkMgr::~NetworkMgr()
 {
 }
