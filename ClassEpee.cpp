@@ -1,4 +1,5 @@
-﻿#include "ClassEpee.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassEpee.h"
 
 #include <string>
 
@@ -22,7 +23,7 @@ void Epee::afficheDebug(std::ostream& rOst) const
 #endif
 Epee* Epee::clone() const 
 {
-	return new Epee(mpNoeud, mDegat, mVitesse, mResistance, mPrix, mPoid, mNom, mIsUnique, mIsVisible);
+	return LOP_NEW Epee(mpNoeud, mDegat, mVitesse, mResistance, mPrix, mPoid, mNom, mIsUnique, mIsVisible);
 }
 
 bool Epee::canUse(Personnage const& rJoueur) const 

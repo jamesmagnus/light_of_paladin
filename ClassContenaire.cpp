@@ -1,4 +1,5 @@
-﻿#include "ClassContenaire.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassContenaire.h"
 #include "ClassItem.h"
 
 #include <string>
@@ -33,7 +34,7 @@ Contenaire* Contenaire::clone() const
 
 	assert(invTemp.getNB() == getNB());
 
-	return new Contenaire(mpNoeud, invTemp, mIsVisible);
+	return LOP_NEW Contenaire(mpNoeud, invTemp, mIsVisible);
 }
 
 #ifdef _DEBUG

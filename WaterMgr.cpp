@@ -1,4 +1,5 @@
-﻿#include "WaterMgr.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "WaterMgr.h"
 
 #include <Hydrax.h>
 #include <Noise/Perlin/Perlin.h>
@@ -13,7 +14,7 @@
 
 WaterMgr::WaterMgr(Ogre::SceneManager* pMgn, Ogre::Camera* pCam, Ogre::Viewport* pView, SkyX::SkyX* pSky): Ogre::FrameListener()
 {
-	mpHydrax = new Hydrax::Hydrax(pMgn, pCam, pView);
+	mpHydrax = LOP_NEW Hydrax::Hydrax(pMgn, pCam, pView);
 	mNeedUpdate = true;
 	mpSky = pSky;
 }
@@ -55,7 +56,7 @@ bool WaterMgr::create()
 	options_struct.Complexity = complexity_num;
 	options_struct.MeshSize = mesh_struct;
 
-	Hydrax::Module::RadialGrid *module = new Hydrax::Module::RadialGrid(mpHydrax, new Hydrax::Noise::FFT(), Hydrax::MaterialManager::NM_RTT, Hydrax::Module::RadialGrid::Options());
+	Hydrax::Module::RadialGrid *module = LOP_NEW Hydrax::Module::RadialGrid(mpHydrax, LOP_NEW Hydrax::Noise::FFT(), Hydrax::MaterialManager::NM_RTT, Hydrax::Module::RadialGrid::Options());
 
 	mpHydrax->setModule(module);
 
