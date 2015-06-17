@@ -1,4 +1,5 @@
-﻿#include "IDMgr.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "IDMgr.h"
 #include "ExceptionPerso.h"
 
 #include <ctime>
@@ -10,7 +11,7 @@ IDMgr::IDMgr()
 {
 	mEngine.seed(static_cast<uint32_t>(time(nullptr)));	//Init
 
-	mpLongDistrib = new boost::random::uniform_int_distribution<unsigned long>(1, ULONG_MAX);	//Distribution uniforme entre 1 et max
+	mpLongDistrib = LOP_NEW boost::random::uniform_int_distribution<unsigned long>(1, ULONG_MAX);	//Distribution uniforme entre 1 et max
 }
 
 IDMgr::~IDMgr()
@@ -20,16 +21,13 @@ IDMgr::~IDMgr()
 			delete mpsInstanceUnique->mpLongDistrib;
 			mpsInstanceUnique->mpLongDistrib = nullptr;
 	}
-
-		delete mpsInstanceUnique;
-		mpsInstanceUnique = nullptr;
 }
 
 IDMgr* IDMgr::getInstance()
 {
 	if (mpsInstanceUnique == nullptr)
 	{
-		mpsInstanceUnique = new IDMgr();
+		mpsInstanceUnique = LOP_NEW IDMgr();
 	} 
 
 	return mpsInstanceUnique;
@@ -38,6 +36,7 @@ IDMgr* IDMgr::getInstance()
 void IDMgr::destroy()
 {
 	delete mpsInstanceUnique;
+	mpsInstanceUnique = nullptr;
 }
 
 unsigned long IDMgr::newID()
