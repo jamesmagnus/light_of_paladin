@@ -1,4 +1,5 @@
-﻿#include "Affichable.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "Affichable.h"
 
 using namespace Ogre;
 

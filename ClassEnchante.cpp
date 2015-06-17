@@ -1,4 +1,5 @@
-﻿#include "ClassEnchante.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassEnchante.h"
 #include "ClassSort.h"
 
 Enchante::Enchante(Ogre::SceneNode *pNode, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible, Sort *pEnchantement):Item(pNode, prix, poid, nom, IsUnique, IsVisible)

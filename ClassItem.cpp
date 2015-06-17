@@ -1,4 +1,5 @@
-﻿#include <string>
+﻿#include "StdLibAndNewOperator.h"
+#include <string>
 
 #include "ClassItem.h"
 #include "IDMgr.h"

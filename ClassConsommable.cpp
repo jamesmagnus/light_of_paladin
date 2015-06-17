@@ -1,4 +1,5 @@
-﻿#include "ClassConsommable.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassConsommable.h"
 #include "ExceptionPerso.h"
 
 using namespace std;

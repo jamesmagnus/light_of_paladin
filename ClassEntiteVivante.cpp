@@ -1,4 +1,5 @@
-﻿#include "ClassEntiteVivante.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassEntiteVivante.h"
 
 
 EntiteVivante::EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom): Affichable(pNode, IsVisible)

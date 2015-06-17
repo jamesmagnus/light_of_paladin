@@ -1,4 +1,5 @@
-﻿#include "ClassDocument.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassDocument.h"
 
 #include <string>
 

@@ -1,4 +1,5 @@
-﻿#include "ClassPersonnage.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassPersonnage.h"
 #include "ClassInventaire.h"
 #include "ClassArme.h"
 

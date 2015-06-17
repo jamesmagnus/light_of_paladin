@@ -1,4 +1,5 @@
-﻿#include "CeguiMgr.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "CeguiMgr.h"
 #include "GameConsole.h"
 
 #include <CEGUI/CEGUI.h>
@@ -26,6 +27,7 @@ CeguiMgr::CeguiMgr()
 
 CeguiMgr::~CeguiMgr()
 {
+	CEGUI::OgreRenderer::destroy(*mpRenderer);
 }
 
 void CeguiMgr::injectOISKeyEvent(bool IsDown, OIS::KeyEvent const& keyEvent)

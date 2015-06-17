@@ -1,4 +1,5 @@
-﻿#include "ClassArmure.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ClassArmure.h"
 
 #include <OgreMath.h>
 
