@@ -4,7 +4,7 @@
 
 #include <OgreFrameListener.h>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 #include <map>
 
@@ -16,7 +16,7 @@ class FMODSoundMgr: public Ogre::FrameListener, private boost::noncopyable
 {
 private:
 	FMOD::System *pSys;
-	std::map<std::string, FMOD::Sound*> mSoundPtrMap;
+	std::map<std::string, std::pair<FMOD::Sound*, FMOD::Channel*>> mSoundPtrMap;
 
 public:
 
@@ -27,8 +27,8 @@ public:
 	/* Destructeur */
 	virtual ~FMODSoundMgr();
 
-	/* Appelé par Ogre à chaque début de frame */
-	virtual bool frameStarted(Ogre::FrameEvent const& evt) override;
+	/* Appelé par Ogre pendant le rendu de chaque frame */
+	virtual bool frameRenderingQueued(Ogre::FrameEvent const& evt) override;
 
 	/* Charge un son */
 	/* renvoie true si le son est chargé, false sinon */
@@ -39,11 +39,17 @@ public:
 	/* Lance la lecture du son */
 	/* nom, le nom du son à lancer */
 	/* Lève une exception si le son n'existe pas */
-	void playLoadedSound(std::string const& nom, bool const paused=false) const;
+	void playLoadedSound(std::string const& nom, bool const paused=false);
 
 	/* Décharge un son */
 	/* nom, le nom du son à décharger */
-	/* Lève une exception si le son est introuvable */
+	/* Lève une exception si le son est introuvable ou en cours de lecture */
 	void unloadSound(std::string const& nom);
+
+	/* Arrête la lecture d'un son */
+	/* nom, le nom du son à arrêter */
+	/* Renvoie true si le son était en lecture, false sinon */
+	/* Lève une exception si le son est introuvable */
+	bool stopSound(std::string const& nom) const;
 };
 
