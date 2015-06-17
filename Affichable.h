@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <iostream>
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 namespace Ogre
 {

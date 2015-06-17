@@ -2,7 +2,7 @@
 
 #include <OgreFrameListener.h>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 namespace Hydrax
 {

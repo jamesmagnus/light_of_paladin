@@ -3,7 +3,7 @@
 #include <OIS/OISKeyboard.h>
 #include <OIS/OISMouse.h>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 class InputListener;
 namespace CEGUI

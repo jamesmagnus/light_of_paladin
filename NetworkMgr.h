@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 class NetworkMgr
 {

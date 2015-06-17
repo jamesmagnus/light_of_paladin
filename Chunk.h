@@ -5,7 +5,7 @@
 #include <OgrePrerequisites.h>
 #include <OgreVector2.h>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 class TerrainMgr;
 class hkpRigidBody;
