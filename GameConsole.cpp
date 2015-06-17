@@ -1,18 +1,21 @@
-﻿#include "GameConsole.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "GameConsole.h"
 #include "ExceptionPerso.h"
 #include "AppMain.h"
 #include "FMODSoundMgr.h"
 
 #include <OgreLogManager.h>
 
+#include <CEGUI/PCRERegexMatcher.h>
+
 using namespace CEGUI;
 
-const std::set<std::string> GameConsole::msCommandes = GameConsole::staticSetInit();
+std::set<std::string> const GameConsole::msCommandes = GameConsole::staticSetInit();
 
-const std::set<std::string> GameConsole::staticSetInit()
+std::set<std::string> const GameConsole::staticSetInit()
 {
-	const std::string tmp[] = {"say", "quit", "help", "dance", "tp", "invoke", "kill", "playSound"};
-	return std::set<std::string>(tmp, tmp + sizeof(tmp)/sizeof(tmp[0]));
+	std::vector<std::string> const tmp = { "say", "quit", "help", "dance", "tp", "invoke", "kill", "play_sound", "stop_sound" };
+	return std::set<std::string>(tmp.cbegin(), tmp.cend());
 }
 
 GameConsole::GameConsole(CeguiMgr *pCeguiMgr)
@@ -35,9 +38,9 @@ void GameConsole::CreateCEGUIWindow()
 
 	if (mConsoleWindow != nullptr)
 	{
-		CEGUI::System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+		System::getSingletonPtr()->getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
 		System::getSingletonPtr()->getDefaultGUIContext().getRootWindow()->addChild(mConsoleWindow);
-		this->RegisterHandlers();
+		RegisterHandlers();
 	}
 	else
 	{
@@ -52,102 +55,163 @@ void GameConsole::RegisterHandlers()
 	mConsoleWindow->getChild("EditBox")->subscribeEvent(Editbox::EventTextAccepted, &GameConsole::HandleTextSubmitted, this);
 }
 
-bool GameConsole::HandleTextSubmitted(CEGUI::EventArgs const&e)
+bool GameConsole::HandleTextSubmitted(EventArgs const&e)
 {
-	CEGUI::String Msg = mConsoleWindow->getChild("EditBox")->getText();
+	String Msg = mConsoleWindow->getChild("EditBox")->getText();
 
-	this->ParseText(Msg);
+	ParseText(Msg);
 
 	mConsoleWindow->getChild("EditBox")->setText("");
 
 	return true;
 }
 
-bool GameConsole::HandleSendButtonPressed(CEGUI::EventArgs const&e)
+bool GameConsole::HandleSendButtonPressed(EventArgs const&e)
 {
-	CEGUI::String Msg = mConsoleWindow->getChild("EditBox")->getText();
-	this->ParseText(Msg);
+	String Msg = mConsoleWindow->getChild("EditBox")->getText();
+	ParseText(Msg);
 	mConsoleWindow->getChild("EditBox")->setText("");
 
 	return true;
 }
 
-void GameConsole::ParseText(CEGUI::String msg)
+void GameConsole::ParseText(String const& msg)
 {
 	std::string inString = msg.c_str();
+	CEGUI::PCRERegexMatcher pcre;
+	pcre.setRegexString(R"((\/\w+)((?(?=[ ]).*)))");
 
-	if (inString.length() >= 1)
+	if (pcre.getMatchStateOfString(msg) == CEGUI::PCRERegexMatcher::MatchState::MS_VALID)
 	{
-		if (inString.at(0) == '/')
+		inString.erase(0, 1);	// On efface le '/'
+		std::transform(inString.begin(), inString.end(), inString.begin(), std::tolower);
+
+		std::string::size_type posSpace = inString.find(" ");
+		std::string command = inString.substr(0, posSpace);	//Le premier mot est la commande
+
+		std::vector<std::string> args;
+		posSpace != std::string::npos ? inString.erase(0, posSpace + 1) : inString.erase();	// On efface la commande et l'espace suit
+
+		if (getCommandes().find(command) == getCommandes().cend())	//Commande incorrecte
 		{
-			std::string::size_type commandEnd = inString.find(" ", 1);
-			std::string command = inString.substr(1, commandEnd - 1);
-			std::string commandArgs;
-
-			if (!(commandEnd==std::string::npos))
-			{
-				commandArgs = inString.substr(commandEnd + 1, std::string::npos);
-			}
-
-			for(std::string::size_type i=0; i < command.length(); i++)
-			{
-				command[i] = tolower(command[i]);
-			}
-
-			if (command == "say")
-			{
-				std::string outString = "Vous:" + commandArgs;
-				OutputText(outString);
-
-			}
-			else if (command == "quit")
-			{
-
-			}
-			else if (command == "help")
-			{
-				std::string outString = "Liste des commandes: ";
-
-				std::set<std::string> cmd = getCommandes();
-
-				for (std::set<std::string>::const_iterator it = cmd.cbegin(); it != cmd.cend(); ++it)
-				{
-					outString += (*it)+", ";
-				}
-
-				outString.erase(outString.length()-2);
-
-				OutputText(outString, CEGUI::Colour(0.9f, 0.1f, 0.1f));
-			}
-			else if (command == "playSound")
-			{
-				AppMain::getInstance()->getFMODSoundMgr()->playLoadedSound(commandArgs);
-			}
-			else
-			{
-				std::string outString = "<" + inString + "> is an invalid command.";
-				this->OutputText(outString,CEGUI::Colour(1.0f,0.0f,0.0f));
-			}
+			std::string outString = "<" + command + "> n'est pas une commande valide.";
+			OutputText(outString, CONSOLE_ROUGE);
 		}
 		else
 		{
-			this->OutputText(inString);
+			while (inString != "")	// On récupère tous les arguments de la commande
+			{
+				posSpace = inString.find(" ");
+				args.push_back(inString.substr(0, posSpace));
+				posSpace != std::string::npos ? inString.erase(0, posSpace + 1) : inString.erase();
+			}
+
+			exeCommande(command, args);
 		}
-	} 
+	}
 }
 
-void GameConsole::OutputText(CEGUI::String msg, CEGUI::Colour const& colour)
+void GameConsole::exeCommande(std::string const& command, std::vector<std::string> const& args) const
 {
-	CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(mConsoleWindow->getChild("ChatBox"));
+	if (command == "say")
+	{
+		std::string saying;
 
-	CEGUI::ListboxTextItem* newItem=nullptr;
+		for (auto word : args)
+		{
+			saying += word;
+		}
 
-	newItem = new CEGUI::ListboxTextItem(msg);
+		std::string outString = "Vous:" + saying;
+		OutputText(outString);
+
+	}
+	else if (command == "quit")
+	{
+
+	}
+	else if (command == "tp")
+	{
+
+	}
+	else if (command == "dance")
+	{
+
+	}
+	else if (command == "kill")
+	{
+
+	}
+	else if (command == "invoke")
+	{
+
+	}
+	else if (command == "help")
+	{
+		std::string outString = "Liste des commandes: ";
+
+		std::set<std::string> const cmd = getCommandes();
+
+		for (std::set<std::string>::const_iterator it = cmd.cbegin(); it != cmd.cend(); ++it)
+		{
+			outString += *it + ", ";
+		}
+
+		outString.erase(outString.length() - 2);
+
+		OutputText(outString, CONSOLE_OLIVE);
+	}
+	else if (command == "play_sound")
+	{
+		for (auto son : args)
+		{
+			try
+			{
+				AppMain::getInstance()->getFMODSoundMgr()->playLoadedSound(son);
+			}
+			catch (ExceptionPerso const& e)
+			{
+				std::string msgErr = "Le son <" + son + "> n'a pas pu être trouvé. ";
+				OutputText(msgErr, CONSOLE_ROUGE);
+			}
+		}
+	}
+	else if (command == "stop_sound")
+	{
+		for (auto son : args)
+		{
+			try
+			{
+				bool wasPlayed = AppMain::getInstance()->getFMODSoundMgr()->stopSound(son);
+
+				if (wasPlayed)
+				{
+					OutputText(std::string("<") + son + "> était en lecture", CONSOLE_BLEU_MARINE);
+				}
+				else
+				{
+					OutputText(std::string("<") + son + "> n'était pas en lecture", CONSOLE_BLEU_MARINE);
+				}
+			}
+			catch (ExceptionPerso const& e)
+			{
+				std::string msgErr = "Le son <" + son + "> n'a pas pu être trouvé. ";
+				OutputText(msgErr, CONSOLE_ROUGE);
+			}
+		}
+	}
+}
+
+void GameConsole::OutputText(String const& msg, Colour const& colour) const
+{
+	Listbox *outputWindow = static_cast<Listbox*>(mConsoleWindow->getChild("ChatBox"));
+
+	ListboxTextItem* newItem = LOP_NEW ListboxTextItem(msg);
 	newItem->setTextColours(colour);
 	outputWindow->addItem(newItem);
 }
 
-std::set<std::string> GameConsole::getCommandes()
+std::set<std::string> const& GameConsole::getCommandes()
 {
 	return msCommandes;
 }
