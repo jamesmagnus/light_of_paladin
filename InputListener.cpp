@@ -1,4 +1,5 @@
-﻿#include "enumerations.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "enumerations.h"
 #include "InputListener.h"
 #include "CeguiMgr.h"
 
@@ -28,7 +29,7 @@ InputListener::~InputListener()
 	windowClosing(mpWindow); //Appelée manuellement dans le destructeur si la fenêtre est fermée par une source externe
 }
 
-bool InputListener::frameRenderingQueued(FrameEvent const& evt)
+bool InputListener::frameStarted(FrameEvent const& evt)
 {
 	Vector3 deplacement = Vector3::ZERO;
 	Real movement = evt.timeSinceLastFrame * VITESSE_TRANS_CAM;
@@ -271,7 +272,7 @@ bool MouseEventListener::mouseMoved(OIS::MouseEvent const& arg)
 	/* On récupère l'état de la souris */
 	const OIS::MouseState &mouseState = arg.state;
 
-	mpCEGUIMgr->injectOISMouseRotation(static_cast<float>(mouseState.X.rel), static_cast<float>(mouseState.Y.rel), mpEventTime->timeSinceLastFrame);
+	mpCEGUIMgr->injectOISMouseRotation(static_cast<float>(mouseState.X.rel), static_cast<float>(mouseState.Y.rel), static_cast<float>(mpEventTime->timeSinceLastFrame));
 
 	/* On calcule la rotation à partir des coordonnées relatives à la dernière position */
 	Radian mRotationX = Degree(-mouseState.Y.rel * VITESSE_ROTATION_CAM);

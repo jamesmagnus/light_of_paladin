@@ -1,4 +1,6 @@
-﻿#include "LightMgr.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "LightMgr.h"
+
 #include <SkyX.h>
 
 
@@ -32,23 +34,32 @@ bool LightMgr::IsNuit() const
 	}
 }
 
-bool LightMgr::frameStarted(Ogre::FrameEvent const& rEvt)
+bool LightMgr::frameRenderingQueued(Ogre::FrameEvent const& rEvt)
 {
-	if (!IsNuit())
-	{
-		mpSoleil->setVisible(true);
-		Ogre::Vector3 directionSun = mpSky->getController()->getSunDirection();
-		mpSoleil->setDirection(-directionSun);
-		mLumAmbiente = Ogre::ColourValue(0.8f, 0.8f, 0.8f);
-	}
-	else
-	{
-		mpSoleil->setVisible(false);
-		mLumAmbiente = Ogre::ColourValue(0.3f, 0.3f, 0.3f);
-	}
+	static boost::chrono::milliseconds const ref(1000);
 
+	boost::chrono::system_clock::time_point tempsDebut = boost::chrono::system_clock::now();
+	boost::chrono::milliseconds elapsedTime = boost::chrono::duration_cast<boost::chrono::milliseconds>(tempsDebut - mTimeCount);
 
-	mpSceneMgr->setAmbientLight(mLumAmbiente);
+	if (elapsedTime >= ref)
+	{
+		if (!IsNuit())
+		{
+			mpSoleil->setVisible(true);
+			Ogre::Vector3 directionSun = mpSky->getController()->getSunDirection();
+			mpSoleil->setDirection(-directionSun);
+			mLumAmbiente = Ogre::ColourValue(0.8f, 0.8f, 0.8f);
+		}
+		else
+		{
+			mpSoleil->setVisible(false);
+			mLumAmbiente = Ogre::ColourValue(0.3f, 0.3f, 0.3f);
+		}
+
+		mpSceneMgr->setAmbientLight(mLumAmbiente);
+
+		mTimeCount = boost::chrono::system_clock::now();
+	}
 
 	return true;
 }
