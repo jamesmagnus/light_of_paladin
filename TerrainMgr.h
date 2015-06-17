@@ -2,7 +2,7 @@
 
 #include "ChunkMgr.h"
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 class IDMgr;
 
@@ -25,7 +25,7 @@ class TerrainMgr: private boost::noncopyable
 public:
 
     /* Constructeur */
-    TerrainMgr(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot, hkpWorld *pHavokWorld);
+    TerrainMgr(unsigned int tailleHeightMap, unsigned int tailleTerrain, Ogre::SceneManager *pSceneMgr, Ogre::Light *pSoleil, Ogre::Camera *pCam, Ogre::Viewport *pViewPort, Ogre::Root *pRoot);
 
     /* Destructeur */
     ~TerrainMgr();
@@ -55,7 +55,6 @@ private:
     Ogre::Light *mpSoleil;
 	Ogre::Root *mpRoot;
 
-	hkpWorld *mpHavokWorld;
 	ChunkMgr *mpChunksMgn;
 
     IDMgr *mpIDGestion;
