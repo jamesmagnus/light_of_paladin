@@ -1,33 +1,30 @@
-﻿#include "ChunkMgr.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "ChunkMgr.h"
 #include "ExceptionPerso.h"
 #include "HeightFieldShape.h"
 #include "Chunk.h"
 
-#include <boost/timer/timer.hpp>
-
 #include <OgreCamera.h>
-#include <Physics2012/Dynamics/World/hkpWorld.h>
 
 using namespace Ogre;
 
-ChunkMgr::ChunkMgr(Ogre::Camera *pCam, TerrainMgr *pTerrainMgr, hkpWorld *pHavokWorld)
+ChunkMgr::ChunkMgr(Ogre::Camera *pCam, TerrainMgr *pTerrainMgr)
 {
 	assert(TAILLE_MONDE%TAILLE_CHUNK == 0);
 
 	mMaxChunkCoo = TAILLE_MONDE / TAILLE_CHUNK;
 	mpCam = pCam;
 	mpGestTerrain = pTerrainMgr;
-	mpHavokWorld = pHavokWorld;
 
-	mpppChunk = new Chunk**[mMaxChunkCoo];
+	mpppChunk = LOP_NEW Chunk**[mMaxChunkCoo];
 
 	for (int i=0; i<mMaxChunkCoo; ++i)
 	{
-		mpppChunk[i] = new Chunk*[mMaxChunkCoo];
+		mpppChunk[i] = LOP_NEW Chunk*[mMaxChunkCoo];
 
 		for (int j=0; j<mMaxChunkCoo; ++j)
 		{
-			mpppChunk[i][j] = new Chunk(pTerrainMgr, std::make_pair(i,j));
+			mpppChunk[i][j] = LOP_NEW Chunk(pTerrainMgr, std::make_pair(i,j));
 		}
 	}
 
@@ -89,22 +86,14 @@ TableauChunks const& ChunkMgr::getCurrentChunks() const
 
 bool ChunkMgr::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 {
-	boost::chrono::system_clock::time_point debut = boost::chrono::system_clock::now();
+	static boost::chrono::milliseconds const ref(1000);
 
+	boost::chrono::system_clock::time_point debut = boost::chrono::system_clock::now();
 	boost::chrono::milliseconds elapsedTime = boost::chrono::duration_cast<boost::chrono::milliseconds>(debut - mTimeCount);
-	static boost::chrono::milliseconds ref(1000);
 
 	if (elapsedTime >= ref)
 	{
 		TableauChunks tmp;
-
-		mpHavokWorld->lock();
-		mpHavokWorld->markForWrite();
-
-		for (Chunk* it : mActualChunk.vectPtrChunk)
-		{
-			mpHavokWorld->removeEntity((hkpEntity*)(it->getBodyPtr()));
-		}
 	
 		Vector3 pos = mpCam->getDerivedPosition();
 	
@@ -148,17 +137,7 @@ bool ChunkMgr::frameRenderingQueued(Ogre::FrameEvent const& rEv)
 
 		Vector3 newOffset(centre.x, averageLocalHeight(), centre.y);
 
-		mpHavokWorld->shiftBroadPhase(hkVector4(newOffset.x - mOldOffset.x, newOffset.y - mOldOffset.y, newOffset.z - mOldOffset.z), hkVector4(), hkpWorld::SHIFT_BROADPHASE_UPDATE_ENTITY_AABBS);
-
 		mOldOffset = newOffset;
-
-		for (Chunk* it : mActualChunk.vectPtrChunk)
-		{
-			mpHavokWorld->addEntity((hkpEntity*)(it->getBodyPtr()));
-		}
-
-		mpHavokWorld->unmarkForWrite();
-		mpHavokWorld->unlock();
 
 		mTimeCount = boost::chrono::system_clock::now();
 	}
