@@ -1,4 +1,5 @@
-﻿#include "AppMain.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "AppMain.h"
 #include "WaterMgr.h"
 #include "LightMgr.h"
 #include "IDMgr.h"
@@ -8,6 +9,7 @@
 #include "CeguiMgr.h"
 #include "GameConsole.h"
 #include "FMODSoundMgr.h"
+#include "PhysicMgr.h"
 
 #include <SkyX.h>
 #include <OgreTerrainGroup.h>
@@ -17,25 +19,15 @@
 #include <TreeLoader3D.h>
 
 #include <boost/thread.hpp>
-
-#include <Common/Base/hkBase.h>
-#include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
-#include <Physics2012/Dynamics/World/hkpWorld.h>
+#include <boost/chrono.hpp>
 
 #include "ClassEpee.h"
-
-#ifdef _DEBUG
-
-#include <Common/Visualize/hkVisualDebugger.h>
-#include <Physics2012/Utilities/VisualDebugger/hkpPhysicsContext.h>
-
-#endif
 
 using namespace Ogre;
 
 AppMain::AppMain()
 {
-	LogManager *pLogMgr = new LogManager();
+	LogManager *pLogMgr = OGRE_NEW LogManager();
 	LogManager::getSingletonPtr()->createLog("LoP.log", true);
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "!***! Light of Paladin started !***!");
 
@@ -50,9 +42,9 @@ AppMain::AppMain()
 	mpWater = nullptr;
 	mpCam = nullptr;
 	mpCeguiMgr = nullptr;
-	mpHkWorld = nullptr;
 	mpListener = nullptr;
 	mpSoundMgr = nullptr;
+	mpPhysicMgr = nullptr;
 
 	std::srand(time(nullptr));
 }
@@ -61,8 +53,15 @@ AppMain::~AppMain()
 {
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "AppMain destruction started...");
 
-	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Closing window...");
-	mpWindow->destroy();
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction SkyX...");
+	if (mpRoot != nullptr && mpWindow != nullptr && mpSky != nullptr)
+	{
+		mpRoot->removeFrameListener(mpSky);
+		mpWindow->removeListener(mpSky);
+		mpSky->remove();
+		delete mpSky;
+		mpSky = nullptr;
+	}
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction paged geometry...");
 	if (mpTrees != nullptr && mpTrees->getPageLoader() != nullptr)
@@ -93,7 +92,7 @@ AppMain::~AppMain()
 		mpTerrain = nullptr;
 	}
 
-	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction window's event listener...");
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction frame and window's event listener...");
 	if (mpListener != nullptr)
 	{
 		delete mpListener;
@@ -107,14 +106,14 @@ AppMain::~AppMain()
 		mpCeguiMgr = nullptr;
 	}
 
-	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction Havok...");
-	if (mpHkWorld != nullptr && mpHkWorld->getReferenceCount() > 0)
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction Bullet...");
+	delete mpPhysicMgr;
+
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Closing window...");
+	if (mpWindow != nullptr)
 	{
-		mpHkWorld->removeReference();
-		mpHkWorld = nullptr;
+		mpWindow->destroy();
 	}
-	hkBaseSystem::quit();
-	hkMemoryInitUtil::quit();
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Destruction Ogre...");
 	if(mpRoot != nullptr)
@@ -141,7 +140,7 @@ AppMain::~AppMain()
 void AppMain::start()
 {
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting FMOD...");
-	mpSoundMgr = new FMODSoundMgr();
+	mpSoundMgr = LOP_NEW FMODSoundMgr();
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting Ogre...");
 	if(!initOGRE()) //Démarrage de Ogre
@@ -149,10 +148,11 @@ void AppMain::start()
 		throw ExceptionPerso("Erreur dans AppMain::initOGRE(), mais Ogre ne parait pas avoir levé une exception.", FATAL);
 	}
 
-	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting Havok...");
-	if (!initHavok()) //Physique et collision
+	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting Bullet...");
+	mpPhysicMgr = LOP_NEW PhysicMgr();
+	if (!mpPhysicMgr->initBullet()) //Physique et collision
 	{
-		throw ExceptionPerso("Erreur lors de l'initialisation du moteur Havok.", FATAL);
+		throw ExceptionPerso("Erreur lors de l'initialisation du moteur Bullet.", FATAL);
 	}
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create basics...");
@@ -162,10 +162,10 @@ void AppMain::start()
 	}
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create CEGUI interface...");
-	mpCeguiMgr = new CeguiMgr();
+	mpCeguiMgr = LOP_NEW CeguiMgr();
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Create window's event listener...");
-	mpListener = new InputListener(mpWindow, mpCam, mpCeguiMgr);   //Ecouteur d'évènement pour les entrées utilisateurs
+	mpListener = LOP_NEW InputListener(mpWindow, mpCam, mpCeguiMgr);   //Ecouteur d'évènement pour les entrées utilisateurs
 	mpRoot->addFrameListener(mpListener);
 
 	/* Création du singleton gestionnaire ID */
@@ -180,11 +180,9 @@ void AppMain::start()
 	mpRoot->addFrameListener(mpSoundMgr);
 
 	mpSoundMgr->loadSound("media/fmod/music/ambiance_ballade.mp3", "ballade");
-	mpSoundMgr->playLoadedSound("ballade");
 
 	LogManager::getSingletonPtr()->logMessage(LML_NORMAL, "Starting rendering loop...");
-	infiniteLoop(); //Boucle de rendu
-
+	infiniteLoop(); //Boucle de rendu*/
 }
 
 bool AppMain::initOGRE()
@@ -192,10 +190,10 @@ bool AppMain::initOGRE()
 	Ogre::ConfigFile config;    //Gestionnaire de fichier de config Ogre
 
 #ifdef _DEBUG
-	mpRoot = new Root("plugins_d.cfg", "ogre.cfg");
+	mpRoot = OGRE_NEW Root("plugins_d.cfg", "ogre.cfg");
 	config.load("resources_d.cfg");
 #else
-	mpRoot = new Root("plugins.cfg", "ogre.cfg");
+	mpRoot = OGRE_NEW Root("plugins.cfg", "ogre.cfg");
 	config.load("resources.cfg");
 #endif
 
@@ -237,7 +235,7 @@ bool AppMain::initOGRE()
 	/* Création du scène manager */
 	mpSceneMgr = mpRoot->createSceneManager("OctreeSceneManager", "SceneManager");
 
-	/* Activation du filtrage anisotropique, niveau 8 */
+	/* Activation du filtrage anisotropique, niveau 16 */
 	MaterialManager::getSingleton().setDefaultTextureFiltering(TFO_ANISOTROPIC);
 	MaterialManager::getSingleton().setDefaultAnisotropy(16);
 
@@ -282,7 +280,7 @@ bool AppMain::createBase()
 
 bool AppMain::createSky()
 {
-	mpSky = new SkyX::SkyX(mpSceneMgr, new SkyX::BasicController());
+	mpSky = LOP_NEW SkyX::SkyX(mpSceneMgr, LOP_NEW SkyX::BasicController());
 	mpSky->create();
 
 	mpRoot->addFrameListener(mpSky);
@@ -306,13 +304,13 @@ bool AppMain::createTerrain()
 	pSoleil->setDiffuseColour(ColourValue(0.8f, 0.68f, 0.73f));
 	pSoleil->setSpecularColour(ColourValue(0.8f, 0.68f, 0.73f));
 
-	mpTerrain = new TerrainMgr(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport(), mpRoot, mpHkWorld);
+	mpTerrain = LOP_NEW TerrainMgr(TAILLE_IMG_HEIGHTMAP, TAILLE_MONDE, mpSceneMgr, mpSceneMgr->getLight("soleil"), mpCam, mpCam->getViewport(), mpRoot);
 
 	//boost::thread ThTerrainCreationHavok(&AppMain::createTerrainHavokMultiThreaded, this);
 
 	mpRoot->addFrameListener(mpTerrain->getPtrChunk());
 
-	mpWater = new WaterMgr(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
+	mpWater = LOP_NEW WaterMgr(mpSceneMgr, mpCam, mpWindow->getViewport(0), mpSky);
 	mpRoot->addFrameListener(mpWater);
 
 	mpWater->setHauteur(150.0f);
@@ -320,7 +318,7 @@ bool AppMain::createTerrain()
 	// Create water
 	mpWater->create();
 
-	mpTrees = new Forests::PagedGeometry();
+	mpTrees = LOP_NEW Forests::PagedGeometry();
 
 	mpTrees->setCamera(mpCam);
 	mpTrees->setPageSize(50);
@@ -330,7 +328,7 @@ bool AppMain::createTerrain()
 	mpTrees->addDetailLevel<Forests::ImpostorPage>(1000, 100);
 
 	//Create a new TreeLoader3D object first
-	Forests::TreeLoader3D *treeLoader = new Forests::TreeLoader3D(mpTrees, Forests::TBounds(0, 0, 10000, 10000));
+	Forests::TreeLoader3D *treeLoader = LOP_NEW Forests::TreeLoader3D(mpTrees, Forests::TBounds(0, 0, 10000, 10000));
 
 	Entity *pEnt1 = mpSceneMgr->createEntity("tree", "bouleau.mesh"), *pEnt2 = mpSceneMgr->createEntity("lila", "lila.mesh"), *pEnt3 = mpSceneMgr->createEntity("apple tree", "pommier.mesh");
 
@@ -386,14 +384,14 @@ bool AppMain::createPersonnage()
 	particleNode->setPosition(0, 30, 0);
 
 	int stat[ESTATMAX]={0};
-	ajoutPersonnage(pNodePeng, "Samuel", stat, 1, 0, Vector3(0.0f), Vector3(0.0f));
+//	ajoutPersonnage(pNodePeng, "Samuel", stat, 1, 0, Vector3(0.0f), Vector3(0.0f));
 
 	return true;
 }
 
 bool AppMain::createLight()
 {
-	mpLum = new LightMgr(mpSceneMgr, mpSceneMgr->getLight("soleil"), mpSky, mpWater, ColourValue(0.8f, 0.8f, 0.8f));
+	mpLum = LOP_NEW LightMgr(mpSceneMgr, mpSceneMgr->getLight("soleil"), mpSky, mpWater, ColourValue(0.8f, 0.8f, 0.8f));
 
 	mpRoot->addFrameListener(mpLum);
 
@@ -405,12 +403,8 @@ void AppMain::infiniteLoop()
 	Personnage *pSam = nullptr;
 	bool bSens = true;
 
-	GameConsole* p = new GameConsole(mpCeguiMgr);
+	GameConsole* p = LOP_NEW GameConsole(mpCeguiMgr);
 	p->CreateCEGUIWindow();
-
-	Epee e(nullptr, 100);
-
-	std::cout << e;
 
 	/* test */
 	try
@@ -423,27 +417,15 @@ void AppMain::infiniteLoop()
 	}
 	/* test */
 
-#ifdef _DEBUG
-	hkpPhysicsContext* physicsContext = new hkpPhysicsContext;
-	physicsContext->addWorld(mpHkWorld);
+	static boost::chrono::milliseconds const ref(1000);
 
-	hkpPhysicsContext::registerAllPhysicsProcesses();
+	unsigned int fps=0;
 
-	hkArray<hkProcessContext*> contexts;
-	contexts.pushBack( physicsContext );
-	hkVisualDebugger* vdb = new hkVisualDebugger( contexts );
-
-	vdb->serve(25001);
-#endif
+	boost::chrono::system_clock::time_point tempsDebut = boost::chrono::system_clock::now();
+	boost::chrono::system_clock::time_point tempsFin;
 
 	while (true)
 	{
-		mpHkWorld->stepDeltaTime(0.001f);
-
-#ifdef _DEBUG
-		vdb->step(0);
-#endif
-
 		WindowEventUtilities::messagePump();
 
 		if (!mpRoot->renderOneFrame())
@@ -452,12 +434,25 @@ void AppMain::infiniteLoop()
 		}
 
 		mpTrees->update();
+
+		tempsFin = boost::chrono::system_clock::now();
+
+		if (boost::chrono::duration_cast<boost::chrono::milliseconds>(tempsFin - tempsDebut) < ref)
+		{
+			fps++;
+		} 
+		else
+		{
+			std::cout << fps << std::endl;
+			fps=0;
+			tempsDebut = boost::chrono::system_clock::now();
+		}
 	}
 }
 
 bool AppMain::ajoutPersonnage(Ogre::SceneNode *pNoeud, std::string const& nom, int stat[EStat::ESTATMAX], int niveau, int XP, Ogre::Vector3 const& position, Ogre::Vector3 const& rotation)
 {
-	//Personnage *pPersonnage =  new Personnage(pNoeud, stat, true, nom, niveau, XP);
+	//Personnage *pPersonnage =  LOP_NEW Personnage(pNoeud, stat, true, nom, niveau, XP);
 
 	std::pair<std::map<std::string, Personnage*>::iterator, bool> retVal;
 
@@ -477,7 +472,7 @@ Personnage* AppMain::getPersonnage(std::string const& nom) const
 	}
 	else
 	{
-		std::string mesg = nom+": "+"Ce personnage n'existe pas. Opération abandonnée.";
+		std::string mesg = nom+": Ce personnage n'existe pas. Opération abandonnée.";
 		throw ExceptionPerso(mesg.c_str(), INFO);
 	}
 }
@@ -489,15 +484,16 @@ FMODSoundMgr* AppMain::getFMODSoundMgr() const
 
 AppMain* AppMain::getInstance()
 {
-	if (mpsUniqueInstance == nullptr)
+	if (mpsInstanceUnique == nullptr)
 	{
-		mpsUniqueInstance = new AppMain;
+		mpsInstanceUnique = LOP_NEW AppMain;
 	}
 	
-	return mpsUniqueInstance;
+	return mpsInstanceUnique;
 }
 
 void AppMain::destroy()
 {
-		delete mpsUniqueInstance;
+		delete mpsInstanceUnique;
+		mpsInstanceUnique = nullptr;
 }
