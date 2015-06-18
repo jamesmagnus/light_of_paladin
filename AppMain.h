@@ -10,10 +10,10 @@ class Item;
 class Inventaire;
 class WaterMgr;
 class LightMgr;
-class hkpWorld;
 class CeguiMgr;
 class InputListener;
 class FMODSoundMgr;
+class PhysicMgr;
 
 namespace Ogre
 {
@@ -40,7 +40,7 @@ class AppMain
 {
 private:
 
-	static AppMain *mpsUniqueInstance;
+	static AppMain *mpsInstanceUnique;
 
 	Ogre::Root *mpRoot;
 	Ogre::RenderWindow *mpWindow;
@@ -53,11 +53,10 @@ private:
 	LightMgr *mpLum;
 	InputListener *mpListener;
 	FMODSoundMgr *mpSoundMgr;
+	PhysicMgr *mpPhysicMgr;
 
 	SkyX::SkyX *mpSky;
 	Forests::PagedGeometry *mpTrees;
-
-	hkpWorld *mpHkWorld;
 
 	std::map<std::string, Personnage*> mmapPersonnages;
 	std::map<std::string, Item*> mmapItem;
@@ -135,9 +134,6 @@ public:
 	/* Renvoie un pointeur vers ce personnage */
 	/* Lève une exception sinon */
 	Personnage* getPersonnage(std::string const& nom) const;
-
-	/* Initialise Havok */
-	bool initHavok();
 
 	/* Renvoie l'adresse du gestionnaire de son FMOD */
 	FMODSoundMgr* getFMODSoundMgr() const;
