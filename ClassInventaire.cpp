@@ -1,7 +1,7 @@
-﻿#include <assert.h>
+﻿#include "StdLibAndNewOperator.h"
+#include <cassert>
 
 #include "ClassInventaire.h"
-#include "ClassItem.h"
 
 using namespace std;
 
@@ -56,16 +56,6 @@ Inventaire::~Inventaire()
 	mStuff.clear();
 	mNb = mMax = 0;
 	mPoidTotal = 0.0f;
-}
-
-int Inventaire::getNB() const
-{
-	return mNb;
-}
-
-int Inventaire::getMax() const
-{
-	return mMax;
 }
 
 bool Inventaire::setMax(int newMax)
@@ -186,21 +176,6 @@ Item* Inventaire::getItem(unsigned long ID) const
 	{
 		return nullptr;
 	}
-}
-
-bool Inventaire::existe(unsigned long ID) const
-{
-	return mStuff.find(ID) != mStuff.end();
-}
-
-bool Inventaire::existe(Item* pItem) const
-{
-	return mStuff.find(pItem->getID()) != mStuff.end();
-}
-
-float Inventaire::getPoidTotal() const
-{
-	return mPoidTotal;
 }
 
 #ifdef _DEBUG
