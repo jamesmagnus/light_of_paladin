@@ -7,7 +7,7 @@
 #include <OgreFrameListener.h>
 #include <OgreWindowEventUtilities.h>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 #include <OIS/OISKeyboard.h>
 #include <OIS/OISMouse.h>
@@ -45,7 +45,7 @@ public:
 
     /* S'exécute pendant le rendu */
     /* Renvoie false si le programme doit s'arrêter */
-    bool frameRenderingQueued(Ogre::FrameEvent const& evt) override;
+    bool frameStarted(Ogre::FrameEvent const& evt) override;
 
     /* Initialise OIS, appelée par le constructeur */
     void startOIS();

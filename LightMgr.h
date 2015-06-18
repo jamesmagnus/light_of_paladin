@@ -3,7 +3,8 @@
 #include <OgreFrameListener.h>
 #include <OgreColourValue.h>
 
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
+#include <boost/chrono.hpp>
 
 namespace Ogre
 {
@@ -31,6 +32,8 @@ private:
 	SkyX::SkyX* mpSky;
 	WaterMgr* mpEauMgr;
 
+	boost::chrono::system_clock::time_point mTimeCount;
+
 public:
 
 	/* Constructeur */
@@ -46,5 +49,5 @@ public:
 	/* Prédicat, renvoie true s'il fait nuit, false sinon */
 	bool IsNuit() const;
 
-	bool frameStarted(Ogre::FrameEvent const& rEvt) override;
+	bool frameRenderingQueued(Ogre::FrameEvent const& rEvt) override;
 };
