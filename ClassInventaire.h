@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include <map>
+#include "ClassItem.h"
 
-class Item;
+#include <map>
 
 /* Classe pour gérer un inventaire, sémantique de valeur */
 class Inventaire
@@ -32,17 +32,17 @@ public:
 	virtual ~Inventaire();
 
 	/* Renvoie le nombre d'items dans l'inventaire */
-	int getNB() const;
+	inline int getNB() const;
 
 	/* Renvoie le nombre max d'emplacement */
-	int getMax() const;
+	inline int getMax() const;
 
 	/* Modifie le nombre max d'emplacement */
 	/* Renvoie si le nombre max a pu être modifié ( trop d'item ) */
 	bool setMax(int newMax);
 
 	/* Renvoie le poid de tous les objets contenus dans l'inventaire */
-	float getPoidTotal() const;
+	inline float getPoidTotal() const;
 
 	/* Ajoute un item par référence */
 	/* Renvoie l'ID de l'item ajouté ou 0 en cas de problème */
@@ -70,8 +70,8 @@ public:
 	Item* getItem(unsigned long ID) const;
 
 	/* Renvoie true si l'item demandé, ou son ID, est trouvé */
-	bool existe(unsigned long ID) const;
-	bool existe(Item* pItem) const;
+	inline bool existe(unsigned long ID) const;
+	inline bool existe(Item* pItem) const;
 
 #ifdef _DEBUG
 	/* Affiche des informations sur l'inventaire dans la console, DEBUG */
@@ -103,3 +103,29 @@ bool operator<(Inventaire const& inv1, Inventaire const& inv2);
 /* << */
 std::ostream& operator<<(std::ostream& rOst, Inventaire const& inv);
 #endif
+
+/* Fonctions inline */
+inline int Inventaire::getNB() const
+{
+	return mNb;
+}
+
+inline int Inventaire::getMax() const
+{
+	return mMax;
+}
+
+inline bool Inventaire::existe(unsigned long ID) const
+{
+	return mStuff.find(ID) != mStuff.end();
+}
+
+inline bool Inventaire::existe(Item* pItem) const
+{
+	return mStuff.find(pItem->getID()) != mStuff.end();
+}
+
+inline float Inventaire::getPoidTotal() const
+{
+	return mPoidTotal;
+}
