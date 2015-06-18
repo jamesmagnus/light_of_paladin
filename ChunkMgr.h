@@ -4,7 +4,7 @@
 #include <OgreVector3.h>
 
 #include <boost/chrono/chrono.hpp>
-#include <boost/noncopyable.hpp>
+#include <boost/core/noncopyable.hpp>
 
 #include "Structures.h"
 
@@ -13,8 +13,6 @@ namespace Ogre
 	class Camera;
 }
 
-class hkpRigidBody;
-class hkpWorld;
 class TerrainMgr;
 class Chunk;
 
@@ -27,7 +25,6 @@ private:
 	TableauChunks mActualChunk;
 	int mMaxChunkCoo;
 	TerrainMgr *mpGestTerrain;
-	hkpWorld *mpHavokWorld;
 	Ogre::Camera* mpCam;
 	Chunk*** mpppChunk;
 	boost::chrono::system_clock::time_point mTimeCount;
@@ -39,7 +36,7 @@ public:
 	/* pCam, pointeur sur la caméra d'Ogre (pour connaître la position du joueur) */
 	/* pTerrainMgr, pointeur sur les gestionnaire de terrain */
 	/* DEBUG: assert si la taille du monde n'est pas un multiple de la taille d'un chunk */
-	ChunkMgr(Ogre::Camera *pCam, TerrainMgr *pTerrainMgr, hkpWorld *pHavokWorld);
+	ChunkMgr(Ogre::Camera *pCam, TerrainMgr *pTerrainMgr);
 
 	virtual ~ChunkMgr();
 
