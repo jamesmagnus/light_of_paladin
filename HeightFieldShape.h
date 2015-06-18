@@ -1,21 +1,17 @@
 ﻿#pragma once
 
-#include <Physics2012/Collide/hkpCollide.h>
-#include <Physics2012/Collide/Shape/HeightField/SampledHeightField/hkpSampledHeightFieldShape.h>
+#include <boost/core/noncopyable.hpp>
 
-#include <boost/noncopyable.hpp>
+#include <btBulletDynamicsCommon.h>
 
 #include "Structures.h"
 
 class TerrainMgr;
-class hkpSampledHeightFieldBaseCinfo;
-class CollideSpheresInput;
-class SphereCollisionOutput;
 
-/* Classe pour représenter un chunk de terrain dans Havok */
-/* Hérite de hkSampleHeightFieldShape */
+/* Classe pour  */
+/* Hérite de  */
 /* Sémantique d'entité, hérite boost::noncopyable */
-class HeightFieldShape: public hkpSampledHeightFieldShape, private boost::noncopyable
+class HeightFieldShape: private boost::noncopyable
 {
 private:
 	float **mpHeightData;
@@ -26,20 +22,10 @@ public:
 	/* rInfo, référence sur une structure qui décrit les paramètres de la HeightMap */
 	/* pTerrain, adresse du gestionnaire de terrains */
 	/* cooHeightField, paire de coordonnées (en chunk) de la zone de terrain à créer */
-	HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, TerrainMgr const *pTerrains, std::pair<int, int> const& coo);
+	HeightFieldShape(TerrainMgr const *pTerrains, std::pair<int, int> const& coo);
 
 	/* Destructeur */
 	virtual ~HeightFieldShape();
-
-	/* Récupération de la hauteur du terrain */
-	HK_FORCE_INLINE hkReal getHeightAtImpl(int x, int z) const;
-
-	/* Sens de découpage des rectangles en triangles */
-	HK_FORCE_INLINE hkBool getTriangleFlipImpl() const;
-
-	/* Détermine la collision avec une sphère */
-	/* Fonction par défaut de Havok */
-	virtual void collideSpheres(CollideSpheresInput const& input, SphereCollisionOutput* outputArray) const;
 
 	/* Renvoie la hauteur minimale et maximale du terrain */
 	std::pair<float, float> getMinMaxHeight() const;

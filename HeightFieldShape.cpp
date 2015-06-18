@@ -1,17 +1,18 @@
-﻿#include "HeightFieldShape.h"
+﻿#include "StdLibAndNewOperator.h"
+#include "HeightFieldShape.h"
 #include "TerrainMgr.h"
 
 #include <algorithm>
 
 #include <OgreTerrainGroup.h>
 
-HeightFieldShape::HeightFieldShape(hkpSampledHeightFieldBaseCinfo const& rInfo, TerrainMgr const *pTerrains, std::pair<int, int> const& coo): hkpSampledHeightFieldShape(rInfo)
+HeightFieldShape::HeightFieldShape(TerrainMgr const *pTerrains, std::pair<int, int> const& coo)
 {
-	mpHeightData = new float*[TAILLE_CHUNK];
+	mpHeightData = LOP_NEW float*[TAILLE_CHUNK];
 
 	for (int i=0; i<TAILLE_CHUNK; ++i)
 	{
-		mpHeightData[i] = new float[TAILLE_CHUNK];
+		mpHeightData[i] = LOP_NEW float[TAILLE_CHUNK];
 	}
 
 	for (int i=0; i<TAILLE_CHUNK; ++i)
@@ -33,21 +34,6 @@ HeightFieldShape::~HeightFieldShape()
 
 	delete[] mpHeightData;
 	mpHeightData = nullptr;
-}
-
-HK_FORCE_INLINE hkBool HeightFieldShape::getTriangleFlipImpl() const 
-{
-	return false;
-}
-
-void HeightFieldShape::collideSpheres(CollideSpheresInput const& input, SphereCollisionOutput* outputArray) const 
-{
-	return hkSampledHeightFieldShape_collideSpheres(*this, input, outputArray);
-}
-
-HK_FORCE_INLINE hkReal HeightFieldShape::getHeightAtImpl(int x, int z) const 
-{
-	return mpHeightData[x][z];
 }
 
 std::pair<float, float> HeightFieldShape::getMinMaxHeight() const
