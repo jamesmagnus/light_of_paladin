@@ -1,0 +1,107 @@
+// Material.001 genrated by blender2ogre 0.6.0
+
+material katana.001 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass katana.001
+        {
+            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+
+// Material.002 genrated by blender2ogre 0.6.0
+
+material katana.002 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass katana.002
+        {
+            ambient 0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0
+            diffuse 0.20000000298023224 0.20000000298023224 0.20000000298023224 1.0
+            specular 0.5488418340682983 0.5488418340682983 0.5488418340682983 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+
+// Material.003 genrated by blender2ogre 0.6.0
+
+material katana.003 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass katana.003
+        {
+            ambient 0.2079104334115982 0.17325863242149353 0.0693034753203392 1.0
+            diffuse 0.16632834920776407 0.13860690800259867 0.05544278108243317 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}

@@ -1,0 +1,67 @@
+material lila/Flle_Lilas
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+			cull_hardware none
+			cull_software none
+			ambient 0.498039 0.498039 0.498039 1
+			diffuse 0.498039 0.498039 0.498039 1
+
+			texture_unit
+			{
+				texture_alias 0
+				texture Lilac_leaf.png
+			}
+		}
+
+	}
+
+}
+
+material lila/Bois_defaut
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.498039 0.498039 0.498039 1
+			diffuse 0.498039 0.498039 0.498039 1
+
+			texture_unit
+			{
+				texture_alias 0
+				texture iTrees-02_Bark-MapleYng-01.jpg
+			}
+		}
+
+	}
+
+}
+
+material lila/Fleurs_Lilas
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+			cull_hardware none
+			cull_software none
+			ambient 0.498039 0.498039 0.498039 1
+			diffuse 0.498039 0.498039 0.498039 1
+
+			texture_unit
+			{
+				texture_alias 0
+				texture Lilac_leaf.png
+			}
+		}
+
+	}
+
+}
