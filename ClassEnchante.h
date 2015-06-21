@@ -14,10 +14,11 @@ public:
 
 	/* Constructeur */
 	/* pNode, l'adresse du noeud de Ogre */
+	/* shapeType, enum Shape qui détermine quel forme est utilisée pour représenter l'objet */
 	/* prix, poid, nom, caractéristiques de l'item enchanté */
 	/* IsUnique, true si l'item enchanté ne peut se trouver 2 fois dans un même inventaire, false par défaut */
 	/* IsVisible, true si l'item enchanté doit être rendu par Ogre */
-	Enchante(Ogre::SceneNode *pNode, int prix=0, float poid=1.0, std::string const& nom="defaultItemEnchanted", bool IsUnique=false, bool IsVisible=true, Sort *pEnchantement=nullptr);
+	Enchante(Ogre::SceneNode *pNode, EShape shapeType, int prix=0, float poid=1.0, std::string const& nom="defaultItemEnchanted", bool IsUnique=false, bool IsVisible=true, Sort *pEnchantement=nullptr);
 
 	/* Destructeur */
 	virtual ~Enchante();

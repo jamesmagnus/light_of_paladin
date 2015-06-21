@@ -2,7 +2,7 @@
 #include "ClassEntiteVivante.h"
 
 
-EntiteVivante::EntiteVivante(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom): Affichable(pNode, IsVisible)
+EntiteVivante::EntiteVivante(Ogre::SceneNode *pNode, EShape shapeType, bool IsVisible, int vie, std::string const& nom) : Affichable(pNode, IsVisible), Collisionnable(shapeType)
 {
 	mVie = vie;
 	mNom = nom;

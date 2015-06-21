@@ -1,7 +1,7 @@
 ﻿#include "StdLibAndNewOperator.h"
 #include "ClassHumanoide.h"
 
-Humanoide::Humanoide(Ogre::SceneNode *pNode, bool IsVisible, int vie, std::string const& nom):EntiteVivante(pNode, IsVisible, vie, nom)
+Humanoide::Humanoide(Ogre::SceneNode *pNode, EShape shapeType, bool IsVisible, int vie, std::string const& nom) :EntiteVivante(pNode, shapeType, IsVisible, vie, nom)
 {
 }
 

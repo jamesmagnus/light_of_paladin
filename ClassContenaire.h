@@ -19,9 +19,10 @@ public:
 
 	/* Constructeur */
 	/* pNode, adresse du noeud de scène lié à l'objet */
+	/* shapeType, enum Shape qui détermine quel forme est utilisée pour représenter l'objet */
 	/* IsVisible, true si l'objet doit être rendu, true par défaut */
 	/* max, la taille de l'inventaire du contenaire */
-	Contenaire(Ogre::SceneNode *pNode, bool IsVisible=true, int max=10);
+	Contenaire(Ogre::SceneNode *pNode, EShape shapeType, bool IsVisible=true, int max=10);
 
 	/* Constructeur */
 	/* pNode, adresse du noeud de scène lié à l'objet */

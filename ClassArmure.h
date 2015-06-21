@@ -4,7 +4,7 @@
 
 enum class ETypeArmure{CASQUE, PLASTRON, GANT_G, GANT_D, BOTTE_G, BOTTE_D, JAMBIERE_G, JAMBIERE_D};
 
-/* Classe abstraite qui sert à manipuler les différentes parties d'armure */
+/* Classe finale qui sert à manipuler les différentes parties d'armure */
 /* Sémantique d'entité */
 class Armure : public Enchante
 {
@@ -17,11 +17,12 @@ public:
 
 	/* Constructeur */
 	/* pNode, adresse du noeud de Ogre */
+	/* shapeType, enum Shape qui détermine quel forme est utilisée pour représenter l'objet */
 	/* prix, poid, nom, caractéristiques de l'armure */
 	/* IsUnique, true si l'armure ne peut se trouver 2 fois dans un même inventaire, false par défaut */
 	/* IsVisible, true si l'armure doit être rendue par Ogre */
 	/* pointProtection, etat, caractéristiques de l'armure */
-	Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix=0, float poid=1.0f, std::string const& nom="DefaultArmor", bool IsUnique=false, bool IsVisible=true, int pointProtection=0, float etat=1.0f, Sort *pEnchantement=nullptr);
+	Armure(Ogre::SceneNode *pNode, EShape shapeType, ETypeArmure type, int prix=0, float poid=1.0f, std::string const& nom="DefaultArmor", bool IsUnique=false, bool IsVisible=true, int pointProtection=0, float etat=1.0f, Sort *pEnchantement=nullptr);
 
 	/* Destructeur */
 	virtual ~Armure();

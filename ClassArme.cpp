@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Arme::Arme(Ogre::SceneNode *pNode, int degat, float vitesse, float resistance, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible, Sort *pEnchantement): Enchante(pNode, prix, poid, nom, IsUnique, IsVisible, pEnchantement)
+Arme::Arme(Ogre::SceneNode *pNode, EShape shapeType, int degat, float vitesse, float resistance, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible, Sort *pEnchantement) : Enchante(pNode, shapeType, prix, poid, nom, IsUnique, IsVisible, pEnchantement)
 {
     if (degat >= 0)
     {

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Armure::Armure(Ogre::SceneNode *pNode, ETypeArmure type, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible, int pointProtection, float etat, Sort *pEnchantement): Enchante(pNode, prix, poid, nom, IsUnique, IsVisible, pEnchantement)
+Armure::Armure(Ogre::SceneNode *pNode, EShape shapeType, ETypeArmure type, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible, int pointProtection, float etat, Sort *pEnchantement) : Enchante(pNode, shapeType, prix, poid, nom, IsUnique, IsVisible, pEnchantement)
 {
 	if (pointProtection >= 0)
 	{

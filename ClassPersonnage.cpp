@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Personnage::Personnage(Ogre::SceneNode *pNode, int stat[EStat::ESTATMAX], bool IsVisible, std::string const& nom, int niveau, int XP):Humanoide(pNode, IsVisible, stat[EStat::VIE_MAX], nom)
+Personnage::Personnage(Ogre::SceneNode *pNode, EShape shapeType, int stat[EStat::ESTATMAX], bool IsVisible, std::string const& nom, int niveau, int XP) :Humanoide(pNode, shapeType, IsVisible, stat[EStat::VIE_MAX], nom)
 {
     for (int i=0; i<EStat::ESTATMAX; i++)
     {

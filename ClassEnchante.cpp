@@ -2,7 +2,7 @@
 #include "ClassEnchante.h"
 #include "ClassSort.h"
 
-Enchante::Enchante(Ogre::SceneNode *pNode, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible, Sort *pEnchantement):Item(pNode, prix, poid, nom, IsUnique, IsVisible)
+Enchante::Enchante(Ogre::SceneNode *pNode, EShape shapeType, int prix, float poid, std::string const& nom, bool IsUnique, bool IsVisible, Sort *pEnchantement) :Item(pNode, shapeType, prix, poid, nom, IsUnique, IsVisible)
 {
 	mpEnch = pEnchantement;
 }

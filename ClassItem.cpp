@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Item::Item(Ogre::SceneNode *pNode, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible): Affichable(pNode, IsVisible)
+Item::Item(Ogre::SceneNode *pNode, EShape shapeType, int prix, float poid, string const& nom, bool IsUnique, bool IsVisible) : Affichable(pNode, IsVisible), Collisionnable(shapeType)
 {
     mID = IDMgr::getInstance()->newID();
 

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Contenaire::Contenaire(Ogre::SceneNode *pNode, bool IsVisible, int max):Affichable(pNode, IsVisible), Inventaire(max)
+Contenaire::Contenaire(Ogre::SceneNode *pNode, EShape shapeType, bool IsVisible, int max) :Affichable(pNode, IsVisible), Inventaire(max)
 {
 	mNom = "Coffre";
 }

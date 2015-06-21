@@ -25,12 +25,13 @@ public:
 
     /* Constructeur */
     /* pNode, adresse du noeud de scène lié au personnage */
+	/* shapeType, enum Shape qui détermine quel forme est utilisée pour représenter l'objet */
     /* stat, tableau de int qui représente les compétences du personnage */
     /* IsVisible, true si le personnage doit être rendu par Ogre */
     /* nom, le nom du personnage */
     /* niveau, le niveau du personnage */
     /* XP, l'XP du personnage 0 -> 1000 */
-    Personnage(Ogre::SceneNode *pNode, int stat[EStat::ESTATMAX], bool IsVisible=true, std::string const& nom="DefaultName", int niveau=1, int XP=0); 
+    Personnage(Ogre::SceneNode *pNode, EShape shapeType, int stat[EStat::ESTATMAX], bool IsVisible=true, std::string const& nom="DefaultName", int niveau=1, int XP=0); 
 
     /* Destructeur */
     virtual ~Personnage(); 
