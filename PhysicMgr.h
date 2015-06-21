@@ -7,6 +7,7 @@ class btCollisionDispatcher;
 class btDiscreteDynamicsWorld;
 class btBroadphaseInterface;
 class btSequentialImpulseConstraintSolver;
+class Collisionnable;
 
 /* Classe pour gérer le moteur de physique du jeu (Bullet) */
 /* Sémantique d'entité hérite de boost::noncopyable */
@@ -27,6 +28,9 @@ public:
 
 	/* Libère les ressources allouées pour Bullet */
 	void destroyBullet();
+
+	/* Ajoute un object dérivé de Collisionnable au monde */
+	void addObjectToWorld(Collisionnable *pColl) const;
 
 private:
 	btDefaultCollisionConfiguration *mpCollisionCfg;
