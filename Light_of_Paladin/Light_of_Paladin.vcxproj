@@ -203,7 +203,6 @@
     <ClInclude Include="InputListener.h" />
     <ClInclude Include="LightMgr.h" />
     <ClInclude Include="NetworkMgr.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Structures.h" />
     <ClInclude Include="TerrainMgr.h" />
     <ClInclude Include="WaterMgr.h" />
@@ -512,14 +511,30 @@
     <None Include="resources_d.cfg" />
   </ItemGroup>
   <ItemGroup>
-    <Xsd Include="media\cegui\xml_schemas\Animation.xsd" />
-    <Xsd Include="media\cegui\xml_schemas\CEGUIConfig.xsd" />
-    <Xsd Include="media\cegui\xml_schemas\Falagard.xsd" />
-    <Xsd Include="media\cegui\xml_schemas\Font.xsd" />
-    <Xsd Include="media\cegui\xml_schemas\GUILayout.xsd" />
-    <Xsd Include="media\cegui\xml_schemas\GUIScheme.xsd" />
-    <Xsd Include="media\cegui\xml_schemas\Imageset.xsd" />
-    <Xsd Include="media\cegui\xml_schemas\Samples.xsd" />
+    <Xsd Include="media\cegui\xml_schemas\Animation.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\CEGUIConfig.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Falagard.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Font.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\GUILayout.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\GUIScheme.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Imageset.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Samples.xsd">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Xsd>
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\cegui\imagesets\AlfiskoSkin.png" />
@@ -634,14 +649,30 @@
     <Image Include="media\texture\terrain\terrainsnow01_N.DDS" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="media\skyX\SkyX_Clouds.hlsl" />
-    <FxCompile Include="media\skyX\SkyX_Ground.hlsl" />
-    <FxCompile Include="media\skyX\SkyX_Lightning.hlsl" />
-    <FxCompile Include="media\skyX\SkyX_Moon.hlsl" />
-    <FxCompile Include="media\skyX\SkyX_Skydome.hlsl" />
-    <FxCompile Include="media\skyX\SkyX_VolClouds.hlsl" />
-    <FxCompile Include="media\skyX\SkyX_VolClouds_Lightning.hlsl" />
-    <FxCompile Include="media\skyX\Terrain.hlsl" />
+    <FxCompile Include="media\skyX\SkyX_Clouds.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Ground.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Lightning.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Moon.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Skydome.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_VolClouds.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_VolClouds_Lightning.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="media\skyX\Terrain.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Media Include="media\fmod\music\ambiance_ballade.mp3" />
