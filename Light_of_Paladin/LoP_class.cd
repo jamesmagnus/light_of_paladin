@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Arme">
+    <Position X="38.5" Y="15.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAIAAAEQAAAAAAACRAAAAAAACASIAAAQEAAEQAA=</HashCode>
+      <FileName>ClassArme.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Armure">
+    <Position X="45.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIBAAAAAAAAAAAABBAEARAAAiAAAAQAEACASEA=</HashCode>
+      <FileName>ClassArmure.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bonne">
+    <Position X="52.5" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>ClassBonne.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chaussure">
+    <Position X="47.75" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAA=</HashCode>
+      <FileName>ClassChaussure.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cle">
+    <Position X="40" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAABAAAAA=</HashCode>
+      <FileName>ClassCle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Consommable">
+    <Position X="52.25" Y="12.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAEIACAAAAAhAAAAACAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>ClassConsommable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Contenaire">
+    <Position X="43.25" Y="6.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAICAAAAARAQAAAAAAAAAAAEAhAAAAAAEAAAAAA=</HashCode>
+      <FileName>ClassContenaire.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Creature">
+    <Position X="31.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassCreature.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Document">
+    <Position X="42.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAIAABEAAEAAAAAAAAAAAACAACAAAAAABAAIA=</HashCode>
+      <FileName>ClassDocument.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enchante">
+    <Position X="43" Y="12.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAACAABBAAAAAQAAABAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>ClassEnchante.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntiteVivante">
+    <Position X="37.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAIQAAAIAAAQAAAAAAAAAAAAFAAAAAA=</HashCode>
+      <FileName>ClassEntiteVivante.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Epee">
+    <Position X="38.75" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAABABAAAAAAAAAAACAEAAAQAA=</HashCode>
+      <FileName>ClassEpee.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Humanoide">
+    <Position X="35.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAIAAAAAAAAAAAAAAAAAAAAAAAACAAAAEAAAACA=</HashCode>
+      <FileName>ClassHumanoide.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ingredient">
+    <Position X="50.25" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassIngredient.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inventaire">
+    <Position X="43.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAQQQEQAAAAAAcQgQAAAAAFAAAAASAgCAAAAAA=</HashCode>
+      <FileName>ClassInventaire.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item">
+    <Position X="40.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAMBYAACEAAACQAAAABAIEAAAAAkAAAAAAEAAgYAA=</HashCode>
+      <FileName>ClassItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Livre">
+    <Position X="43.25" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>ClassLivre.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Magique">
+    <Position X="30" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>ClassMagique.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Note">
+    <Position X="41" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>ClassNote.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ordinaire">
+    <Position X="32.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>ClassOrdinaire.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Personnage">
+    <Position X="35" Y="12.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAICiAAgAAAAAAQAAEAACiAKAAAAVkAgEAEAAAA=</HashCode>
+      <FileName>ClassPersonnage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Poison">
+    <Position X="54.75" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>ClassPoison.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Potion">
+    <Position X="53.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassPotion.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sort" Collapsed="true">
+    <Position X="64.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAgAAAAAIAAAAAAA=</HashCode>
+      <FileName>ClassSort.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vetement">
+    <Position X="47.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAABAAAAAAAAIAAA=</HashCode>
+      <FileName>ClassVetement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Affichable">
+    <Position X="40.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAIACAAAAAAAAAAABAAACAAAABAAAAEEEEAAAAA=</HashCode>
+      <FileName>Affichable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Collisionnable">
+    <Position X="37.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAARAAAIABAIAAAAAAAAAAIARAQMABE=</HashCode>
+      <FileName>Collisionnable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhysicMgr" Collapsed="true">
+    <Position X="64.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAEAEAAAAAEAAAAAEAAAACBAEEAAAAAABAAAAA=</HashCode>
+      <FileName>PhysicMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppMain" Collapsed="true">
+    <Position X="57.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAKKACACBACAAgAgAAU0gEAABECKAEQAAAgghgOAKAA=</HashCode>
+      <FileName>AppMain.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CeguiMgr" Collapsed="true">
+    <Position X="60.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAEgAAAAAAAAEAAAAQCAAAAAAAACAAAgAAAKAAAAA=</HashCode>
+      <FileName>CeguiMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chunk" Collapsed="true">
+    <Position X="62.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAIEAACAEAAAAAFAAEAAAAAEAAAACAAAQABAAAAAA=</HashCode>
+      <FileName>Chunk.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChunkMgr" Collapsed="true">
+    <Position X="64.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAABAIAQAAAAAACAAAQAIEAAgAAAAuE=</HashCode>
+      <FileName>ChunkMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExceptionPerso" Collapsed="true">
+    <Position X="66" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAggiAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ExceptionPerso.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMODSoundMgr" Collapsed="true">
+    <Position X="57.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAQAgAAAAECAAABgAgAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>FMODSoundMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameConsole" Collapsed="true">
+    <Position X="59" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCQAgAAAGAEAEAQAAAAAAIgAQgAACAAQAAAAAAAIA=</HashCode>
+      <FileName>GameConsole.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeightFieldShape" Collapsed="true">
+    <Position X="60.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQBAAAAAAAAAAAAAAIACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HeightFieldShape.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IDMgr" Collapsed="true">
+    <Position X="64.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAABQAEAAQAAAAAYBCCAwAAAAIAA=</HashCode>
+      <FileName>IDMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputListener" Collapsed="true">
+    <Position X="66" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAITCAgABABCAAACIAQAAAAQIAAA=</HashCode>
+      <FileName>InputListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyBoardEventListener" Collapsed="true">
+    <Position X="60.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAACAAAAACIgEBAAAAAAAIAEAAAAAAAAA=</HashCode>
+      <FileName>InputListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseEventListener" Collapsed="true">
+    <Position X="57.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACgAAAAAAAAAAIAAAAACAAABAAAAkAAAAAAAACAAAAA=</HashCode>
+      <FileName>InputListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightMgr" Collapsed="true">
+    <Position X="64.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQBAAAAAAACAAACARIAAAAAAAABCCA=</HashCode>
+      <FileName>LightMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkMgr" Collapsed="true">
+    <Position X="59" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NetworkMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TerrainMgr" Collapsed="true">
+    <Position X="60.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACACAhAAAAEAAAoAAAAECBDAAAAAAAEAAEAAAAACAA=</HashCode>
+      <FileName>TerrainMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaterMgr" Collapsed="true">
+    <Position X="64.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggAAEAAAAAkAARACAAAAAABAAAAAFAA=</HashCode>
+      <FileName>WaterMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::SceneNode" Collapsed="true">
+    <Position X="60.75" Y="4.5" Width="1.5" />
+    <NestedTypes>
+      <Typedef Name="Ogre::SceneNode::ObjectMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneNode.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneNode::ObjectIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneNode.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneNode::ConstObjectIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneNode.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AUBgBnxQEQgEKAEIAAkACgHhgKEAAIACIBAiAEFGkBA=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneNode.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::Root" Collapsed="true">
+    <Position X="57.25" Y="4.5" Width="1.5" />
+    <NestedTypes>
+      <Typedef Name="Ogre::Root::SceneManagerStack" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::Root::PluginLibList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::Root::PluginInstanceList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::Root::MovableObjectFactoryMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::Root::RenderQueueInvocationSequenceMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Enum Name="Ogre::Root::FrameEventTimeType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Typedef Name="Ogre::Root::EventTimesQueue" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::Root::MovableObjectFactoryIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>2QmedgQVExgF4CTvRSvapAnpnI06wNyj9TgikzkkVF4=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\OgreRoot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::RenderWindow" Collapsed="true">
+    <Position X="66" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ApASAAkQCQgQAAAAEDAAAFCAYAAAAAACAQDAAAAEAAE=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\OgreRenderWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::SceneManager" Collapsed="true">
+    <Position X="59" Y="4.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Ogre::SceneManager::PrefabType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Typedef Name="Ogre::SceneManager::MovableObjectIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::AutoTrackingSceneNodes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::StaticGeometryList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Enum Name="Ogre::SceneManager::BoxPlane" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="Ogre::SceneManager::SceneMgrQueuedRenderableVisitor" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Ogre::SceneManager::ShadowCasterSceneQueryListener" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Typedef Name="Ogre::SceneManager::ListenerList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::CameraList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::MovableObjectLodChangedEventList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::SceneManager::lightsForShadowTextureLess" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Ogre::SceneManager::LightInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::SceneManager::SceneNodeList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::SpecialCaseRenderQueueList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::EntityMaterialLodChangedEventList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::EntityMeshLodChangedEventList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::InstanceManagerMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::SceneManager::SkyPlaneGenParameters" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::SceneManager::LodListenerSet" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::SceneManager::LightClippingInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Ogre::SceneManager::RenderContext" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::SceneManager::MovableObjectMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::AnimationList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::LightInfoList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::SceneManager::SkyDomeGenParameters" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Ogre::SceneManager::materialLess" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::SceneManager::ShadowTextureCameraList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::MovableObjectCollectionMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::SceneManager::MovableObjectCollection" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::SceneManager::RenderQueueListenerList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::InstanceManagerVec" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Enum Name="Ogre::SceneManager::IlluminationRenderStage" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Ogre::SceneManager::SpecialCaseRenderQueueMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Typedef Name="Ogre::SceneManager::CamVisibleObjectsMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::SceneManager::SkyBoxGenParameters" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::SceneManager::InstancedGeometryList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::RenderObjectListenerList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::CameraIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::AnimationIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::SceneManager::ShadowCasterList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Class Name="Ogre::SceneManager::Listener" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Typedef Name="Ogre::SceneManager::LightClippingInfoMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::SceneManager::lightLess" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::SceneManager::ShadowCamLightMapping" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>/df2+f67v/3vZ3//ft/7+o7/73/+vV32+//+v3//v/w=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\OgreSceneManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::Camera" Collapsed="true">
+    <Position X="59" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Ogre::Camera::Listener" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreCamera.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Typedef Name="Ogre::Camera::ListenerList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreCamera.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>WBBqqzwAlQwO7DSJQDiYsSYzRgACEuoilQyHBEEGLxI=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\OgreCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::Light" Collapsed="true">
+    <Position X="62.5" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Ogre::Light::LightTypes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreLight.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Typedef Name="Ogre::Light::CustomParameterMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreLight.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EOJjMIgEAEwJEFSRCCgwBpBSAXhBgoe7g8bpAoAGA5g=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\OgreLight.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::TerrainGroup" Collapsed="true">
+    <Position X="57.25" Y="5.5" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="Ogre::TerrainGroup::TerrainSlotDefinition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Ogre::TerrainGroup::TerrainSlot" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Ogre::TerrainGroup::RayResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Typedef Name="Ogre::TerrainGroup::TerrainList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::TerrainGroup::TerrainSlotMap" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::TerrainGroup::TerrainIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="Ogre::TerrainGroup::ConstTerrainIterator" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Struct Name="Ogre::TerrainGroup::LoadRequest" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QRLFAAYYQEkAoKYIQJxIoCJEBB5FIGTxCZAAgQAHHUA=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainGroup.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::TerrainGlobalOptions" Collapsed="true">
+    <Position X="66" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YBwBAQBImLUAIlgACAAAAQYpwAwIgBiAGsMBgUQwFog=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrain.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::Viewport" Collapsed="true">
+    <Position X="62.5" Y="5.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Ogre::Viewport::Listener" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreViewport.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Typedef Name="Ogre::Viewport::ListenerList" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\OGRE\OgreViewport.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>esCKAi5A2RIF6Ao2BAUEsKBECIUMYAJSgghAARAcAgA=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\OgreViewport.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ogre::TerrainLayerBlendMap" Collapsed="true">
+    <Position X="59" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCAAIAAAAUAAAQCAECAAQAAACAAZQAAIBQCQBAUFgCA=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\OGRE\Terrain\OgreTerrainLayerBlendMap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkyX::SkyX" Collapsed="true">
+    <Position X="62.5" Y="4.5" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="SkyX::SkyX::RenderQueueGroups" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\SKYX_140\include\SkyX.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="SkyX::SkyX::LightingMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\SKYX_140\include\SkyX.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>SACIAAwBIAQAwACkUBhFQAAAQFAFABQBABLAGwAGmQA=</HashCode>
+      <FileName>c:\DevLib\SKYX_140\include\SkyX.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Forests::PagedGeometry" Collapsed="true">
+    <Position X="62.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RJQBGCiAGAAiQAIiFlAAA4IiABUQoABUB4AKAAEFABA=</HashCode>
+      <FileName>c:\DevLib\PAGEDGEOMETRY_140\include\PagedGeometry.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CEGUI::OgreRenderer" Collapsed="true">
+    <Position X="60.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBAIAAZhIAAYAxUMAiGQAUARKIAAAYAgUCNIACMhtQQ=</HashCode>
+      <FileName>c:\DevLib\CEGUI_140\include\CEGUI\RendererModules\Ogre\Renderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OIS::InputManager" Collapsed="true">
+    <Position X="57.25" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="OIS::InputManager::AddOnFactories" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\ois\OISInputManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAASABAAAAAAgAIAAkAAIBAQWAAgFAIAAAAAA=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\ois\OISInputManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OIS::Mouse" Collapsed="true">
+    <Position X="66" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQCAAAAAAAUAAgAAAAAAAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\ois\OISMouse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OIS::Keyboard" Collapsed="true">
+    <Position X="59" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="OIS::Keyboard::TextTranslationMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\ois\OISKeyboard.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="OIS::Keyboard::Modifier" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\OGRE_140\include\ois\OISKeyboard.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAhAABAQAAAAAAACAAAAAAAIgAIAAABAASAACAAABAA=</HashCode>
+      <FileName>c:\DevLib\OGRE_140\include\ois\OISKeyboard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hydrax::Hydrax" Collapsed="true">
+    <Position X="62.5" Y="1.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Hydrax::Hydrax::DeviceListener" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>c:\DevLib\HYDRAX_140\include\Hydrax.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QECIIAoVwsVK6K1sN9AzCgIrhhcSsBRqLkZCEy0Go4A=</HashCode>
+      <FileName>c:\DevLib\HYDRAX_140\include\Hydrax.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="sTableauChunks">
+    <Position X="30" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAABA=</HashCode>
+      <FileName>Structures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="sVector3Move">
+    <Position X="26" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Structures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="TableauChunks" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Structures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Vector3Move" Collapsed="true">
+    <Position X="25.75" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Structures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="ETypeArmure" Collapsed="true">
+    <Position X="59" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAIAAAEAABAgCQAAAAAAAAA=</HashCode>
+      <FileName>ClassArmure.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EStat" Collapsed="true">
+    <Position X="66" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAhAIAAAAABQAEAAAAACAAAABAABAAAAAgAAAAA=</HashCode>
+      <FileName>enumerations.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EDegat" Collapsed="true">
+    <Position X="57.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAEAAAAAAAQ=</HashCode>
+      <FileName>enumerations.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EPopo" Collapsed="true">
+    <Position X="62.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAABAAAAAAAAAAAAoAAAAAAAA=</HashCode>
+      <FileName>enumerations.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ENiveau" Collapsed="true">
+    <Position X="60.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAAAAAA=</HashCode>
+      <FileName>enumerations.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ETexture" Collapsed="true">
+    <Position X="57.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>enumerations.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EMove" Collapsed="true">
+    <Position X="59" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>enumerations.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EShape" Collapsed="true">
+    <Position X="64.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEEIAIAAAAAAABAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>enumerations.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

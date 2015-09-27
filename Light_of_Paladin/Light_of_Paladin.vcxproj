@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8C2D4C9A-F2C4-4001-986B-295AF5E661B6}</ProjectGuid>
+    <RootNamespace>Light_of_Paladin</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BT_USE_DOUBLE_PRECISION;_DEBUG;_DEBUG_;_WIN32;_WIN32_;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <SmallerTypeCheck>true</SmallerTypeCheck>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>C:\DevLib\SKYX_140\include;C:\DevLib\RAKNET_140\include\RakNet;C:\DevLib\PAGEDGEOMETRY_140\include;C:\DevLib\OGRE_140\include\ois;C:\DevLib\OGRE_140\include\OGRE\Terrain;C:\DevLib\OGRE_140\include\OGRE;C:\DevLib\OGRE_140\include;C:\DevLib\HYDRAX_140\include;C:\DevLib\FMOD\FMOD Studio API Windows\api\lowlevel\inc;C:\DevLib\CEGUI_140\include\;C:\DevLib\BULLET_140\include;C:\DevLib\BOOST_140;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ShowProgress>NotSet</ShowProgress>
+      <Version>1.0</Version>
+      <SubSystem>Windows</SubSystem>
+      <HeapReserveSize>52428800</HeapReserveSize>
+      <HeapCommitSize>204800</HeapCommitSize>
+      <StackReserveSize>10485760</StackReserveSize>
+      <StackCommitSize>51200</StackCommitSize>
+      <LinkStatus>
+      </LinkStatus>
+      <AdditionalLibraryDirectories>C:\DevLib\BOOST_140\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <PreprocessorDefinitions>BT_USE_DOUBLE_PRECISION;_WIN32;_WIN32_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>false</OpenMPSupport>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>C:\DevLib\SKYX_140\include;C:\DevLib\RAKNET_140\include\RakNet;C:\DevLib\PAGEDGEOMETRY_140\include;C:\DevLib\OGRE_140\include\ois;C:\DevLib\OGRE_140\include\OGRE\Terrain;C:\DevLib\OGRE_140\include\OGRE;C:\DevLib\OGRE_140\include;C:\DevLib\HYDRAX_140\include;C:\DevLib\FMOD\FMOD Studio API Windows\api\lowlevel\inc;C:\DevLib\CEGUI_140\include\;C:\DevLib\BULLET_140\include;C:\DevLib\BOOST_140;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ShowProgress>NotSet</ShowProgress>
+      <Version>1.0</Version>
+      <SubSystem>Windows</SubSystem>
+      <HeapReserveSize>52428800</HeapReserveSize>
+      <HeapCommitSize>204800</HeapCommitSize>
+      <StackReserveSize>10485760</StackReserveSize>
+      <StackCommitSize>51200</StackCommitSize>
+      <LinkStatus>false</LinkStatus>
+      <AdditionalLibraryDirectories>C:\DevLib\BOOST_140\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Affichable.cpp" />
+    <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="CeguiMgr.cpp" />
+    <ClCompile Include="Chunk.cpp" />
+    <ClCompile Include="ChunkMgr.cpp" />
+    <ClCompile Include="ClassArme.cpp" />
+    <ClCompile Include="ClassArmure.cpp" />
+    <ClCompile Include="ClassBonne.cpp" />
+    <ClCompile Include="ClassChaussure.cpp" />
+    <ClCompile Include="ClassCle.cpp" />
+    <ClCompile Include="ClassConsommable.cpp" />
+    <ClCompile Include="ClassContenaire.cpp" />
+    <ClCompile Include="ClassCreature.cpp" />
+    <ClCompile Include="ClassDocument.cpp" />
+    <ClCompile Include="ClassEnchante.cpp" />
+    <ClCompile Include="ClassEntiteVivante.cpp" />
+    <ClCompile Include="ClassEpee.cpp" />
+    <ClCompile Include="ClassHumanoide.cpp" />
+    <ClCompile Include="ClassIngredient.cpp" />
+    <ClCompile Include="ClassInventaire.cpp" />
+    <ClCompile Include="ClassItem.cpp" />
+    <ClCompile Include="ClassLivre.cpp" />
+    <ClCompile Include="ClassMagique.cpp" />
+    <ClCompile Include="ClassNote.cpp" />
+    <ClCompile Include="ClassOrdinaire.cpp" />
+    <ClCompile Include="ClassPersonnage.cpp" />
+    <ClCompile Include="ClassPoison.cpp" />
+    <ClCompile Include="ClassPotion.cpp" />
+    <ClCompile Include="ClassSort.cpp" />
+    <ClCompile Include="ClassVetement.cpp" />
+    <ClCompile Include="Collisionnable.cpp" />
+    <ClCompile Include="ExceptionPerso.cpp" />
+    <ClCompile Include="FMODSoundMgr.cpp" />
+    <ClCompile Include="GameConsole.cpp" />
+    <ClCompile Include="HeightFieldShape.cpp" />
+    <ClCompile Include="IDMgr.cpp" />
+    <ClCompile Include="InputListener.cpp" />
+    <ClCompile Include="LightMgr.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkMgr.cpp" />
+    <ClCompile Include="PhysicMgr.cpp" />
+    <ClCompile Include="TerrainMgr.cpp" />
+    <ClCompile Include="WaterMgr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Affichable.h" />
+    <ClInclude Include="Collisionnable.h" />
+    <ClInclude Include="PhysicMgr.h" />
+    <ClInclude Include="StdLibAndNewOperator.h" />
+    <ClInclude Include="AppMain.h" />
+    <ClInclude Include="CeguiMgr.h" />
+    <ClInclude Include="Chunk.h" />
+    <ClInclude Include="ChunkMgr.h" />
+    <ClInclude Include="ClassArme.h" />
+    <ClInclude Include="ClassArmure.h" />
+    <ClInclude Include="ClassBonne.h" />
+    <ClInclude Include="ClassChaussure.h" />
+    <ClInclude Include="ClassCle.h" />
+    <ClInclude Include="ClassConsommable.h" />
+    <ClInclude Include="ClassContenaire.h" />
+    <ClInclude Include="ClassCreature.h" />
+    <ClInclude Include="ClassDocument.h" />
+    <ClInclude Include="ClassEnchante.h" />
+    <ClInclude Include="ClassEntiteVivante.h" />
+    <ClInclude Include="ClassEpee.h" />
+    <ClInclude Include="ClassHumanoide.h" />
+    <ClInclude Include="ClassIngredient.h" />
+    <ClInclude Include="ClassInventaire.h" />
+    <ClInclude Include="ClassItem.h" />
+    <ClInclude Include="ClassLivre.h" />
+    <ClInclude Include="ClassMagique.h" />
+    <ClInclude Include="ClassNote.h" />
+    <ClInclude Include="ClassOrdinaire.h" />
+    <ClInclude Include="ClassPersonnage.h" />
+    <ClInclude Include="ClassPoison.h" />
+    <ClInclude Include="ClassPotion.h" />
+    <ClInclude Include="ClassSort.h" />
+    <ClInclude Include="ClassVetement.h" />
+    <ClInclude Include="enumerations.h" />
+    <ClInclude Include="ExceptionPerso.h" />
+    <ClInclude Include="FMODSoundMgr.h" />
+    <ClInclude Include="GameConsole.h" />
+    <ClInclude Include="HeightFieldShape.h" />
+    <ClInclude Include="IDMgr.h" />
+    <ClInclude Include="InputListener.h" />
+    <ClInclude Include="LightMgr.h" />
+    <ClInclude Include="NetworkMgr.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Structures.h" />
+    <ClInclude Include="TerrainMgr.h" />
+    <ClInclude Include="WaterMgr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="C:\DevLib\BULLET_140\bin\debug\BulletCollision_Debug.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\debug\BulletDynamics_Debug.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\debug\LinearMath_Debug.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\release\BulletCollision.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\release\BulletDynamics.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\release\LinearMath.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUIBase-0_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUICommonDialogs-0_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUILuaScriptModule-0_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUIOgreRenderer-0_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUIBase-0.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUICommonDialogs-0.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUILuaScriptModule-0.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUIOgreRenderer-0.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\FMOD\FMOD Studio API Windows\api\lowlevel\lib\fmodL_vc.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\FMOD\FMOD Studio API Windows\api\lowlevel\lib\fmod_vc.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\HYDRAX_140\bin\debug\HydraxLib_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\HYDRAX_140\bin\release\HydraxLib.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\debug\OgreMain_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\debug\OgreTerrain_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\debug\OIS_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\release\OgreMain.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\release\OgreTerrain.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\release\OIS.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\PAGEDGEOMETRY_140\bin\debug\PagedGeometry_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\PAGEDGEOMETRY_140\bin\release\PagedGeometry.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\RAKNET_140\bin\debug\RakNetDLL_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\RAKNET_140\bin\release\RakNetDLL.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\SKYX_140\bin\debug\SkyX_d.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </Library>
+    <Library Include="C:\DevLib\SKYX_140\bin\release\SkyX.lib">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LoP_class.cd" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\Item">
+      <UniqueIdentifier>{7bf38c93-c4d4-4770-9144-5f4559e6624c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Moteur">
+      <UniqueIdentifier>{213c9ea1-1202-46e0-85cb-e3086695cabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Item">
+      <UniqueIdentifier>{5b207344-adc9-4483-825c-96ee4ce3649e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Moteur">
+      <UniqueIdentifier>{80e2a0cd-a617-434e-ac17-be1938f7ac43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\debug">
+      <UniqueIdentifier>{406bfd64-db2c-4043-acf2-f7d0672d07e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\release">
+      <UniqueIdentifier>{a60d9504-147a-44dd-8a64-4be057e4dddf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ClassArme.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassArmure.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassBonne.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassChaussure.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassCle.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassConsommable.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassContenaire.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassDocument.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassCreature.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassEnchante.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassEntiteVivante.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassEpee.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassHumanoide.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassIngredient.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassInventaire.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassItem.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassLivre.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassMagique.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassNote.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassOrdinaire.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassPersonnage.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassPoison.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassPotion.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassSort.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassVetement.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Affichable.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="AppMain.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="CeguiMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="ExceptionPerso.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="FMODSoundMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="GameConsole.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="HeightFieldShape.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="IDMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="InputListener.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="LightMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicMgr.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+    <ClCompile Include="Collisionnable.cpp">
+      <Filter>Fichiers sources\Moteur</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ClassArme.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassArmure.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassBonne.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassChaussure.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassCle.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassConsommable.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassContenaire.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassCreature.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDocument.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassEnchante.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassEntiteVivante.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassEpee.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassHumanoide.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassIngredient.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassInventaire.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassItem.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassLivre.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassMagique.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassNote.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassOrdinaire.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassPersonnage.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassPoison.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassPotion.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassSort.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassVetement.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Affichable.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="AppMain.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="CeguiMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="enumerations.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="ExceptionPerso.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="FMODSoundMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConsole.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="HeightFieldShape.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="IDMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="InputListener.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="LightMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="Structures.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="StdLibAndNewOperator.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicMgr.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+    <ClInclude Include="Collisionnable.h">
+      <Filter>Fichiers d%27en-tête\Moteur</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="C:\DevLib\BULLET_140\bin\debug\BulletCollision_Debug.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\debug\BulletDynamics_Debug.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUIBase-0_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUICommonDialogs-0_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUILuaScriptModule-0_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\debug\CEGUIOgreRenderer-0_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\HYDRAX_140\bin\debug\HydraxLib_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\debug\LinearMath_Debug.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\debug\OgreMain_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\debug\OgreTerrain_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\debug\OIS_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\PAGEDGEOMETRY_140\bin\debug\PagedGeometry_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\RAKNET_140\bin\debug\RakNetDLL_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\SKYX_140\bin\debug\SkyX_d.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\FMOD\FMOD Studio API Windows\api\lowlevel\lib\fmodL_vc.lib">
+      <Filter>Fichiers de ressources\debug</Filter>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\release\BulletCollision.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\release\BulletDynamics.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUIBase-0.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUICommonDialogs-0.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUILuaScriptModule-0.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\CEGUI_140\bin\release\CEGUIOgreRenderer-0.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\PAGEDGEOMETRY_140\bin\release\PagedGeometry.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\FMOD\FMOD Studio API Windows\api\lowlevel\lib\fmod_vc.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\HYDRAX_140\bin\release\HydraxLib.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\BULLET_140\bin\release\LinearMath.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\release\OgreMain.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\release\OgreTerrain.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\OGRE_140\bin\release\OIS.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\RAKNET_140\bin\release\RakNetDLL.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+    <Library Include="C:\DevLib\SKYX_140\bin\release\SkyX.lib">
+      <Filter>Fichiers de ressources\release</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LoP_class.cd" />
+  </ItemGroup>
+</Project>

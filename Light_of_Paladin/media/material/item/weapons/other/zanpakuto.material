@@ -1,0 +1,107 @@
+// Material.001 genrated by blender2ogre 0.6.0
+
+material zanpakuto.001 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass zanpakuto.001
+        {
+            ambient 0.5039615035057068 0.25870293378829956 0.25870293378829956 1.0
+            diffuse 0.4031692088122547 0.20696235011461894 0.20696235011461894 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+
+// Material genrated by blender2ogre 0.6.0
+
+material zanpakuto 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass zanpakuto
+        {
+            ambient 0.39767903089523315 0.3908202648162842 0.3908202648162842 1.0
+            diffuse 0.31814322945689 0.31265621651196795 0.31265621651196795 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
+
+// Material.002 genrated by blender2ogre 0.6.0
+
+material zanpakuto.002 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass zanpakuto.002
+        {
+            ambient 1.0 0.9916099309921265 0.9916099309921265 1.0
+            diffuse 0.800000011920929 0.7932879566146127 0.7932879566146127 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
+
+        }
+    }
+}
