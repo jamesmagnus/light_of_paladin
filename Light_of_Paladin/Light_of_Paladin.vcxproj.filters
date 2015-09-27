@@ -31,6 +31,9 @@
     <Filter Include="Fichiers de ressources\release">
       <UniqueIdentifier>{a60d9504-147a-44dd-8a64-4be057e4dddf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers de ressources\LoP_media">
+      <UniqueIdentifier>{d64b194c-7f99-472e-8569-4dbe0f525ac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClassArme.cpp">
@@ -396,6 +399,1106 @@
     </Library>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LoP_class.cd" />
+    <None Include="media\cegui\imagesets\AlfiskoSkin.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\AlfiskoSkin.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\AlfiskoSkin.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\characters\female\base_character_female.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\Batang-18.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\weapons\staff\baton.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\weapons\staff\baton.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\weapons\staff\baton.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\bear.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\blackPlastic.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\natural\trees\bouleau.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\natural\trees\bouleau.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\boutton.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\outCity\bridge.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\characters\female\cgc_character_female_basemesh.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\characters\female\cgc_character_female_basemesh.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\weapons\swords\chaine royale.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\contenant\chest.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\contenant\chest.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\buildings\exterior\city\churches\church.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\churches\church.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\city\churches\church.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\buildings\exterior\city\churches\Church1Upload.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\buildings\exterior\city\churches\church2.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\city\churches\church2.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\city\churches\church3.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\console.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\Console.wnd">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\shader\GLSL\item\weapons\staff\cristal.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\terrain\data_00000000.ter">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\DejaVuSans-10.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\DejaVuSans-10-NoScale.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\DejaVuSans-12.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\DejaVuSans-12-NoScale.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\DejaVuSans-14.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\DejaVuSans-14-NoScale.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\Demo8.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\lua_scripts\demo8.lua">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\diamond.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\diamond.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\misc\diamond_perfect_brillant_cut.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\DoorType1_2.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\DragDropDemo.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\DriveIcons.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\EffectsDemo.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\weapons\swords\épée.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\weapons\swords\epee.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\animations\example.anims">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\FairChar.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\FairChar-30.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\feet.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\particle\spells\fire_ball.particle">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\FontDemo.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\Fur_MaterialBody.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\animations\GameMenu.anims">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\GameMenu.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\GameMenu.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\GameMenu.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\GameMenu.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\city\gare.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\Generic.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\Generic.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\contenant\gladius_s_truhe3.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\GreatVibes-16.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\GreatVibes-22.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\GreyBrick2.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\GreyStone2.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\city\houses\house.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\buildings\exterior\city\houses\House3Upload.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\HUDDemo.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\HUDDemo.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\HUDDemo.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\HUDDemoGameOver.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\HUDDemoIngame.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\hydrax\HydraxDemo.hdx">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\Inherited.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\InventoryComponents.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\Junicode-13.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\Jura-10.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\Jura-13.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\fonts\Jura-18.font">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\weapons\swords\katana.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\weapons\swords\katana.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\knot.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\buildings\exterior\outCity\kopalnia.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\lamp.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\lamp.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\lampShade.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\weapons\swords\Lexaeus.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\weapons\swords\lexaeus.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\weapons\swords\lexaeus.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\natural\trees\lila.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\natural\trees\lila.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\LogEdgeWeathered.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="LoP_class.cd">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\misc\Medieval Place Setting.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\medieval_bowl.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\medieval_chalice.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\medieval_fork.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\medieval_knife.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\medieval_large_bowl.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\medieval_place_000.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\medieval_place_002.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\medieval_place_023.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\misc\medieval_spoon.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\outCity\mine.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\missing_material.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\weapons\projectiles\ninjasternturorial.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\nose.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="ogre.cfg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\OgreCore.zip">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\OgreTray.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\OgreTray.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\OgreTray.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\buildings\exterior\city\palace.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\buildings\exterior\city\palace.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\characters\other\penguin.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\characters\other\penguin.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skeleton\characters\other\penguin.skeleton">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\pink.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\Plaster.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="plugins_d.cfg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\natural\trees\pommier.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\natural\trees\pommier.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\transport\rail.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\transport\rail_droit.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="resources_d.cfg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\RoofTiles.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\RustedMetal.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\shader\GLSL\item\weapons\staff\rylai.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\weapons\staff\rylai.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\weapons\staff\rylai.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\shader\GLSL\item\weapons\staff\rylai.vert">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\SampleBrowser.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\SampleBrowser.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\SampleBrowser.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\SampleBrowser.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\SampleBrowserLoadScreen.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\weapons\projectiles\shuriken.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\weapons\projectiles\shuriken.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Clouds.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Clouds.fragment">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Clouds.vert">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Clouds.vertex">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Ground.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Ground.fragment">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Ground.vert">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Ground.vertex">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Lightning.fragment">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Lightning.vertex">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Moon.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Moon.fragment">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Moon.vert">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Moon.vertex">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Skydome.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Skydome.fragment">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Skydome.vert">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_Skydome.vertex">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_VolClouds.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_VolClouds.fragment">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_VolClouds.vert">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_VolClouds.vertex">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_VolClouds_Lightning.fragment">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\SkyX_VolClouds_Lightning.vertex">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\spells\spell.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\buildings\exterior\city\station.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\Stone.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\TabControlDemo.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\TabPage.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\TabPage1.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\TabPage1.layout.orig">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\TabPage2.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\TaharezLook.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\TaharezLook.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\TaharezLook.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\TaharezLook.scheme.orig">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\misc\teddyBear10.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\Terrain.frag">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\Terrain.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skyX\Terrain.vert">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\TextDemo.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\TreeDemoTaharez.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\characters\other\Tux.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\characters\other\Tux.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\characters\other\tux.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\skeleton\characters\other\Tux.skeleton">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\test\unit_cube.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\test\unit_cube.blend1">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\test\unit_cube.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\test\unit_cube_material.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\Vanilla.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\Vanilla.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\VanillaCommonDialogs.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\VanillaCommonDialogs.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\VanillaCommonDialogs.scheme.orig">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\VanillaConsole.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\VanillaSkin.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\layouts\VanillaWindows.layout">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\WindowBlue1.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\WindowBlue2.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\imagesets\WindowsLook.imageset">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\looknfeel\WindowsLook.looknfeel">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\cegui\schemes\WindowsLook.scheme">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\buildings\exterior\city\houses\Wood.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\misc\Wood.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\blender\item\weapons\other\zanpakuto.blend">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\material\item\weapons\other\zanpakuto.material">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+    <None Include="media\mesh\item\weapons\other\zanpakuto.mesh">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="media\cegui\xml_schemas\Animation.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\CEGUIConfig.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Falagard.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Font.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\GUILayout.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\GUIScheme.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Imageset.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+    <Xsd Include="media\cegui\xml_schemas\Samples.xsd">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </Xsd>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\texture\terrain\grass_green-01_diffusespecular.dds">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\terrain\grass_green-01_normalheight.dds">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\terrain\terrainhdrocklichen01.dds">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\terrain\terrainhdrocklichen01_N.DDS">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\terrain\terrainsnow01.dds">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\terrain\terrainsnow01_N.DDS">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\item\contenant\truhe_tex.tga">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\AlfiskoSkin.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\Aliasing.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\BackgroundSampleBrowser.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\natural\trees\BARK_005.JPG">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\Black.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\c22.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\c22n.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_0.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_1.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_2.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_3.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_4.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_5.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_6.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_7.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_8.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_9.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_10.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_11.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_12.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_13.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_14.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_15.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_16.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_17.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_18.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_19.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_20.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_21.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_22.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_23.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_24.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_25.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_26.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_27.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_28.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_29.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_30.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Caustics_31.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\ChurchDoor1.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\Cloud1.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\Cloud1_Normal.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\Clouds.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\CloudsNormal.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\CloudsTile.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\natural\trees\DB2X2_01.PNG">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\DensityClouds1.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\DoorType1_2.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\DoorType1_2.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\DriveIcons.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\FairChar.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\particle\flare.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Foam.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\Fresnel.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\GameMenu.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\GreyBricks2.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\GreyBricks2.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\GreyStone2.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\heightmap\heightmap1.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\HUDDemo.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\HUDDemoGameOver.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\heightmap\island.bmp">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\natural\trees\iTrees-02_Bark-AppleOld-01.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\natural\trees\iTrees-02_Bark-MapleYng-01.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\natural\trees\itrees-02-leaf_002.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\natural\trees\Lilac_leaf.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\logo.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\marble.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\Metal.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\Noise.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\OgreTrayImages.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\characters\other\penguin.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\PlasterLarge.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\RoofTiles.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\RoofTiles3.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\Rusted_Metal.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\Rusted_Metal.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\SampleBrowser.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\item\misc\silk-fabric-texture-12-1024x682.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\characters\female\Skin_Matcap.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\SkyX_Moon.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\SkyX_MoonHalo.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\SkyX_Starfield.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\SpaceBackground.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\Stone.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\Stone.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\TaharezLook.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\Terrain.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\terrain_detail.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\terrain_texture.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\TerrainAmbientMap.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\TerrainTex0.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\skyX\TerrainTex1.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\TreeLogEdgeWeathered.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\TreeLogEdgeWeathered.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\hydrax\UnderwaterDistortion.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\vanilla.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\WindowBlue1.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\WindowsBlue2.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\cegui\imagesets\WindowsLook.png">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\Wood.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\houses\Wood.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+    <Image Include="media\texture\buildings\exterior\city\churches\WroughtIron.jpg">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="media\skyX\SkyX_Clouds.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Ground.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Lightning.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Moon.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_Skydome.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_VolClouds.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+    <FxCompile Include="media\skyX\SkyX_VolClouds_Lightning.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+    <FxCompile Include="media\skyX\Terrain.hlsl">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="media\fmod\music\ambiance_ballade.mp3">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Media>
+    <Media Include="media\fmod\music\ambiance_grotte.mp3">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Media>
+    <Media Include="media\fmod\music\load.mp3">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Media>
+    <Media Include="media\fmod\music\menu.mp3">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="media\cegui\fonts\Legal.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+    <Text Include="media\cegui\fonts\LicenseApache.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+    <Text Include="media\cegui\fonts\LicenseDejaVu.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+    <Text Include="media\cegui\fonts\LicenseGPL.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+    <Text Include="media\cegui\fonts\LicenseMIT.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+    <Text Include="media\cegui\fonts\LicenseSIL.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+    <Text Include="media\cegui\fonts\LicenseUbuntuFont.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+    <Text Include="media\cegui\imagesets\ReadMe.txt">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="media\cegui\fonts\batang.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\DejaVuSans.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\DejaVuSerif.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\FetteClassicUNZFraktur.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Futhark Adapted.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\GreatVibes-Regular.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\IMFePIrm29P.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Junicode.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Jura-DemiBold.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Jura-Light.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Jura-Medium.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Jura-Regular.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Klingon-pIqaD-HaSta.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\mizufalp.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\RichStyle.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
+    <Font Include="media\cegui\fonts\Tnua-Libre.ttf">
+      <Filter>Fichiers de ressources\LoP_media</Filter>
+    </Font>
   </ItemGroup>
 </Project>
