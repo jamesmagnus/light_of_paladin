@@ -36,7 +36,7 @@ bool InputListener::frameStarted(FrameEvent const& evt)
 	mCurrentEvent = evt;
 
 	/* Si la fenêtre s'est fermée on coupe Ogre */
-	if (mpWindow->isClosed())
+	if (mpWindow->isClosed() || mpInputManager == nullptr)
 	{
 		return false;
 	}
@@ -44,11 +44,6 @@ bool InputListener::frameStarted(FrameEvent const& evt)
 	/* Mise à jour des périphériques d'entrée */
 	mpMouse->capture();
 	mpKeyBoard->capture();
-
-	if (mpInputManager == nullptr)
-	{
-		return false;
-	}
 
 	Vector3Move moving = dynamic_cast<KeyBoardEventListener*>(mpKeyBoard->getEventCallback())->getMove();
 
@@ -274,12 +269,15 @@ bool MouseEventListener::mouseMoved(OIS::MouseEvent const& arg)
 
 	mpCEGUIMgr->injectOISMouseRotation(static_cast<float>(mouseState.X.rel), static_cast<float>(mouseState.Y.rel), static_cast<float>(mpEventTime->timeSinceLastFrame));
 
-	/* On calcule la rotation à partir des coordonnées relatives à la dernière position */
-	Radian mRotationX = Degree(-mouseState.Y.rel * VITESSE_ROTATION_CAM);
-	Radian mRotationY = Degree(-mouseState.X.rel * VITESSE_ROTATION_CAM);
+	if(!mpCEGUIMgr->shiftMode())
+	{
+		/* On calcule la rotation à partir des coordonnées relatives à la dernière position */
+		Radian mRotationX = Degree(-mouseState.Y.rel * VITESSE_ROTATION_CAM);
+		Radian mRotationY = Degree(-mouseState.X.rel * VITESSE_ROTATION_CAM);
 
-	mpCamera->yaw(mRotationY);
-	mpCamera->pitch(mRotationX);
+		mpCamera->yaw(mRotationY);
+		mpCamera->pitch(mRotationX);
+	}
 
 	return true;
 }
