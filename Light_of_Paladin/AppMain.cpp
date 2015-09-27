@@ -364,6 +364,11 @@ bool AppMain::createObject()
 
 bool AppMain::createPersonnage()
 {
+	/* Unit cube test */
+	Entity *pEntUnitCube = mpSceneMgr->createEntity("unit_cube", "unit_cube.mesh");
+	SceneNode *pNodeUnitCube = mpSceneMgr->getRootSceneNode()->createChildSceneNode("nodeUnitCube", Vector3(0.0, 200.0, 0.0));
+	pNodeUnitCube->attachObject(pEntUnitCube);
+
 	Entity *pEnt1 = mpSceneMgr->createEntity("pingouin", "penguin.mesh");
 	SceneNode *pNodePeng = mpSceneMgr->getRootSceneNode()->createChildSceneNode("nodePengouin", Vector3(1200.0f, 1500.0f, 1200.0f));
 	pNodePeng->attachObject(pEnt1);
