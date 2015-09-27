@@ -22,7 +22,6 @@
 #include <boost/chrono.hpp>
 
 #include "ClassEpee.h"
-#include "ClassArmure.h"
 #include <btBulletDynamicsCommon.h>
 
 using namespace Ogre;
