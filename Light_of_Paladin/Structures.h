@@ -3,8 +3,8 @@
 #define TAILLE_MONDE 30000
 #define TAILLE_CHUNK 100
 #define TAILLE_IMG_HEIGHTMAP 2049
-#define VITESSE_TRANS_CAM 500.0f
-#define VITESSE_ROTATION_CAM 0.25f
+#define VITESSE_TRANS_CAM 100.0
+#define VITESSE_ROTATION_CAM 0.25
 
 #include <OgreVector3.h>
 #include <vector>
